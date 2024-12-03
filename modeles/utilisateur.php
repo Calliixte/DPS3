@@ -34,7 +34,7 @@
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
             
-            return $resultat->fetchAll();
+            return $resultat->fetch();
         }
 
         public function __toString(){
