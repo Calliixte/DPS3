@@ -13,26 +13,24 @@
             $this->$attribute = $val;
         }
 
-        public function __construct(int $idVote=NULL, string $titreVote=NULL){
+        public function __construct(int $idVote=NULL, string $titreVote=NULL, Groupe $groupe=NULL){
             if(!is_null($idVote)){
                 $this->idVote = $idVote;
                 $this->titreVote = $titreVote;
+                $this->groupe = $groupe;
             }
         }
 
-        public static function getVote(int $idVote, int $idUser){
+        public static function getVote(int $idVote, int $idUser, Groupe $groupe){
             $requete = "SELECT idVote, titreVote FROM Vote WHERE idVote = $idVote;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
             
             $vote = $resultat->fetch();
+            $vote->set('groupe', $groupe);
             $vote->fillChoixVote($idUser);
             
             return $vote;
-        }
-
-        public static function getJSON(int $idVote, int $idUser){
-            return json_encode((array) Vote::getVote($idVote,$idUser),JSON_PRETTY_PRINT);
         }
 
         public function fillChoixVote($idUser){
