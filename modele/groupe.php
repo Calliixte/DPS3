@@ -12,7 +12,13 @@
         }
 
         public function ___toString(){
-            return 
+            return "<h3> Groupe </h3>
+                    <p>id : $this->idGroupe<br>
+                       nom : $this->nomGroupe</p>";
+        }
+
+        public function display(){
+            echo $this;
         }
     }
 ?>
