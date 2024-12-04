@@ -4,7 +4,7 @@
         private string $pseudo;
         private string $nom;
         private string $prenom;
-        private string $pfpLink;
+        private string $lienPhotoProfil;
 
         public function get($attribute){
             return $this->$attribute;
@@ -18,14 +18,14 @@
                                     string $pseudo=NULL, 
                                     string $nom=NULL,
                                     string $prenom=NULL,
-                                    string $pfpLink=NULL) {
+                                    string $lienPhotoProfil=NULL) {
                 
             if(!is_null($idUtilisateur)){
                 $this->idUtilisateur = $idUtilisateur;
                 $this->pseudo = $pseudo;
                 $this->nom = $nom;
                 $this->prenom = $prenom;
-                $this->pfpLink = $pfpLink;
+                $this->lienPhotoProfil = $lienPhotoProfil;
             }
         }
 
@@ -38,11 +38,11 @@
         }
 
         public function __toString(){
-            return "id : $idUtilisateur
-                    pseudo : $pseudo
-                    nom : $nom
-                    prenom : $prenom
-                    photo de Profil : $pfpLink";
+            return "<p>id : $this->idUtilisateur<br>
+                    pseudo : $this->pseudo<br>
+                    nom : $this->nom<br>
+                    prenom : $this->prenom<br>
+                    photo de Profil : $this->lienPhotoProfil<p>";
         }
 
         public function display(){
