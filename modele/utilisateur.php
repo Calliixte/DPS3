@@ -1,10 +1,16 @@
 <?php
+    const MEMBRE = 0;
+    const MODO = 1;
+    const ADMIN = 2;
+    const ASSESS = 3;
+    const ORGA = 4;
     Class Utilisateur{
         private int $idUtilisateur;
         private string $pseudo;
         private string $nom;
         private string $prenom;
         private string $lienPhotoProfil;
+        private int $role;
 
         public function get($attribute){
             return $this->$attribute;
