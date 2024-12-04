@@ -33,6 +33,17 @@
             return $vote;
         }
 
+        public static function getJSON(int $idVote, int $idUser, Groupe $groupe){
+            $requete = "SELECT idVote, titreVote FROM Vote WHERE idVote = $idVote;";
+            $resultat = Connexion::pdo()->query($requete);
+            $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
+            
+            $vote = $resultat->fetch();
+            $vote->set('groupe', $groupe);
+            $vote->fillChoixVote($idUser);
+
+            return json_encode((array) $vote);
+        }
         public function fillChoixVote($idUser){
             $requete = "SELECT idChoixVote, intitule, CountVoteChoix(idChoixVote) AS nbVote FROM ChoixVote WHERE idVote=$this->idVote;";
             $resultat = Connexion::pdo()->query($requete);
