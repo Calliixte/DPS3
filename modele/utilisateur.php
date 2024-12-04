@@ -10,7 +10,7 @@
         private string $nom;
         private string $prenom;
         private string $lienPhotoProfil;
-        private int $role;
+        private int $role = MEMBRE;
 
         public function get($attribute){
             return $this->$attribute;
