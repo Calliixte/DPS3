@@ -34,9 +34,10 @@
             
             $i = 0;
             while ($row = $resultat->fetch()) {
-                $this->choixVote[$i]['intitule'] = $row['intitule'];
-                $this->choixVote[$i]['nbVote'] = $row['nbVote'];
-                $this->aChoisi($idUser, $row['idChoixVote']);
+                $aVote = $this->aChoisi($idUser, $row['idChoixVote']);
+
+                $this->choixVote[$row['intitule']] = array ('nbVote' => $row['nbVote'],
+                                                            'aVote' => $aVote);
                 $i++;
             }
         }
@@ -44,16 +45,14 @@
         public function aChoisi($idUser, $idChoixVote){
             $idGroupe = $this->groupe->get('idGroupe');
 
-            $requete = "SELECT COUNT(*) FROM ChoixMembre 
+            $requete = "SELECT COUNT(*) AS 'nbVote' FROM ChoixMembre 
                         WHERE idChoixVote = $idChoixVote
                         AND idUtilisateur = $idUser
-                        AND idGroupe = $idGroupe";
+                        AND idGroupe = $idGroupe;";
 
-        $resultat = Connexion::pdo()->query($requete);
-
-            echo "<pre>";
-            print_r($resultat->fetchAll());
-            echo "</pre>";
+            $resultat = Connexion::pdo()->query($requete);
+            
+            return $resultat->fetch()['nbVote'] > 0;
         }
 
         public function __toString(){

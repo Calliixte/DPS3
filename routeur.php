@@ -18,11 +18,11 @@
                 
                 $User = Utilisateur::getUtilisateur(2);
 
-                $Groupe = Groupe::getGroupe(1);
+                $Groupe = Groupe::getGroupe(2);
 
                 $Vote = Vote::getVote(2);
                 $Vote->set('groupe', $Groupe);
-                $Vote->fillChoixVote($User->get('idUtilisateur'));
+                $Vote->fillChoixVote(2);
 
                 $User->display();
                 $Groupe->display();
