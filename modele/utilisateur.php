@@ -79,6 +79,10 @@
 
         public function display(){
             echo $this;
+
+            foreach ($this->listeGroupes as $elem){
+                $elem->display();
+            }
         }
 
     }

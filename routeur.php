@@ -17,10 +17,13 @@
                 Connexion::connect();
                 
                 $User = Utilisateur::getUtilisateur(2);
+                $groupe = Groupe::getGroupe(2);
 
-                $tab = $User->get('listeGroupes');
+                $Vote = Vote::getVote(2,2,$groupe);
 
-                include('vues/afficherTab.php');
+                $Vote->display();
+
+                $User->display();
 
             ?>
         </main>
