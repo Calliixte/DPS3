@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rename=$target_dir . (string) $idMax; 
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $rename=$target_dir . (string) $idMax .$imageFileType; 
 
     print_r($_FILES);
     
