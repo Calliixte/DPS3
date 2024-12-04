@@ -6,8 +6,7 @@ Connexion::connect();
 $idU = (int)$_GET["id"];
 $UserJSON = Utilisateur::getJSON($idU);
 
-echo "<pre>" ;
 echo $UserJSON;
-echo "<pre>";
+
 
 ?>
