@@ -20,12 +20,15 @@
             }
         }
 
-        public static function getVote(int $idVote){
+        public static function getVote(int $idVote, int $idUser){
             $requete = "SELECT idVote, titreVote FROM Vote WHERE idVote = $idVote;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
             
-            return $resultat->fetch();
+            $vote = $resultat->fetch();
+            $vote->fillChoixVote($idUser);
+            
+            return $vote;
         }
 
         public function fillChoixVote($idUser){
