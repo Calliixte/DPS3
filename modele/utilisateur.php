@@ -11,6 +11,7 @@
         private string $prenom;
         private string $lienPhotoProfil;
         private int $role = MEMBRE;
+        private array $listeGroupes;
 
         public function get($attribute){
             return $this->$attribute;
@@ -20,7 +21,7 @@
             $this->$attribute = $val;
         }
 
-        public function __construct(string $idUtilisateur=NULL, 
+        public function __construct(int $idUtilisateur=NULL, 
                                     string $pseudo=NULL, 
                                     string $nom=NULL,
                                     string $prenom=NULL,
@@ -40,7 +41,22 @@
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
             
-            return $resultat->fetch();
+            $User = $resultat->fetch();
+            $User->fillGroupList();
+
+            return $User;
+        }
+
+        public function fillGroupList(){
+            $requete = "SELECT G.idGroupe, G.nomGroupe 
+                        FROM Groupe G INNER JOIN Membre M
+                        ON G.idGroupe = M.idGroupe 
+                        WHERE idUtilisateur = $this->idUtilisateur;";
+
+            $resultat = Connexion::pdo()->query($requete);
+            $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
+
+            $this->listeGroupes = $resultat->fetchAll(); 
         }
 
         public static function getJSON($idUtilisateur){
@@ -64,5 +80,6 @@
         public function display(){
             echo $this;
         }
+
     }
 ?>

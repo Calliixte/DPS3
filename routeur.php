@@ -18,15 +18,9 @@
                 
                 $User = Utilisateur::getUtilisateur(2);
 
-                $Groupe = Groupe::getGroupe(2);
+                $tab = $User->get('listeGroupes');
 
-                $Vote = Vote::getVote(2);
-                $Vote->set('groupe', $Groupe);
-                $Vote->fillChoixVote(2);
-
-                $User->display();
-                $Groupe->display();
-                $Vote->display();
+                include('vues/afficherTab.php');
 
             ?>
         </main>

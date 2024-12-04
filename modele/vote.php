@@ -35,14 +35,14 @@
             $i = 0;
             while ($row = $resultat->fetch()) {
                 $aVote = $this->aChoisi($idUser, $row['idChoixVote']);
-
+                
                 $this->choixVote[$row['intitule']] = array ('nbVote' => $row['nbVote'],
                                                             'aVote' => $aVote);
                 $i++;
             }
         }
 
-        public function aChoisi($idUser, $idChoixVote){
+        public function aChoisi(int $idUser, int $idChoixVote){
             $idGroupe = $this->groupe->get('idGroupe');
 
             $requete = "SELECT COUNT(*) AS 'nbVote' FROM ChoixMembre 
