@@ -56,11 +56,7 @@
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
 
-            $this->listeGroupes = $resultat->fetchAll(); 
-
-            foreach($listeGroupes as $groupe){
-                $groupe->fillChoixVote($this->idUtilisateur);
-            }
+            $this->listeGroupes = $resultat->fetchAll();
         }
 
         public static function getJSON($idUtilisateur){
