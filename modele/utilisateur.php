@@ -43,6 +43,14 @@
             return $resultat->fetch();
         }
 
+        public static function getJSON($idUtilisateur){
+        $requete = "SELECT idUtilisateur, pseudo, nom, prenom, lienPhotoProfil FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
+        $resultat = Connexion::pdo()->query($requete);
+        $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
+        
+        return json_encode($resultat->fetch(PDO::FETCH_ASSOC),JSON_PRETTY_PRINT);
+        }
+
         public function __toString(){
             return "<h3>Utilisateur</h3>
                     <p>id : $this->idUtilisateur<br>
