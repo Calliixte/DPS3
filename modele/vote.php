@@ -29,22 +29,25 @@
         }
 
         public function fillChoixVote($idUser){
-            $requete = "SELECT intitule, CountVoteChoix(idChoixVote) AS nbVote FROM ChoixVote WHERE idVote=$this->idVote;";
+            $requete = "SELECT idChoixVote, intitule, CountVoteChoix(idChoixVote) AS nbVote FROM ChoixVote WHERE idVote=$this->idVote;";
             $resultat = Connexion::pdo()->query($requete);
             
             $i = 0;
             while ($row = $resultat->fetch()) {
                 $this->choixVote[$i]['intitule'] = $row['intitule'];
                 $this->choixVote[$i]['nbVote'] = $row['nbVote'];
+                $this->aChoisi($idUser, $row['idChoixVote']);
                 $i++;
             }
         }
 
         public function aChoisi($idUser, $idChoixVote){
-            $requete = "SELECT COUNT(*) FROM idChoixMembre 
+            $idGroupe = $this->groupe->get('idGroupe');
+
+            $requete = "SELECT COUNT(*) FROM ChoixMembre 
                         WHERE idChoixVote = $idChoixVote
                         AND idUtilisateur = $idUser
-                        AND idGroupe = $groupe->get(idGroupe)";
+                        AND idGroupe = $idGroupe";
 
         $resultat = Connexion::pdo()->query($requete);
 
