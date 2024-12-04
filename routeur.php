@@ -16,11 +16,12 @@
 
                 Connexion::connect();
                 
-                $User = Utilisateur::getUtilisateur(1);
+                $User = Utilisateur::getUtilisateur(2);
 
                 $Groupe = Groupe::getGroupe(1);
 
                 $Vote = Vote::getVote(2);
+                $Vote->set('groupe', $Groupe);
                 $Vote->fillChoixVote($User->get('idUtilisateur'));
 
                 $User->display();
