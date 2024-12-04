@@ -10,7 +10,7 @@
             }
         }
 
-        public static function getGroupe($idGroupe){
+        public static function getGroupe(int $idGroupe){
             $requete = "SELECT idGroupe, nomGroupe FROM Groupe WHERE idGroupe = $idGroupe;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
