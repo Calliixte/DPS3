@@ -12,15 +12,21 @@
                 require_once("config/connexion.php");
                 require_once("modele/utilisateur.php");
                 require_once("modele/groupe.php");
+                require_once("modele/vote.php");
 
                 Connexion::connect();
                 
                 $User = Utilisateur::getUtilisateur(1);
 
                 $Groupe = Groupe::getGroupe(1);
-                
+
+                $Vote = Vote::getVote(2);
+                $Vote->fillChoixVote($User->get('idUtilisateur'));
+
                 $User->display();
                 $Groupe->display();
+                $Vote->display();
+
             ?>
         </main>
         <footer>this hell of a footer, such a banger</footer>

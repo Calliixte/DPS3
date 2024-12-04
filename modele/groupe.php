@@ -3,6 +3,14 @@
         private int $idGroupe;
         private string $nomGroupe;
 
+        public function get($attribute){
+            return $this->$attribute;
+        }
+
+        public function set($attribute, $val){
+            $this->$attribute = $val;
+        }
+
         public function __construct($idGroupe=NULL, $nomGroupe=NULL){
             if(!is_null($idGroupe)){
                 $this->idGroupe = $idGroupe;
