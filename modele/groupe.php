@@ -4,7 +4,7 @@
         private string $nomGroupe;
 
         public function __construct($idGroupe=NULL, $nomGroupe=NULL){
-            if(!is_null(idGroupe)){
+            if(!is_null($idGroupe)){
                 $this->idGroupe = $idGroupe;
                 $this->nomGroupe = $nomGroupe;
             }
