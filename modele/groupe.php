@@ -2,7 +2,6 @@
     Class Groupe{
         private int $idGroupe;
         private string $nomGroupe;
-        private int $Membres= array();
 
         public function __construct($idGroupe=NULL, $nomGroupe=NULL){
             if(!is_null(idGroupe)){
@@ -18,8 +17,6 @@
             
             return $resultat->fetch();
         }
-
-        
 
         public function __toString(){
             return "<h3> Groupe </h3>

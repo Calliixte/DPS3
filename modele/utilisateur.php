@@ -44,11 +44,13 @@
         }
 
         public function __toString(){
-            return "<p>id : $this->idUtilisateur<br>
-                    pseudo : $this->pseudo<br>
-                    nom : $this->nom<br>
-                    prenom : $this->prenom<br>
-                    photo de Profil : $this->lienPhotoProfil<p>";
+            return "<h3>Utilisateur</h3>
+                    <p>id : $this->idUtilisateur<br>
+                       pseudo : $this->pseudo<br>
+                       nom : $this->nom<br>
+                       prenom : $this->prenom<br>
+                       photo de Profil : $this->lienPhotoProfil<p>
+                       numéro de role : $this->role";
         }
 
         public function display(){
