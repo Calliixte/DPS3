@@ -4,6 +4,7 @@
         private string $titreVote;
         private Groupe $groupe;
         private array $choixVote;
+        private array $listeEtiquettes;
 
         public function get($attribute){
             return $this->$attribute;
@@ -29,6 +30,7 @@
             $vote = $resultat->fetch();
             $vote->set('groupe', $groupe);
             $vote->fillChoixVote($idUser);
+            $vote->fillEtiquettes();
             
             return $vote;
         }
@@ -41,20 +43,32 @@
             $vote = $resultat->fetch();
             $vote->set('groupe', $groupe);
             $vote->fillChoixVote($idUser);
+            $vote->fillEtiquettes();
 
             return json_encode((array) $vote);
         }
+
+        public function fillEtiquettes(){
+            $requete = "SELECT labelEtiquette 
+                        FROM EtiquetteVote EV INNER JOIN Etiquette E
+                        ON EV.idEtiquette = E.idEtiquette
+                        WHERE idVote=$this->idVote;";
+
+            $resultat = Connexion::pdo()->query($requete);
+            $resultat->setFetchmode(PDO::FETCH_COLUMN, 0);
+            
+            $this->listeEtiquettes = $resultat->fetchAll();
+        }
+
         public function fillChoixVote($idUser){
             $requete = "SELECT idChoixVote, intitule, CountVoteChoix(idChoixVote) AS nbVote FROM ChoixVote WHERE idVote=$this->idVote;";
             $resultat = Connexion::pdo()->query($requete);
             
-            $i = 0;
             while ($row = $resultat->fetch()) {
                 $aVote = $this->aChoisi($idUser, $row['idChoixVote']);
                 
                 $this->choixVote[$row['intitule']] = array ('nbVote' => $row['nbVote'],
                                                             'aVote' => $aVote);
-                $i++;
             }
         }
 
@@ -81,6 +95,9 @@
             echo $this;
             echo "<pre>";
             print_r($this->choixVote);
+            echo "</pre>";
+            echo "<pre>";
+            print_r($this->listeEtiquettes);
             echo "</pre>";
         }
     }
