@@ -64,7 +64,10 @@
         $resultat = Connexion::pdo()->query($requete);
         $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
         
-        return json_encode($resultat->fetch(PDO::FETCH_ASSOC),JSON_PRETTY_PRINT);
+        //return json_encode($resultat->fetch(PDO::FETCH_ASSOC),JSON_PRETTY_PRINT);
+        $caca= $resultat->fetch(PDO::FETCH_ASSOC);
+        return $caca;
+        //return "testé";
         }
 
         public function __toString(){
