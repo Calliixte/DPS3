@@ -25,6 +25,21 @@
             
             return $resultat->fetch();
         }
+        public static function getJSON(int $idGroupe){
+            $requete = "SELECT idGroupe, nomGroupe FROM Groupe WHERE idGroupe = $idGroupe;";
+            $resultat = Connexion::pdo()->query($requete);
+            $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
+            
+            $data = $resultat->fetch(PDO::FETCH_ASSOC);
+            echo "test";
+            array_walk_recursive($data, function (&$value) {
+                if (is_string($value)) {
+                    $value = utf8_encode($value);
+                }
+            });
+
+            return json_encode($data, JSON_PRETTY_PRINT);
+        }
 
         public function __toString(){
             return "<h3> Groupe </h3>
