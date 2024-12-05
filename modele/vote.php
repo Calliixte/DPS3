@@ -5,6 +5,7 @@
         private Groupe $groupe;
         private array $choixVote;
         private array $listeEtiquettes;
+        private array $listeMessages;
 
         public function get($attribute){
             return $this->$attribute;
@@ -31,7 +32,7 @@
             $vote->set('groupe', $groupe);
             $vote->fillChoixVote($idUser);
             $vote->fillEtiquettes();
-            
+            $this->listeMessages = Message::getMessages($this);
             return $vote;
         }
 
@@ -46,6 +47,18 @@
             $vote->fillEtiquettes();
 
             return json_encode((array) $vote);
+        }
+
+        public function fillReaction(){
+            $requete = "SELECT idUtilisateur, unicodeEmoticone FROM ReactionVote;";
+            
+            $resultat = Connexion::pdo()->query($requete);
+            
+            $i = 0;
+            while($row = $resultat->fetch()){
+                $listeReactions[$i] = Reaction(getUtilisateur($row['idUtilisateur']),$row['unicodeEmoticone']);
+                $i++;
+            }
         }
 
         public function fillEtiquettes(){

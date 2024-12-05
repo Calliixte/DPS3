@@ -25,6 +25,8 @@
 
                 $User->display();
 
+                echo "👀";
+
             ?>
         </main>
         <footer>this hell of a footer, such a banger</footer>
