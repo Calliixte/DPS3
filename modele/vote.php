@@ -47,6 +47,7 @@
             $vote->fillEtiquettes();
 
             return json_encode((array) $vote,JSON_UNESCAPED_UNICODE);
+            //Vote va garder un json fucked up pour l'instant TODO : creer une fonction to_array pour Vote
         }
 
         public function fillReaction(){
