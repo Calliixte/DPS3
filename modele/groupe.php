@@ -31,14 +31,8 @@
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
             
             $data = $resultat->fetch(PDO::FETCH_ASSOC);
-            echo "test";
-            array_walk_recursive($data, function (&$value) {
-                if (is_string($value)) {
-                    $value = utf8_encode($value);
-                }
-            });
 
-            return json_encode($data, JSON_PRETTY_PRINT);
+            return json_encode($data, JSON_UNESCAPED_UNICODE);
         }
 
         public function __toString(){

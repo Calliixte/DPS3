@@ -63,11 +63,8 @@
         $requete = "SELECT idUtilisateur, pseudo, nom, prenom, lienPhotoProfil FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
         $resultat = Connexion::pdo()->query($requete);
         $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
-        
-        //return json_encode($resultat->fetch(PDO::FETCH_ASSOC),JSON_PRETTY_PRINT);
-        $caca= $resultat->fetch(PDO::FETCH_ASSOC);
-        return $caca;
-        //return "testé";
+
+        return json_encode($resultat->fetch(PDO::FETCH_ASSOC),JSON_UNESCAPED_UNICODE);
         }
 
         public function __toString(){

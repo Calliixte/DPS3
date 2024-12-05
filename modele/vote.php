@@ -46,7 +46,7 @@
             $vote->fillChoixVote($idUser);
             $vote->fillEtiquettes();
 
-            return json_encode((array) $vote);
+            return json_encode((array) $vote,JSON_UNESCAPED_UNICODE);
         }
 
         public function fillReaction(){

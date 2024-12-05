@@ -6,8 +6,6 @@ Connexion::connect();
 $classe = $_GET["classe"];
 require_once("../modele/". $classe . ".php");
 $id = $_GET["id"];
-/*
-
 
 if($classe == "vote"){
     if(!isset($_GET["idVotant"])){
@@ -21,11 +19,11 @@ if($classe == "vote"){
     $groupe = Groupe::getGroupe($idGroupe);
     $JSON = Vote::getJSON($id,$idVotant,$groupe);
 }
-else{*/
-//$JSON = $classe::getJSON($id);
-//}
-echo json_encode($classe::getJSON($id),JSON_UNESCAPED_UNICODE);
+else{
+$JSON = $classe::getJSON($id);
+}
 
-//echo $JSON;
+
+echo $JSON;
 
 ?>
