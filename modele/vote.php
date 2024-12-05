@@ -36,12 +36,13 @@
             return $vote;
         }
 
-        public static function getJSON(int $idVote, int $idUser, Groupe $groupe){
+        public static function getJSON(int $idVote, int $idUser, int $idGroupe){
             $requete = "SELECT idVote, titreVote FROM Vote WHERE idVote = $idVote;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
             
             $vote = $resultat->fetch();
+            $groupe = Groupe::getGroupe($idGroupe);
             $vote->set('groupe', $groupe);
             $vote->fillChoixVote($idUser);
             $vote->fillEtiquettes();

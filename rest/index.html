@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation API JSON</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 1.8em;
+            color: #333;
+        }
+        h2 {
+            font-size: 1.5em;
+            color: #555;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .example {
+            background: #eef;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .url {
+            font-family: "Courier New", Courier, monospace;
+            background: #f9f9f9;
+            padding: 5px;
+            display: inline-block;
+            border-radius: 3px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Documentation API JSON</h1>
+    <h2>GET.php</h2>
+    <p>Options communes à toutes les requêtes :</p>
+    <ul>
+        <li><code>classe</code> = nom de classe (en minuscules)</li>
+        <li><code>id</code> = id de l'objet recherché</li>
+    </ul>
+    <p>Exemple d'URL :</p>
+    <div class="example">
+        <span class="url">https://(nomHote)/rest/GET.php?classe=vote&id=2</span>
+    </div>
+    <h2>Options spécifiques à certaines classes :</h2>
+    <p><strong>Vote :</strong></p>
+    <ul>
+        <li><code>idGroupe</code> = id du groupe dans lequel le vote se déroule</li>
+        <li><code>idVotant</code> = id de la personne dont on veut connaître le/les choix sur ce Vote, peut être nul</li>
+    </ul>
+    <p>Exemple d'URL :</p>
+    <div class="example">
+        <span class="url">https://(nomHote)/rest/GET.php?classe=vote&idGroupe=2&idVotant=2&id=2</span>
+    </div>
+</body>
+</html>
