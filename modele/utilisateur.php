@@ -36,7 +36,7 @@
             }
         }
         
-        public static function creerUtilisateur($nomUtilisateur,$prenomUtilisateur,$pseudo,$mdp,$ddn,$email,$adresse,$lienPdp){
+        public static function insererUtilisateur($nomUtilisateur,$prenomUtilisateur,$pseudo,$mdp,$ddn,$email,$adresse,$lienPdp){
             $requete = "SELECT max(idUtilisateur)+1 FROM `Utilisateur` WHERE 1; ";
             $resultat = Connexion::pdo()->query($requete);
             $idMax=$resultat->fetchColumn();
