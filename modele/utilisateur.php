@@ -35,6 +35,36 @@
                 $this->lienPhotoProfil = $lienPhotoProfil;
             }
         }
+        
+        public static function creerUtilisateur($nomUtilisateur,$prenomUtilisateur,$pseudo,$mdp,$ddn,$email,$addresse,$lienPdp){
+            $requete = "SELECT max(idUtilisateur)+1 FROM `Utilisateur` WHERE 1; ";
+            $resultat = Connexion::pdo()->query($requete);
+            $idMax=$resultat->fetchColumn();
+
+            $requete = "INSERT INTO Utilisateur (
+                            idUtilisateur, pseudo, mdp, nom, prenom, dateNaissance, mail, adresse, estVerifie, lienPhotoProfil
+                        ) VALUES (
+                            :idUtilisateur, :pseudo, PASSWORD(:mdp), :nom, :prenom, :dateNaissance, :mail, :adresse, :estVerifie, :lienPhotoProfil
+                        );";
+
+    
+            $statement = Connexion::pdo()->prepare($requete);
+            $statement->execute([
+                ':idUtilisateur' => $nouvelId,
+                ':pseudo' => $pseudo,
+                ':mdp' => $mdp, 
+                ':nom' => $nomUtilisateur,
+                ':prenom' => $prenomUtilisateur,
+                ':dateNaissance' => $ddn,
+                ':mail' => $email,
+                ':adresse' => $adresse,
+                ':estVerifie' => false, //on met false car un utilisateur qui vient d'être crée ne peut être vérifié
+                ':lienPhotoProfil' => $lienPdp
+            ]);
+        }
+
+        
+//date('Y-m-d H:i:s')
 
         public static function getUtilisateur($idUtilisateur){
             $requete = "SELECT idUtilisateur, pseudo, nom, prenom, lienPhotoProfil FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
@@ -60,9 +90,9 @@
         }
 
         public static function getJSON($idUtilisateur){
-        $requete = "SELECT idUtilisateur, pseudo, nom, prenom, lienPhotoProfil FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
+        $requete = "SELECT * FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
         $resultat = Connexion::pdo()->query($requete);
-        $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
+        //$resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
 
         return json_encode($resultat->fetch(PDO::FETCH_ASSOC),JSON_UNESCAPED_UNICODE);
         }
