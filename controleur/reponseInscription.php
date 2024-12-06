@@ -44,8 +44,9 @@ foreach($_POST as $val ){
 }
 echo $_POST["adresse_utilisateur"];
 
-Utilisateur::creerUtilisateur($_POST["nom_utilisateur"],$_POST["prenom_utilisateur"],$_POST["pseudo_utilisateur"],$_POST["password_utilisateur"],date_format(date_create($_POST["u_ddn"]), 'Y-m-d H:i:s'),$_POST["email_utilisateur"],$_POST["adresse_utilisateur"],$rename);
-
+Utilisateur::creerUtilisateur($_POST["nom_utilisateur"],$_POST["prenom_utilisateur"],$_POST["pseudo_utilisateur"],$_POST["password_utilisateur"],date_format(date_create($_POST["u_ddn"]), 'Y-m-d 0:0:0'),$_POST["email_utilisateur"],$_POST["adresse_utilisateur"],$rename);
+$url = "../rest/";
+echo " <meta http-equiv=\"refresh\" content=\"0; url=$url\"> "
 ?>
 </pre>
 
