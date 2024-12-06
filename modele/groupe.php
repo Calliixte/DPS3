@@ -2,6 +2,7 @@
     Class Groupe{
         private int $idGroupe;
         private string $nomGroupe;
+        private array $listeVote;
 
         public function get($attribute){
             return $this->$attribute;
@@ -22,9 +23,26 @@
             $requete = "SELECT idGroupe, nomGroupe FROM Groupe WHERE idGroupe = $idGroupe;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
-            
-            return $resultat->fetch();
+            $groupe = $resultat->fetch();
+            $groupe->fillVote();
+
+            return $groupe;
         }
+
+        public function fillVote(){
+            $requete = "SELECT idVote, titreVote FROM Vote WHERE idGroupe = $this->idGroupe";
+            $resultat = Connexion::pdo()->query($requete);
+            $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
+            $this->listeVote = $resultat->fetchAll();
+
+            foreach($this->listeVote as $vote){
+                $vote->set('groupe', $this);
+                $vote->fillChoixVote();
+                $vote->fillEtiquettes();
+                $vote->set('listeMessages', Message::getMessages($vote));
+            }
+        }
+
         public static function getJSON(int $idGroupe){
             $requete = "SELECT idGroupe, nomGroupe FROM Groupe WHERE idGroupe = $idGroupe;";
             $resultat = Connexion::pdo()->query($requete);
@@ -43,6 +61,9 @@
 
         public function display(){
             echo $this;
+            echo "<pre>";
+            print_r($this->listeVote);
+            echo "</pre>";
         }
     }
 ?>
