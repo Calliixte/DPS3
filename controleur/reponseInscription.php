@@ -46,7 +46,7 @@ echo $_POST["adresse_utilisateur"];
 
 Utilisateur::creerUtilisateur($_POST["nom_utilisateur"],$_POST["prenom_utilisateur"],$_POST["pseudo_utilisateur"],$_POST["password_utilisateur"],date_format(date_create($_POST["u_ddn"]), 'Y-m-d 0:0:0'),$_POST["email_utilisateur"],$_POST["adresse_utilisateur"],$rename);
 $url = "../rest/";
-echo " <meta http-equiv=\"refresh\" content=\"0; url=$url\"> "
+echo " <meta http-equiv=\"refresh\" content=\"0; url=$url\"> " //redirige vers l'url donnée au bout de 0 secondes, modifier le 0 ou commenter la ligne si on veut voir la page de debug
 ?>
 </pre>
 
