@@ -2,7 +2,6 @@
     Class Message{
         private int $idMessage;
         private Utilisateur $auteur;
-        private Vote $vote;
         private string $texte;
         private string $dateEnvoi;
         private array $listeReactions;
@@ -24,7 +23,6 @@
             $listeMessages = $resultat->fetchAll();
 
             foreach($listeMessages as $message){
-                $message->vote = $vote;
                 $message->fillReaction();
             }
 

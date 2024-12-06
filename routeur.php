@@ -14,17 +14,15 @@
                 require_once("modele/message.php");
                 require_once("modele/reaction.php");
                 require_once("modele/utilisateur.php");
-                require_once("modele/groupe.php");
+                // require_once("modele/groupe.php");
                 require_once("modele/vote.php");
 
                 Connexion::connect();
 
-                $User = Utilisateur::getUtilisateur(2);
-                $groupe = Groupe::getGroupe(2);
-
-                $Vote = Vote::getVote(2,2,$groupe);
-
-                Message::getMessages($Vote);
+                $Vote = Vote::getVote(2,2);
+                
+                $Vote->display();
+                //Message::getMessages($Vote);
 
             ?>
         </main>
