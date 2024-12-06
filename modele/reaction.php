@@ -1,12 +1,24 @@
 <?php
     Class Reaction{
-        private Utilisateur $auteur;
+        private int $idAuteur;
         private string $emoticone;
 
-        public function __construct(Utilisateur $auteur=NULL, string $emoticone=NULL){
-            if(!is_null($auteur)){
-                $this->auteur = $auteur;
+        public function __construct(int $idAuteur=NULL, string $emoticone=NULL){
+            if(!is_null($idAuteur)){
+                $this->idAuteur = $idAuteur;
                 $this->emoticone = $emoticone;
+            }
+        }
+
+        public static function getReactionsMessage($idMessage){
+            $requete = "SELECT idUtilisateur, unicodeEmoticone FROM ReactionMessage WHERE idMessage = $idMessage;";
+            
+            $resultat = Connexion::pdo()->query($requete);
+            
+            $i = 0;
+            while($row = $resultat->fetch()){
+                $listeReactions[$i] = new Reaction(Utilisateur::getUtilisateur($row['idUtilisateur']),$row['unicodeEmoticone']);
+                $i++;
             }
         }
 

@@ -33,12 +33,9 @@
             $requete = "SELECT idUtilisateur, unicodeEmoticone FROM ReactionMessage WHERE idMessage = $this->idMessage;";
             
             $resultat = Connexion::pdo()->query($requete);
+            $resultat->setFetchmode(PDO::FETCH_CLASS,"Reaction");
             
-            $i = 0;
-            while($row = $resultat->fetch()){
-                $listeReactions[$i] = new Reaction(Utilisateur::getUtilisateur($row['idUtilisateur']),$row['unicodeEmoticone']);
-                $i++;
-            }
+            $listeReactions = $resultat->fetchAll();
         }
     }
 ?>
