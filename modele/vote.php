@@ -23,20 +23,19 @@
             }
         }
 
-        public static function getVote(int $idVote, int $idUser, Groupe $groupe){
+        public static function getVote(int $idVote, int $idUser=NULL, Groupe $groupe){
             $requete = "SELECT idVote, titreVote FROM Vote WHERE idVote = $idVote;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
-            
             $vote = $resultat->fetch();
             $vote->set('groupe', $groupe);
             $vote->fillChoixVote($idUser);
             $vote->fillEtiquettes();
-            $this->listeMessages = Message::getMessages($this);
+            $vote->listeMessages = Message::getMessages($vote);
             return $vote;
         }
 
-        public static function getJSON(int $idVote, int $idUser, int $idGroupe){
+        public static function getJSON(int $idVote, int $idUser=NULL, int $idGroupe){
             $requete = "SELECT idVote, titreVote FROM Vote WHERE idVote = $idVote;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
@@ -75,15 +74,21 @@
             $this->listeEtiquettes = $resultat->fetchAll();
         }
 
-        public function fillChoixVote($idUser){
+        public function fillChoixVote($idUser=NULL){
             $requete = "SELECT idChoixVote, intitule, CountVoteChoix(idChoixVote) AS nbVote FROM ChoixVote WHERE idVote=$this->idVote;";
             $resultat = Connexion::pdo()->query($requete);
             
-            while ($row = $resultat->fetch()) {
-                $aVote = $this->aChoisi($idUser, $row['idChoixVote']);
-                
-                $this->choixVote[$row['intitule']] = array ('nbVote' => $row['nbVote'],
-                                                            'aVote' => $aVote);
+            if(!is_null($idUser)){
+                while ($row = $resultat->fetch()) {
+                    $aVote = $this->aChoisi($idUser, $row['idChoixVote']);
+                    
+                    $this->choixVote[$row['intitule']] = array ('nbVote' => $row['nbVote'],
+                                                                'aVote' => $aVote);
+                }
+            }else{
+                while ($row = $resultat->fetch()) {
+                    $this->choixVote[$row['intitule']] = array ('nbVote' => $row['nbVote']);
+                }
             }
         }
 
