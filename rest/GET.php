@@ -3,7 +3,11 @@
 <?php
 
 require_once("../config/connexion.php");
-require_once("../modele/groupe.php");
+
+foreach(glob("../modele/*php") as $fichier){
+    require_once($fichier);
+}
+
 Connexion::connect();
 $lienDocu= "<a href=\"index.html\">documentation</a>";
 $listeClasse = array("groupe","message","reaction","utilisateur","vote");

@@ -72,25 +72,9 @@
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
             
             $User = $resultat->fetch();
-            $User->fillGroupList();
+            $User->listeGroupes = Groupe::getGroupeUtilisateur($idUtilisateur);
 
             return $User;
-        }
-
-        public function fillGroupList(){
-            $requete = "SELECT G.idGroupe, G.nomGroupe 
-                        FROM Groupe G INNER JOIN Membre M
-                        ON G.idGroupe = M.idGroupe 
-                        WHERE idUtilisateur = $this->idUtilisateur;";
-
-            $resultat = Connexion::pdo()->query($requete);
-            $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
-            
-            $this->listeGroupes = $resultat->fetchAll();
-
-            foreach($this->listeGroupes as $groupe){
-                $groupe->fillVote();
-            }
         }
 
         public static function getJSON($idUtilisateur){

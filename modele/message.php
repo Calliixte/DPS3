@@ -14,8 +14,7 @@
             $this->$attribute = $val;
         }
 
-        public static function getMessages(Vote $vote){
-            $idVote = $vote->get('idVote');
+        public static function getMessages(int $idVote){
             $requete = "SELECT idMessage, texte, dateEnvoi FROM Message WHERE idVote = $idVote;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Message");
@@ -23,19 +22,10 @@
             $listeMessages = $resultat->fetchAll();
 
             foreach($listeMessages as $message){
-                $message->fillReaction();
+                $message->listeReaction = Reaction::getReactionMessage($message->idMessage);
             }
 
             return $listeMessages;
-        }
-
-        public function fillReaction(){
-            $requete = "SELECT idUtilisateur, unicodeEmoticone FROM ReactionMessage WHERE idMessage = $this->idMessage;";
-            
-            $resultat = Connexion::pdo()->query($requete);
-            $resultat->setFetchmode(PDO::FETCH_CLASS,"Reaction");
-            
-            $listeReactions = $resultat->fetchAll();
         }
     }
 ?>
