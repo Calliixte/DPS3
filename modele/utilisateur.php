@@ -72,7 +72,7 @@
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
             
             $User = $resultat->fetch();
-            $User->fillGroupList();
+            //$User->fillGroupList();
 
             return $User;
         }

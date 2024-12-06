@@ -2,7 +2,6 @@
     Class Vote{
         private int $idVote;
         private string $titreVote;
-        private Groupe $groupe;
         private array $choixVote;
         private array $listeEtiquettes;
         private array $listeMessages;
@@ -15,34 +14,30 @@
             $this->$attribute = $val;
         }
 
-        public function __construct(int $idVote=NULL, string $titreVote=NULL, Groupe $groupe=NULL){
+        public function __construct(int $idVote=NULL, string $titreVote=NULL){
             if(!is_null($idVote)){
                 $this->idVote = $idVote;
                 $this->titreVote = $titreVote;
-                $this->groupe = $groupe;
             }
         }
 
-        public static function getVote(int $idVote, int $idUser=NULL, Groupe $groupe){
+        public static function getVote(int $idVote, int $idUser=NULL){
             $requete = "SELECT idVote, titreVote FROM Vote WHERE idVote = $idVote;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
             $vote = $resultat->fetch();
-            $vote->set('groupe', $groupe);
             $vote->fillChoixVote($idUser);
             $vote->fillEtiquettes();
             $vote->listeMessages = Message::getMessages($vote);
             return $vote;
         }
 
-        public static function getJSON(int $idVote, int $idUser=NULL, int $idGroupe){
+        public static function getJSON(int $idVote, int $idUser=NULL){
             $requete = "SELECT idVote, titreVote FROM Vote WHERE idVote = $idVote;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
             
             $vote = $resultat->fetch();
-            $groupe = Groupe::getGroupe($idGroupe);
-            $vote->set('groupe', $groupe);
             $vote->fillChoixVote($idUser);
             $vote->fillEtiquettes();
 
@@ -93,12 +88,9 @@
         }
 
         public function aChoisi(int $idUser, int $idChoixVote){
-            $idGroupe = $this->groupe->get('idGroupe');
-
             $requete = "SELECT COUNT(*) AS 'nbVote' FROM ChoixMembre 
                         WHERE idChoixVote = $idChoixVote
-                        AND idUtilisateur = $idUser
-                        AND idGroupe = $idGroupe;";
+                        AND idUtilisateur = $idUser;";
 
             $resultat = Connexion::pdo()->query($requete);
             
@@ -118,6 +110,9 @@
             echo "</pre>";
             echo "<pre>";
             print_r($this->listeEtiquettes);
+            echo "</pre>";
+            echo "<pre>";
+            print_r($this->listeMessages);
             echo "</pre>";
         }
     }
