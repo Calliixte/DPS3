@@ -50,7 +50,7 @@
     
             $statement = Connexion::pdo()->prepare($requete);
             $statement->execute([
-                ':idUtilisateur' => $nouvelId,
+                ':idUtilisateur' => $idMax,
                 ':pseudo' => $pseudo,
                 ':mdp' => $mdp, 
                 ':nom' => $nomUtilisateur,
@@ -58,7 +58,7 @@
                 ':dateNaissance' => $ddn,
                 ':mail' => $email,
                 ':adresse' => $adresse,
-                ':estVerifie' => false, //on met false car un utilisateur qui vient d'être crée ne peut être vérifié
+                ':estVerifie' => 0, //on met false car un utilisateur qui vient d'être crée ne peut être vérifié
                 ':lienPhotoProfil' => $lienPdp
             ]);
         }

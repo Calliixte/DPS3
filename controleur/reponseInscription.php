@@ -42,8 +42,10 @@ foreach($_POST as $val ){
     echo $val;
     echo "\n";
 }
+echo $_POST["adresse_utilisateur"];
 
-Utilisateur::creerUtilisateur($_POST["nom_utilisateur"],$_POST["prenom_utilisateur"],$_POST["pseudo_utilisateur"],$_POST["password_utilisateur"],$_POST["u_ddn"],$_POST["email_utilisateur"],$_POST["adresse_utilisateur"],$rename)
+Utilisateur::creerUtilisateur($_POST["nom_utilisateur"],$_POST["prenom_utilisateur"],$_POST["pseudo_utilisateur"],$_POST["password_utilisateur"],date_format(date_create($_POST["u_ddn"]), 'Y-m-d H:i:s'),$_POST["email_utilisateur"],$_POST["adresse_utilisateur"],$rename);
+
 ?>
 </pre>
 
