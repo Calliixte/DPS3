@@ -5,6 +5,7 @@
         private array $choixVote;
         private array $listeEtiquettes;
         private array $listeMessages;
+        private array $listeReactions;
 
         public function get($attribute){
             return $this->$attribute;
@@ -28,8 +29,24 @@
             $vote = $resultat->fetch();
             $vote->fillChoixVote($idUser);
             $vote->fillEtiquettes();
-            $vote->listeMessages = Message::getMessages($vote);
+            $vote->listeMessages = Message::getMessages($idVote);
+            $vote->listeReactions = Reaction::getReactionMessage($idVote);
             return $vote;
+        }
+
+        public static function getVotesGroupe($idGroupe){
+            $requete = "SELECT idVote, titreVote FROM Vote WHERE idGroupe = $idGroupe";
+            $resultat = Connexion::pdo()->query($requete);
+            $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
+            $listeVote = $resultat->fetchAll();
+
+            foreach($listeVote as $vote){
+                $vote->fillChoixVote();
+                $vote->fillEtiquettes();
+                $vote->set('listeMessages', Message::getMessages($vote->idVote));
+            }
+
+            return $listeVote;
         }
 
         public static function getJSON(int $idVote, int $idUser=NULL){
@@ -45,17 +62,6 @@
             //Vote va garder un json fucked up pour l'instant TODO : creer une fonction to_array pour Vote
         }
 
-        public function fillReaction(){
-            $requete = "SELECT idUtilisateur, unicodeEmoticone FROM ReactionVote;";
-            
-            $resultat = Connexion::pdo()->query($requete);
-            
-            $i = 0;
-            while($row = $resultat->fetch()){
-                $listeReactions[$i] = Reaction(getUtilisateur($row['idUtilisateur']),$row['unicodeEmoticone']);
-                $i++;
-            }
-        }
 
         public function fillEtiquettes(){
             $requete = "SELECT labelEtiquette 

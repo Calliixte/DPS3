@@ -10,16 +10,22 @@
             }
         }
 
-        public static function getReactionsMessage($idMessage){
+        public static function getReactionMessage($idMessage){
             $requete = "SELECT idUtilisateur, unicodeEmoticone FROM ReactionMessage WHERE idMessage = $idMessage;";
             
             $resultat = Connexion::pdo()->query($requete);
+            $resultat->setFetchmode(PDO::FETCH_CLASS,"Reaction");
             
-            $i = 0;
-            while($row = $resultat->fetch()){
-                $listeReactions[$i] = new Reaction(Utilisateur::getUtilisateur($row['idUtilisateur']),$row['unicodeEmoticone']);
-                $i++;
-            }
+            return $resultat->fetchAll();
+        }
+
+        public static function getReactionVote($idVote){
+            $requete = "SELECT idUtilisateur, unicodeEmoticone FROM ReactionMessage WHERE idVote = $idVote;";
+            
+            $resultat = Connexion::pdo()->query($requete);
+            $resultat->setFetchmode(PDO::FETCH_CLASS,"Reaction");
+            
+            return $resultat->fetchAll();
         }
 
         public function __toString(){

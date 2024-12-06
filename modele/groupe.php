@@ -24,22 +24,27 @@
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
             $groupe = $resultat->fetch();
-            $groupe->fillVote();
+            $groupe->listeVote = Vote::getVote($idGroupe);
 
             return $groupe;
         }
 
-        public function fillVote(){
-            $requete = "SELECT idVote, titreVote FROM Vote WHERE idGroupe = $this->idGroupe";
-            $resultat = Connexion::pdo()->query($requete);
-            $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
-            $this->listeVote = $resultat->fetchAll();
+        public static function getGroupeUtilisateur(int $idUtilisateur){
+            $requete = "SELECT G.idGroupe, G.nomGroupe 
+                        FROM Groupe G INNER JOIN Membre M
+                        ON G.idGroupe = M.idGroupe 
+                        WHERE idUtilisateur = $idUtilisateur;";
 
-            foreach($this->listeVote as $vote){
-                $vote->fillChoixVote();
-                $vote->fillEtiquettes();
-                $vote->set('listeMessages', Message::getMessages($vote));
+            $resultat = Connexion::pdo()->query($requete);
+            $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
+            
+            $listeGroupes = $resultat->fetchAll();
+
+            foreach($listeGroupes as $groupe){
+                $groupe->listeVote = Vote::getVotesGroupe($groupe->idGroupe);
             }
+
+            return $listeGroupes;
         }
 
         public static function getJSON(int $idGroupe){
