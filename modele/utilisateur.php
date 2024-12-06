@@ -72,7 +72,7 @@
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
             
             $User = $resultat->fetch();
-            //$User->fillGroupList();
+            $User->fillGroupList();
 
             return $User;
         }
@@ -96,7 +96,6 @@
         public static function getJSON($idUtilisateur){
         $requete = "SELECT * FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
         $resultat = Connexion::pdo()->query($requete);
-        //$resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
 
         return json_encode($resultat->fetch(PDO::FETCH_ASSOC),JSON_UNESCAPED_UNICODE);
         }

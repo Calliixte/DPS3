@@ -36,7 +36,6 @@
             $this->listeVote = $resultat->fetchAll();
 
             foreach($this->listeVote as $vote){
-                $vote->set('groupe', $this);
                 $vote->fillChoixVote();
                 $vote->fillEtiquettes();
                 $vote->set('listeMessages', Message::getMessages($vote));
