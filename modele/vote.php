@@ -50,13 +50,7 @@
         }
 
         public static function getJSON(int $idVote, int $idUser=NULL){
-            $requete = "SELECT idVote, titreVote FROM Vote WHERE idVote = $idVote;";
-            $resultat = Connexion::pdo()->query($requete);
-            $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
-            
-            $vote = $resultat->fetch();
-            $vote->fillChoixVote($idUser);
-            $vote->fillEtiquettes();
+            $vote = Vote::getVote($idVote, $idUser);
 
             return json_encode((array) $vote,JSON_UNESCAPED_UNICODE);
             //Vote va garder un json fucked up pour l'instant TODO : creer une fonction to_array pour Vote
