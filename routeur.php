@@ -9,6 +9,7 @@
         <main>
             <h2>DPS3<h2>
             <?php 
+
                 require_once("config/connexion.php");
                 
                 require_once("modele/message.php");
@@ -19,9 +20,16 @@
 
                 Connexion::connect();
 
+                //$User = Utilisateur::connexion();
                 $User = Utilisateur::getUtilisateur(2);
 
                 $User->display();
+                $prout=Utilisateur::verifLogin("alexcharp");
+                if($prout>0){
+                    echo "L'id utilisateur trouvé est " . $prout;
+                }else{
+                    echo "Aucun Utilisteur trouvé ";
+                }
 
             ?>
         </main>

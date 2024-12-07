@@ -46,7 +46,7 @@
                         ) VALUES (
                             :idUtilisateur, :pseudo, PASSWORD(:mdp), :nom, :prenom, :dateNaissance, :mail, :adresse, :estVerifie, :lienPhotoProfil
                         );";
-
+                        //PASSWORD est la fonction de hash de mySQL
     
             $statement = Connexion::pdo()->prepare($requete);
             $statement->execute([
@@ -63,8 +63,28 @@
             ]);
         }
 
+        public static function connexion(){
+
+        }
+        public static function verifLogin($log /*log est soit un email soit un pseudo*/){
+                      //pour distinguer pseudo ou email -> on vérifie si il y a un @ dans le string, les @ sont interdits dans les pseudos mais tjrs présents dans les emails
+            $estEmail = false;
+            foreach (mb_str_split($log) as $char) {
+                if($char=='@'){
+                    $estEmail=true;
+                    break;
+                }
+            }
+            $valLogin = $estEmail ? "mail" : "pseudo" ;      
+            $requete = "SELECT idUtilisateur FROM `Utilisateur` WHERE $valLogin = :logu"; //pour quelconque raison les noms de colonnes ne peuvent pas être mis avec des prepare statement                                                                        
+            $statement = Connexion::pdo()->prepare($requete);  // du coup le prepare est pas ouf mais je le garde par ego
+            $statement->execute([
+                ':logu' => $log
+            ]);
+            return $statement->fetch(PDO::FETCH_ASSOC)['idUtilisateur'] ?? -1;
+        }
         
-//date('Y-m-d H:i:s')
+        
 
         public static function getUtilisateur($idUtilisateur){
             $requete = "SELECT idUtilisateur, pseudo, nom, prenom, lienPhotoProfil FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
@@ -101,6 +121,8 @@
                 $elem->display();
             }
         }
+
+
 
     }
 ?>

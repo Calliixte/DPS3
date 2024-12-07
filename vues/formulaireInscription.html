@@ -39,6 +39,8 @@
     <input id="u_nickname"
         name="pseudo_utilisateur"
         type="text"
+        pattern="[^@#$%^&*]+" 
+        title="Les caractères @, #, $, %, ^, &, * ne sont pas autorisés." 
         required
         placeholder="pseudo"
     />
