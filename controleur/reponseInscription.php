@@ -19,7 +19,7 @@ $resultat = Connexion::pdo()->query($requete);
 $idMax=$resultat->fetchColumn();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Specify the directory where images will be uploaded
+
     
     $target_dir = "../img/profilePicture/";
     $target_file = $target_dir . basename($_FILES["u_photo"]["name"]);

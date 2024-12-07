@@ -73,7 +73,7 @@
             
             $id=Utilisateur::verifLogin($log);
             if($id>=0){
-                return Utilisateur::verifMdp($id,$mdpHash);
+                return Utilisateur::verifMdp($id,$mdpHash) ? $id : false;  //si le login marche il renvoie un id qui est forcément > 0 donc interprété comme true si on veut un bool
             }                                           //peu importe ce qui foire entre le login et le mdp ça renverra false donc mdp erreur sera : login ou mdp incorrect
             return false; 
             

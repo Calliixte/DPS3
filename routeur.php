@@ -21,6 +21,8 @@
                 Connexion::connect();
 
 
+                
+
                 $User = Utilisateur::getUtilisateur(2);
 
                 $User->display();
