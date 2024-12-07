@@ -1,0 +1,35 @@
+@import 'quick-navbar.css';
+@import 'my-groups.css';
+
+#navbar {
+    grid-area: 1 / 1 / 2 / 2;
+    
+    background-color: var(--light-blue);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: stretch;
+} 
+
+#navbar h2 {
+    margin: 20px;
+    text-align: center;
+}
+
+#navbar .group-button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    box-shadow: var(--basic-button-shadow);
+}
+
+#navbar > div:last-child {
+    margin: 3px 20px 0;
+}   
+
+#navbar > div:last-child .group-button p {
+    grid-area: 1 / 2 / 3 / 4;
+    margin: auto auto auto 0;
+}

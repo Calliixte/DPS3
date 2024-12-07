@@ -1,0 +1,32 @@
+#my-groups {
+    padding: 5px 20px;
+    
+    max-height: 49vh;
+    overflow-y: scroll;
+    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+#my-groups-top-grad {
+    position: relative;
+    top: 10px;
+    height: 10px;
+    width: auto;
+
+    mask-image: linear-gradient(to bottom, black 0, transparent 100%);
+    background-color: inherit;
+}
+
+#my-groups-bottom-grad {
+    position: relative;
+    bottom: 10px;
+    height: 10px;
+    width: auto;
+
+    mask-image: linear-gradient(to top, black 0, transparent 100%);
+    background-color: inherit;
+}

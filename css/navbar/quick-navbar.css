@@ -1,0 +1,51 @@
+
+#quick-navbar {
+    margin: 20px;
+
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: var(--basic-button-shadow);
+
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: 50px 50px;
+}
+
+#quick-navbar .logo {
+    grid-area: 1 / 1 / 3 / 2;
+    
+    height: 100%;
+    
+    border-radius: inherit;
+}
+
+#quick-navbar .profilepic {
+    grid-area: 1 / 2 / 3 / 2;
+    margin: auto;
+
+    height: 80%;
+
+    border-radius: 100%;
+}
+
+#quick-navbar .mypolls {
+    grid-area: 1 / 3 / 2 / 4;
+    margin: 20% auto auto;
+    
+    height: 70%;
+}
+
+#quick-navbar .notifications {
+    grid-area: 2 / 3 / 3 / 4;
+    margin: auto auto 20%;
+    
+    height: 70%;
+}
+
+#quick-navbar img {
+    height: 100%;
+    aspect-ratio: 1/1;
+    
+    object-fit: cover;
+    border-radius: inherit;
+}
