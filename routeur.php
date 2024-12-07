@@ -20,16 +20,11 @@
 
                 Connexion::connect();
 
-                //$User = Utilisateur::connexion();
+
                 $User = Utilisateur::getUtilisateur(2);
 
                 $User->display();
-                $prout=Utilisateur::verifLogin("alexcharp");
-                if($prout>0){
-                    echo "L'id utilisateur trouvé est " . $prout;
-                }else{
-                    echo "Aucun Utilisteur trouvé ";
-                }
+                
 
             ?>
         </main>

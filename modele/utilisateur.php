@@ -63,8 +63,20 @@
             ]);
         }
 
-        public static function connexion(){
+        public static function connexion($log,$mdp){
+            //on hash le mot de passe dès le début pour éviter de trop manipuler la version en clair
+            $requete = "select PASSWORD(:mdp) as mdp";
+            $statement = Connexion::pdo()->prepare($requete);
+            $statement->execute([':mdp' => $mdp]);
+            $mdpHash = $statement->fetch(PDO::FETCH_ASSOC)['mdp'];
 
+            
+            $id=Utilisateur::verifLogin($log);
+            if($id>=0){
+                return Utilisateur::verifMdp($id,$mdpHash);
+            }                                           //peu importe ce qui foire entre le login et le mdp ça renverra false donc mdp erreur sera : login ou mdp incorrect
+            return false; 
+            
         }
         public static function verifLogin($log /*log est soit un email soit un pseudo*/){
                       //pour distinguer pseudo ou email -> on vérifie si il y a un @ dans le string, les @ sont interdits dans les pseudos mais tjrs présents dans les emails
@@ -81,9 +93,16 @@
             $statement->execute([
                 ':logu' => $log
             ]);
-            return $statement->fetch(PDO::FETCH_ASSOC)['idUtilisateur'] ?? -1;
+            return $statement->fetch(PDO::FETCH_ASSOC)['idUtilisateur'] ?? -1;  //return l'idUtilisateur obtenu à la requete et -1 s'il n'y en a pas
         }
-        
+        public static function verifMdp($idUser,$hashMdp){
+            $requete = "select mdp from `Utilisateur` WHERE idUtilisateur= :log ";
+            $statement = Connexion::pdo()->prepare($requete);
+            $statement->execute([':log' => $idUser]);
+            $resultat = $statement->fetch(PDO::FETCH_ASSOC)['mdp'];
+            return $hashMdp==$resultat;
+        }
+
         
 
         public static function getUtilisateur($idUtilisateur){
