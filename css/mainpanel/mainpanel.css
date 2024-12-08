@@ -1,4 +1,6 @@
 
 #mainpanel {
+    grid-area: 1 / 1 / 2 /-1;
+
     background-color: green;
 }
