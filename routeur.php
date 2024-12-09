@@ -21,34 +21,35 @@
             Connexion::connect();
     
 
-            // $controleur="defaut"; //mettre le controleur par défaut (celui de la page d'accueil)
-            // $action="action par def de ce controleur"; //mettre l'action que doit faire ce controleur par défaut
-            // $tableauControleurs = ["controleurApplication","controleurGroupe","controleurMessage","controleurUtilisateur","controleurVote"];
+
+            $controleur="defaut"; //mettre le controleur par défaut (celui de la page d'accueil)
+            $action="action par def de ce controleur"; //mettre l'action que doit faire ce controleur par défaut
+            $tableauControleurs = ["controleurApplication","controleurGroupe","controleurMessage","controleurUtilisateur","controleurVote"];
 
 
-            // if(isset($_GET["controleur"])){
-            //     if(in_array($_GET["controleur"],$tableauControleurs)){
-            //         $controleur=$_GET["controleur"];
-            //     }
-            // }
-            // require_once("controleur/$controleur.php");
-            // if(isset($_GET["action"])){
-            //     if(in_array($_GET["action"],get_class_methods($controleur))){
-            //     $action=$_GET["action"];
-            //     }
-            // }
-            // $controleur::$action();
+            if(isset($_GET["controleur"])){
+                if(in_array($_GET["controleur"],$tableauControleurs)){
+                    $controleur=$_GET["controleur"];
+                }
+            }
+            require_once("controleur/$controleur.php");
+            if(isset($_GET["action"])){
+                if(in_array($_GET["action"],get_class_methods($controleur))){
+                $action=$_GET["action"];
+                }
+            }
+            $controleur::$action();
             
 
             // $User = Utilisateur::getUtilisateur(2);
 
             // $User->display();
 
-            $groupe = Groupe::getGroupe(1);
+            // $groupe = Groupe::getGroupe(1);
 
             // $groupe->display();
 
-            include('vues/bouton-groupe.php');
+            // include('vues/bouton-groupe.php');
 
 
             ?>

@@ -3,6 +3,13 @@
 //methode afficher accueil
 // <!-- on mettra les methodes de connexion /inscription dedans  -->
 
+
+public static function afficherPagePrincipale(){
+    echo "main";
+    echo "<a href=routeur.php?controleur=controleurApplication&action=afficherNav> voir la nav nan ? </a> ";
+}
+
+
 public static function afficherNav(){
     echo "Nav";
     afficherPetitUtilisateur();
