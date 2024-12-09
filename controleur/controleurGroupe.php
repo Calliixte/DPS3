@@ -1,5 +1,5 @@
 <?php
-    Class controleurGroupe{
+    Class ControleurGroupe{
         public static function afficherGrandGroupe(int $idGroupe){
             echo "afficher groupe numéro $idGroupe";
             // include("vue/groupe.php");
