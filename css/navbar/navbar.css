@@ -1,7 +1,7 @@
 @import 'quick-navbar.css';
 @import 'my-groups.css';
 
-#navbar {
+header {
     grid-area: 1 / 1 / 2 / 2;
     
     background-color: var(--light-blue);
@@ -13,23 +13,23 @@
     align-items: stretch;
 } 
 
-#navbar h2 {
+header h2 {
     margin: 20px;
     text-align: center;
 }
 
-#navbar .group-button {
+header .group-button {
     margin-top: 5px;
     margin-bottom: 5px;
 
     box-shadow: var(--basic-button-shadow);
 }
 
-#navbar > div:last-child {
+header > div:last-child {
     margin: 3px 20px 0;
 }   
 
-#navbar > div:last-child .group-button p {
+header > div:last-child .group-button p {
     grid-area: 1 / 2 / 3 / 4;
     margin: auto auto auto 0;
 }
