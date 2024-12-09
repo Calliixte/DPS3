@@ -9,7 +9,8 @@
         private string $pseudo;
         private string $nom;
         private string $prenom;
-        private string $lienPhotoProfil;
+        private ?string $lienPhotoProfil; 
+        private bool $estVerifie;
         private int $role = MEMBRE;
         private array $listeGroupes;
 
@@ -95,6 +96,8 @@
             ]);
             return $statement->fetch(PDO::FETCH_ASSOC)['idUtilisateur'] ?? -1;  //return l'idUtilisateur obtenu à la requete et -1 s'il n'y en a pas
         }
+
+
         public static function verifMdp($idUser,$hashMdp){
             $requete = "select mdp from `Utilisateur` WHERE idUtilisateur= :log ";
             $statement = Connexion::pdo()->prepare($requete);
@@ -106,7 +109,7 @@
         
 
         public static function getUtilisateur($idUtilisateur){
-            $requete = "SELECT idUtilisateur, pseudo, nom, prenom, lienPhotoProfil FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
+            $requete = "SELECT idUtilisateur, pseudo, nom, prenom, lienPhotoProfil, estVerifie FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
             
@@ -121,6 +124,16 @@
         $resultat = Connexion::pdo()->query($requete);
 
         return json_encode($resultat->fetch(PDO::FETCH_ASSOC),JSON_UNESCAPED_UNICODE);
+        }
+
+
+        public function getGroupe($idGroupe){
+            foreach($this->listeGroupes as $groupe){
+                if ($groupe->get('idGroupe') == $idGroupe){
+                    return $groupe;
+                }
+            }
+            return -1;
         }
 
         public function __toString(){

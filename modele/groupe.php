@@ -2,6 +2,7 @@
     Class Groupe{
         private int $idGroupe;
         private string $nomGroupe;
+        private string $regles;
         private int $nbMembres;
         private ?string $lienPhotoIcone;    // ? ⇒ nullable
         private array $listeVote;

@@ -1,6 +1,28 @@
 <?php
 
+//methode afficher accueil
+// <!-- on mettra les methodes de connexion /inscription dedans  -->
+class controleurApplication{
 
+public static function afficherPagePrincipale(){
+    echo "main";
+    echo "<a href=routeur.php?controleur=controleurApplication&action=afficherNav> voir la nav nan ? </a> ";
+}
+
+
+public static function afficherNav(){
+    echo "Nav";
+    controleurApplication::afficherListeGroupe();
+    controleurUtilisateur::afficherPetitUtilisateur();
+}
+
+public static function afficherListeGroupe(){
+    echo "listeGroupe";
+    //foreach dans listeGroupe de utilisateur 
+    for($i=0; $i<3; $i++){
+    controleurGroupe::afficherPetitGroupe();}
+    echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherPetitGroupe&id=$i> rejoindre un groupe </a> ";
+}
 
 /*
 methodes : 
@@ -29,6 +51,6 @@ qui aurait un parametre vote.php/voter?choix=x
 
 */
 
-
+}
 
 ?>
