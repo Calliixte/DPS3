@@ -5,7 +5,7 @@
         public static function getGroupe(){
             $idGroupe = $_GET['id'];
             $utilisateurCourant = Utilisateur::getUtilisateur(2);
-            return $UtilisateurCourant->getGroupe($idGroupe);
+            return $utilisateurCourant->getGroupe($idGroupe);
         }
 
         public static function afficherGrandGroupe(){
