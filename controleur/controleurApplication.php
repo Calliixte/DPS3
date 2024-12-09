@@ -21,7 +21,7 @@ public static function afficherListeGroupe(){
     //foreach dans listeGroupe de utilisateur 
     for($i=0; $i<3; $i++){
     controleurGroupe::afficherPetitGroupe();}
-    echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherPetitGroupe> rejoindre un groupe </a> ";
+    echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherPetitGroupe&id=$i> rejoindre un groupe </a> ";
 }
 
 /*
