@@ -6,23 +6,24 @@ class controleurApplication{
 
 public static function afficherPagePrincipale(){
     echo "main";
-    echo "<a href=routeur.php?controleur=controleurApplication&action=afficherNav> voir la nav nan ? </a> ";
+    echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=1> voir la nav nan ? </a> ";
 }
 
 
-public static function afficherNav(){
-    echo "Nav";
-    controleurApplication::afficherListeGroupe();
-    controleurUtilisateur::afficherPetitUtilisateur();
-}
-
-public static function afficherListeGroupe(){
-    echo "listeGroupe";
-    //foreach dans listeGroupe de utilisateur 
-    for($i=0; $i<3; $i++){
-    controleurGroupe::afficherPetitGroupe();}
-    echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherPetitGroupe&id=$i> rejoindre un groupe </a> ";
-}
+// public static function afficherNav(){
+//     echo "Nav";
+//     controleurApplication::afficherListeGroupe();
+//     controleurUtilisateur::afficherPetitUtilisateur();
+// }
+// NE SERT A RIEN MAIS ARCHIVES HASSOUL
+// public static function afficherListeGroupe(){
+//     echo "listeGroupe";
+//     //foreach dans listeGroupe de utilisateur 
+//     for($i=0; $i<3; $i++){
+//     controleurGroupe::afficherPetitGroupe();
+// }
+//     echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherPetitGroupe&id=$i> rejoindre un groupe </a> ";
+// }
 
 /*
 methodes : 

@@ -9,7 +9,7 @@
         <main>
             <h2>DPS3</h2>
             <?php 
-
+             
             require_once("config/connexion.php");
             require_once("modele/message.php");
             require_once("modele/reaction.php");
@@ -24,8 +24,8 @@
             require_once("controleur/controleurVote.php");
             require_once("controleur/controleurApplication.php");
             Connexion::connect();
-
-    
+  
+           
 
 
 

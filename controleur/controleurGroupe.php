@@ -1,9 +1,11 @@
 <?php
+          
     Class ControleurGroupe{
+        
         public static function getGroupe(){
             $idGroupe = $_GET['id'];
-
-            return $UtilisateurCourant->getGroupe($idGroupe);
+            $utilisateurCourant = Utilisateur::getUtilisateur(2);
+            return $utilisateurCourant->getGroupe($idGroupe);
         }
 
         public static function afficherGrandGroupe(){
