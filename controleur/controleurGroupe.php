@@ -4,8 +4,8 @@
         
         public static function getGroupe(){
             $idGroupe = $_GET['id'];
-            $utilisateurCourant = Utilisateur::getUtilisateur(2);
-            return $utilisateurCourant->getGroupe($idGroupe);
+            
+            return $_SESSION['utilisateurCourant']->getGroupe($idGroupe);
         }
 
         public static function afficherGrandGroupe(){

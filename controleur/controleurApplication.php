@@ -7,6 +7,7 @@ class controleurApplication{
 public static function afficherPagePrincipale(){
     echo "main";
     echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=1> voir la nav nan ? </a> ";
+    echo $caca;
 }
 
 
