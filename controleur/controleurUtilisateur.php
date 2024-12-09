@@ -1,0 +1,1 @@
+<!-- pour afficher l'interieur du profil  -->

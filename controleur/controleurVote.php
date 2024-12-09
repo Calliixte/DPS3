@@ -1,0 +1,3 @@
+<!-- méthodes : 
+afficherVoteGros
+afficherListePetitsVotes -->

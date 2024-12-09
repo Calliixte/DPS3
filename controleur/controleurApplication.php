@@ -1,5 +1,9 @@
 <?php
 
+//methode afficher accueil
+// <!-- on mettra les methodes de connexion /inscription dedans  -->
+
+
 
 
 /*
