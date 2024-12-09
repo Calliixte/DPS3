@@ -5,14 +5,16 @@
 
 public static function afficherNav(){
     echo "Nav";
-    //afficherPetitUtilisateur();
-    //afficherListeGroupe();
+    afficherPetitUtilisateur();
+    afficherListeGroupe();
 }
 
 public static function afficherListeGroupe(){
     echo "listeGroupe";
     //foreach dans listeGroupe de utilisateur 
-    //afficherPetitGroupe();
+    for($i=0; $i<3; $i++){
+    afficherPetitGroupe();}
+    echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherPetitGroupe> rejoindre un groupe </a> ";
 }
 
 /*
