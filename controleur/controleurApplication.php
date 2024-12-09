@@ -3,8 +3,17 @@
 //methode afficher accueil
 // <!-- on mettra les methodes de connexion /inscription dedans  -->
 
+public static function afficherNav(){
+    echo "Nav";
+    //afficherPetitUtilisateur();
+    //afficherListeGroupe();
+}
 
-
+public static function afficherListeGroupe(){
+    echo "listeGroupe";
+    //foreach dans listeGroupe de utilisateur 
+    //afficherPetitGroupe();
+}
 
 /*
 methodes : 
