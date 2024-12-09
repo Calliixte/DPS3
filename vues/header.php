@@ -20,7 +20,7 @@
     <div id="my-groups-top-grad"></div>
     <nav id="my-groups" class="hide-scrollbar">
         <?php
-        foreach($utilisateur->get('listeGroupes') as $groupe){
+        foreach($_SESSION['utilisateurCourant']->get('listeGroupes') as $groupe){
             include('vues/boutonGroupe.php');
         }
         ?>
