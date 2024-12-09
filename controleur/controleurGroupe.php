@@ -3,7 +3,7 @@
         public static function getGroupe(){
             $idGroupe = $_GET['id'];
 
-            return $UtilisateurCourant->getGroupe($idGroupe);
+            return $utilisateurCourant->getGroupe($idGroupe);
         }
 
         public static function afficherGrandGroupe(){

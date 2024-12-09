@@ -39,7 +39,7 @@
         }
 
         public static function getGroupeUtilisateur(int $idUtilisateur){
-            $requete = "SELECT G.idGroupe, G.nomGroupe 
+            $requete = "SELECT G.idGroupe, G.nomGroupe, COUNT(*) AS nbMembres
                         FROM Groupe G INNER JOIN Membre M
                         ON G.idGroupe = M.idGroupe 
                         WHERE idUtilisateur = $idUtilisateur;";
