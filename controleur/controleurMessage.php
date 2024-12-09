@@ -1,5 +1,5 @@
 <?php
-    Class ControleurUtilisateur{
+    Class ControleurMessage{
         public static function afficherGrandProfil($idUtilisateur){
             echo "Grand profil utilisateur $idUtilisateur";
         }

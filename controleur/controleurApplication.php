@@ -2,7 +2,7 @@
 
 //methode afficher accueil
 // <!-- on mettra les methodes de connexion /inscription dedans  -->
-
+class controleurApplication{
 
 public static function afficherPagePrincipale(){
     echo "main";
@@ -12,15 +12,15 @@ public static function afficherPagePrincipale(){
 
 public static function afficherNav(){
     echo "Nav";
-    afficherPetitUtilisateur();
-    afficherListeGroupe();
+    controleurApplication::afficherListeGroupe();
+    controleurUtilisateur::afficherPetitUtilisateur();
 }
 
 public static function afficherListeGroupe(){
     echo "listeGroupe";
     //foreach dans listeGroupe de utilisateur 
     for($i=0; $i<3; $i++){
-    afficherPetitGroupe();}
+    controleurGroupe::afficherPetitGroupe();}
     echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherPetitGroupe> rejoindre un groupe </a> ";
 }
 
@@ -51,6 +51,6 @@ qui aurait un parametre vote.php/voter?choix=x
 
 */
 
-
+}
 
 ?>
