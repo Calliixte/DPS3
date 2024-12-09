@@ -9,7 +9,8 @@
         private string $pseudo;
         private string $nom;
         private string $prenom;
-        private string $lienPhotoProfil;
+        private ?string $lienPhotoProfil; 
+        private bool $verifie;
         private int $role = MEMBRE;
         private array $listeGroupes;
 
