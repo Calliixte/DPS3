@@ -20,7 +20,7 @@
     <div id="my-groups-top-grad"></div>
     <nav id="my-groups" class="hide-scrollbar">
         <?php
-        foreach($utilisateur->listeGroupes as $groupe){
+        foreach($utilisateur->get('listeGroupes') as $groupe){
             include('vues/boutonGroupe.php');
         }
         ?>
@@ -32,4 +32,5 @@
             <p>Rejoindre un groupe</p>
         </a>
     </div>
+    
 </header>

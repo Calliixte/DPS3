@@ -25,7 +25,10 @@
         }
 
         public static function getGroupe(int $idGroupe){
-            $requete = "SELECT idGroupe, nomGroupe, COUNT(*) AS nbMembres, lienPhotoIcone FROM Groupe NATURAL JOIN Membre WHERE idGroupe = $idGroupe;";
+            $requete = "SELECT idGroupe, nomGroupe, COUNT(*) AS nbMembres, lienPhotoIcone 
+                        FROM Groupe 
+                        NATURAL JOIN Membre 
+                        WHERE idGroupe = $idGroupe;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
             $groupe = $resultat->fetch();
@@ -38,17 +41,22 @@
         }
 
         public static function getGroupeUtilisateur(int $idUtilisateur){
-            $requete = "SELECT G.idGroupe, G.nomGroupe 
-                        FROM Groupe G INNER JOIN Membre M
-                        ON G.idGroupe = M.idGroupe 
-                        WHERE idUtilisateur = $idUtilisateur;";
+            $requete = "SELECT G.idGroupe, nomGroupe, COUNT(*) AS nbMembres, lienPhotoIcone
+                        FROM Groupe G
+                        INNER JOIN Membre M1 ON G.idGroupe=M1.idGroupe 
+                        INNER JOIN Membre M2 ON G.idGroupe=M2.idGroupe
+                        WHERE M1.idUtilisateur = $idUtilisateur
+                        GROUP BY G.idGroupe, nomGroupe, lienPhotoIcone;";
 
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
-            
+
             $listeGroupes = $resultat->fetchAll();
 
             foreach($listeGroupes as $groupe){
+                if(is_null($groupe->lienPhotoIcone))
+                    $groupe->lienPhotoIcone = Groupe::DEFAULT_LIEN_PHOTO_ICONE;
+                
                 $groupe->listeVote = Vote::getVotesGroupe($groupe->idGroupe);
             }
 

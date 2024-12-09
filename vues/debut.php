@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <title>$titre</title>
+        <title><?=$titre?></title>
         <link rel="icon" type="image/x-icon" href="/media/logo.svg">
 
         <link type='text/css' rel='stylesheet' href='css/style.css'>

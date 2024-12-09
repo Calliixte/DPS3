@@ -13,7 +13,7 @@ require_once("modele/vote.php");
 
 Connexion::connect();
 
-$utilisateur = Utilisateur::getUtilisateur(1);
+$utilisateur = Utilisateur::getUtilisateur(2);
 // $utilisateur->display();
 
 // $groupe = Groupe::getGroupe(1);
@@ -24,7 +24,7 @@ $titre = 'DPS3';
 $styleSpecial = '';
 
 include('vues/debut.php');
-include('vues/header.html');
+include('vues/header.php');
 echo '<main>';
 echo '<h2>DPS3</h2>';
 
@@ -32,6 +32,7 @@ echo '<p>ici c\'est le main</p>';
 
 echo '</main>';
 include('vues/footer.html');
+include('vues/popups/addGroup.html');
 include('vues/fin.html');
 
 
