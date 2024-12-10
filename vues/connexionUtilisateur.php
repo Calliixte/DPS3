@@ -9,6 +9,15 @@
 <body>
 
 <h1>Inscription à DPS3</h1>
+<?php 
+if (isset($_SESSION['previous'])) {
+    if (  "connexion" != $_SESSION['previous']) {
+         session_destroy();
+         ### or alternatively, you can use this for specific variables:
+         ### unset($_SESSION['varname']);
+    }
+ }
+?> 
 <form action="../controleur/reponseConnexionUtilisateur.php" method="POST" enctype="multipart/form-data">
 
     <label for="u_addr">Email ou Nom d'utilisateur</label>
@@ -23,6 +32,13 @@
         required
         placeholder="***"
     />
+    <?php 
+    if(isset($_POST["erreur"])){
+        if ($_POST["erreur"]){
+            echo "Login ou Mot de passe incorrect, veuillez réessayer";
+        } 
+    }
+    ?>
 
     <input type="submit" value="S'inscrire">
 </form>

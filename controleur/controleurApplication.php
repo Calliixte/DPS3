@@ -4,11 +4,43 @@
 // <!-- on mettra les methodes de connexion /inscription dedans  -->
 class controleurApplication{
 
-public static function afficherPagePrincipale(){
+public static function afficherConnexion(){
+    // include('vues/debut.php');
+    // include('vues/header.php');
     echo "main";
-    echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=1> voir la nav nan ? </a> ";
-    echo $caca;
+    echo "<a href=vues/connexionUtilisateur.php> se connecter </a> ";
+    echo "<a href=../vues/formulaireInscription.html> s'inscrire </a> ";
+    $_SESSION["previous"]="connexion";
+    // include('vues/footer.html');
+    // include('vues/popups/addGroup.html');
+    // include('vues/fin.html');
 }
+public static function afficherPageAccueil(){
+    $titre = 'DPS3';
+    $styleSpecial = '';
+    include('vues/debut.php');
+    include('vues/header.php');
+    echo '<main>';
+    echo $_SESSION["utilisateurCourant"];
+    echo '</main>';
+    include('vues/footer.html');
+    include('vues/popups/addGroup.html');
+    include('vues/fin.html');
+}
+//TODO : methode page d'accueil et du coup renommer au dessus en connexion mais la garder en par défaut
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // public static function afficherNav(){
