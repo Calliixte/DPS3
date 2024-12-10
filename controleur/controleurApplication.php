@@ -8,7 +8,7 @@ public static function afficherConnexion(){
     $titre = 'DPS3';
     $styleSpecial = '';
     include('vues/debut.php');
-    include('vues/headerVide.php');
+    ControleurHeader::afficherHeader();
     echo '<main>';
     echo "<a href=vues/connexionUtilisateur.php> se connecter </a> ";
     echo "<a href=vues/formulaireInscription.html> s'inscrire </a> ";
