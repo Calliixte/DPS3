@@ -5,15 +5,18 @@
 class controleurApplication{
 
 public static function afficherConnexion(){
-    // include('vues/debut.php');
-    // include('vues/header.php');
-    echo "main";
+    $titre = 'DPS3';
+    $styleSpecial = '';
+    include('vues/debut.php');
+    include('vues/headerVide.php');
+    echo '<main>';
     echo "<a href=vues/connexionUtilisateur.php> se connecter </a> ";
-    echo "<a href=../vues/formulaireInscription.html> s'inscrire </a> ";
+    echo "<a href=vues/formulaireInscription.html> s'inscrire </a> ";
+    echo '</main>';
     $_SESSION["previous"]="connexion";
-    // include('vues/footer.html');
-    // include('vues/popups/addGroup.html');
-    // include('vues/fin.html');
+    include('vues/footer.html');
+    include('vues/popups/addGroup.html');
+    include('vues/fin.html');
 }
 public static function afficherPageAccueil(){
     $titre = 'DPS3';

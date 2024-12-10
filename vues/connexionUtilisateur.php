@@ -13,8 +13,6 @@
 if (isset($_SESSION['previous'])) {
     if (  "connexion" != $_SESSION['previous']) {
          session_destroy();
-         ### or alternatively, you can use this for specific variables:
-         ### unset($_SESSION['varname']);
     }
  }
 ?> 
