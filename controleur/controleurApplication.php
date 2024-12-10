@@ -1,5 +1,5 @@
 <?php
-
+require_once("controleurHeader.php");
 //methode afficher accueil
 // <!-- on mettra les methodes de connexion /inscription dedans  -->
 class controleurApplication{
@@ -22,7 +22,8 @@ public static function afficherPageAccueil(){
     $titre = 'DPS3';
     $styleSpecial = '';
     include('vues/debut.php');
-    include('vues/header.php');
+    ControleurHeader::afficherHeader();
+    // include('vues/header.php');
     echo '<main>';
     echo $_SESSION["utilisateurCourant"];
     echo '</main>';
