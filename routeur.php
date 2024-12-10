@@ -32,7 +32,7 @@ session_start();
 
 
 $controleur="controleurApplication"; //mettre le controleur par défaut (celui de la page d'accueil)
-$action="afficherConnexion"; //mettre l'action que doit faire ce controleur par défaut
+$action="afficherPageAccueil"; //mettre l'action que doit faire ce controleur par défaut
 $tableauControleurs = ["controleurApplication","controleurGroupe","controleurMessage","controleurUtilisateur","controleurVote"];
 
 

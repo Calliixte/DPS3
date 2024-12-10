@@ -4,28 +4,22 @@ require_once("controleurHeader.php");
 // <!-- on mettra les methodes de connexion /inscription dedans  -->
 class controleurApplication{
 
-public static function afficherConnexion(){
-    $titre = 'DPS3';
-    $styleSpecial = '';
-    include('vues/debut.php');
-    ControleurHeader::afficherHeader();
-    echo '<main>';
+public static function afficherConnexion(){ 
     echo "<a href=vues/connexionUtilisateur.php> se connecter </a> ";
     echo "<a href=vues/formulaireInscription.html> s'inscrire </a> ";
-    echo '</main>';
-    $_SESSION["previous"]="connexion";
-    include('vues/footer.html');
-    include('vues/popups/addGroup.html');
-    include('vues/fin.html');
 }
 public static function afficherPageAccueil(){
     $titre = 'DPS3';
     $styleSpecial = '';
     include('vues/debut.php');
     ControleurHeader::afficherHeader();
-    // include('vues/header.php');
     echo '<main>';
-    echo $_SESSION["utilisateurCourant"];
+    if(isset($_SESSION["utilisateurCourant"])){
+        echo $_SESSION["utilisateurCourant"]; 
+    }else{ 
+        self::afficherConnexion();
+        $_SESSION["previous"]="connexion";
+    }
     echo '</main>';
     include('vues/footer.html');
     include('vues/popups/addGroup.html');
