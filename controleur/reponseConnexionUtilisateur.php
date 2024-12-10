@@ -23,19 +23,23 @@ require_once("../modele/vote.php");
 require_once("../config/connexion.php");
 Connexion::connect();
 $idUtilisateur = null;
-echo "bienvenue";
+$cptErr = $_POST["erreur"] ?? 0;
 $_SESSION["previous"] = "autre";
-$urlErreur = "../vues/connexionUtilisateur.php?erreur=1";
+
 
 $idUtilisateur = Utilisateur::connexion($_POST["login_utilisateur"],$_POST["password_utilisateur"]);
 if($idUtilisateur){
     session_start();
     $_SESSION["utilisateurCourant"] = Utilisateur::getUtilisateur($idUtilisateur);
     $urlRouteur = "../routeur.php?controleur=controleurApplication&action=afficherPageAccueil";
+    echo "Mot de passe correct ! \n Bienvenue dans DPS3";
     echo "<meta http-equiv=\"refresh\" content=\"1; url=$urlRouteur\"> ";
 }
 else{ 
-    echo " <meta http-equiv=\"refresh\" content=\"1; url=$url\"> ";
+    $cptErr = $cptErr +1;
+    $urlErreur = "../vues/connexionUtilisateur.php?erreur=$cptErr";
+    echo "Mot de passe incorrect, vous allez pouvoir ressayer";
+    echo " <meta http-equiv=\"refresh\" content=\"2; url=$urlErreur\"> ";
 
 }  //je sais quand meme pas trop comment on va repasser la valeur au programme initial, la méthode devrait être dans le routeur, mais pour un mvc ça serait bizarre, en tout cas on a le code y'a plus qu'a le bouger
 

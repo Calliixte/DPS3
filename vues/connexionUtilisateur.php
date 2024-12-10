@@ -33,12 +33,15 @@ if (isset($_SESSION['previous'])) {
         placeholder="***"
     />
     <?php 
-    if(isset($_POST["erreur"])){
-        if ($_POST["erreur"]){
-            echo "Login ou Mot de passe incorrect, veuillez réessayer";
+    if(isset($_GET["erreur"])){
+            $nb = $_GET["erreur"];
+            echo "Tentative numéro : $nb ";
+            echo "<input id=\"erreur\" name=\"erreur\" type=\"hidden\" value=$nb />";
         } 
-    }
+    
+    
     ?>
+    
 
     <input type="submit" value="S'inscrire">
 </form>
