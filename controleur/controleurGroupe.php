@@ -24,7 +24,7 @@
                 $titreVote = $liste[$i]->get("titreVote");
                 $listeEtiquette = $liste[$i]->get("listeEtiquettes");
                 //$dateCreation = $liste[$i]->get("dateCreation");
-                //$description = $liste[$i]->get("description"); 
+                $description = $liste[$i]->getDescription(); 
                 $idvkw=$i+1   /*$idVote pour afficherGrand qui marcherait*/;
                 $url = "routeur.php?controleur=controleurVote&action=afficherVoteGros&id=$idvkw";
                 include('vues/petitVote.php');
