@@ -9,21 +9,23 @@ class controleurUtilisateur{
         echo "<a href=routeur.php?controleur=controleurUtilisateur&action=afficherProfilUtilisateur> profil </a> ";
     }
     public static function afficherProfilUtilisateur(){
-        echo "profilUtilisateur";
-        echo "<a href=routeur.php> retour </a> ";
+        $titre = 'DPS3';
+        $styleSpecial = '';
+        include('vues/debut.php');
+        self::afficherHeader();
+        echo '<main>';
+        if(isset($_SESSION["utilisateurCourant"])){
+            echo $_SESSION["utilisateurCourant"]; 
+        }else{ 
+            self::afficherConnexion();
+            $_SESSION["previous"]="connexion";
+        }
+        echo '</main>';
+        include('vues/footer.html');
+        include('vues/popups/addGroup.html');
+        include('vues/fin.html');
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 ?>
