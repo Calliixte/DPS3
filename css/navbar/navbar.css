@@ -2,10 +2,10 @@
 @import 'my-groups.css';
 
 header {
-    grid-area: 1 / 1 / 2 / 2;
+    /* grid-area: 1 / 1 / 2 / 2; */
     
     background-color: var(--light-blue);
-
+    width: 20rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

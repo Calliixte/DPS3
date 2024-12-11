@@ -34,9 +34,10 @@ body {
     
     min-height: 100vh;
     
-    display: grid;
-    grid-template-rows: auto 120px;
-    grid-template-columns: 300px auto;
+    display: flex;
+    flex-wrap: nowrap;
+    /* grid-template-rows: auto 120px;
+    grid-template-columns: 300px auto; */
 }
 
 h1 {

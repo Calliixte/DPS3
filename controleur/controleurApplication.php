@@ -8,7 +8,12 @@ public static function afficherHeader(){
     echo "<header>";
     if(isset($_SESSION["utilisateurCourant"])){
         $idUser = $_SESSION["utilisateurCourant"]->get('idUtilisateur');
+
         $photoProfil = "img/profilePicture/$idUser.jpg";
+        if(!file_exists($photoProfil)){
+            $photoProfil = "img/profilePicture/0.jpg";
+        }
+        
         include('vues/header.php');
         foreach($_SESSION['utilisateurCourant']->get('listeGroupes') as $groupe){
             include('vues/boutonGroupe.php');
@@ -16,11 +21,12 @@ public static function afficherHeader(){
         echo "</nav>";
     }
     else{
-        $idUser = "";
+        $photoProfil = "img/profilePicture/0.jpg";
         include('vues/header.php');
     }
 
     include('vues/boutonRejoindre.php');
+    echo "<a href=vues/connexionUtilisateur.php> se déconnecter </a> ";
     echo "</header>";
 }
 
@@ -28,15 +34,17 @@ public static function afficherConnexion(){
     echo "<a href=vues/connexionUtilisateur.php> se connecter </a> ";
     echo "<a href=vues/formulaireInscription.html> s'inscrire </a> ";
 }
+
 public static function afficherPageAccueil(){
     $titre = 'DPS3';
     $styleSpecial = '';
     include('vues/debut.php');
-    self::afficherHeader();
-    echo '<main>';
     if(isset($_SESSION["utilisateurCourant"])){
+        self::afficherHeader();
+        echo '<main>';
         echo $_SESSION["utilisateurCourant"]; 
     }else{ 
+        echo '<main>';
         self::afficherConnexion();
         $_SESSION["previous"]="connexion";
     }

@@ -109,11 +109,12 @@
         
 
         public static function getUtilisateur($idUtilisateur){
-            $requete = "SELECT idUtilisateur, pseudo, nom, prenom, lienPhotoProfil, estVerifie FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
+            $requete = "SELECT idUtilisateur, pseudo, nom, prenom, estVerifie FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
             
             $User = $resultat->fetch();
+
             $User->listeGroupes = Groupe::getGroupeUtilisateur($idUtilisateur);
 
             return $User;
