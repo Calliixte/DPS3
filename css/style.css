@@ -35,7 +35,7 @@ body {
     min-height: 100vh;
     
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     /* grid-template-rows: auto 120px;
     grid-template-columns: 300px auto; */
 }
