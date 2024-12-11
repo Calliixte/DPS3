@@ -114,7 +114,7 @@
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
             
             $User = $resultat->fetch();
-            $User->listeGroupes = Groupe::getGroupeUtilisateur($idUtilisateur);
+            $User->listeGroupes = Groupe::getGroupesUtilisateur($idUtilisateur);
 
             return $User;
         }

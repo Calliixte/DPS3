@@ -41,7 +41,7 @@
             return $groupe;
         }
 
-        public static function getGroupeUtilisateur(int $idUtilisateur){
+        public static function getGroupesUtilisateur(int $idUtilisateur){
             $requete = "SELECT G.idGroupe, nomGroupe, COUNT(*) AS nbMembres, lienPhotoIcone
                         FROM Groupe G
                         INNER JOIN Membre M1 ON G.idGroupe=M1.idGroupe 
