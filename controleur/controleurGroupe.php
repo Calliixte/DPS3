@@ -10,7 +10,31 @@
 
         public static function afficherGrandGroupe(){
             $groupe = ControleurGroupe::getGroupe();
+            $nomG = $groupe->get("nomGroupe");
+            $titre= $nomG;
+            $styleSpecial = '';
+            include('vues/debut.php');
+            ControleurApplication::afficherHeader();
+            echo '<main>';
+            echo "<h1> $nomG </h1>";
+            echo "Récent <br/>";
+            $liste=$groupe->get("listeVote");
+            for($i = 0;$i<count($liste);$i++){
+                $titreVote = $liste[$i]->get("titreVote");
+                $listeEtiquette = $liste[$i]->get("listeEtiquettes");
+                //$dateCreation = $liste[$i]->get("dateCreation");
+                //$description = $liste[$i]->get("description"); 
+                $idvkw=$i+1;
+                $url = "routeur.php?controleur=controleurVote&action=afficherVoteGros&id=$idvkw";
+                include('vues/petitVote.php');
+                
+            }
             $groupe->display();
+            echo '</main>';
+            include('vues/footer.html');
+            include('vues/popups/addGroup.html');
+            include('vues/fin.html');
+
             // include("vue/groupe.php");
             echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherVotes> afficher les votes </a> ";
             echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherRegle> afficher les regles </a> ";
