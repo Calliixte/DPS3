@@ -1,28 +1,89 @@
 <?php
-
+require_once("controleurHeader.php");
 //methode afficher accueil
 // <!-- on mettra les methodes de connexion /inscription dedans  -->
 class controleurApplication{
 
-public static function afficherPagePrincipale(){
-    echo "main";
-    echo "<a href=routeur.php?controleur=controleurApplication&action=afficherNav> voir la nav nan ? </a> ";
+public static function afficherHeader(){
+    echo "<header>";
+    if(isset($_SESSION["utilisateurCourant"])){
+        $idUser = $_SESSION["utilisateurCourant"]->get('idUtilisateur');
+
+        $photoProfil = "img/profilePicture/$idUser.jpg";
+        if(!file_exists($photoProfil)){
+            $photoProfil = "img/profilePicture/0.jpg";
+        }
+        
+        include('vues/header.php');
+        foreach($_SESSION['utilisateurCourant']->get('listeGroupes') as $groupe){
+            include('vues/boutonGroupe.php');
+        }
+        echo "</nav>";
+    }
+    else{
+        $photoProfil = "img/profilePicture/0.jpg";
+        include('vues/header.php');
+    }
+   
+
+    include('vues/boutonRejoindre.php');
+    echo "<a href=vues/connexionUtilisateur.php> se déconnecter </a> ";
+    echo "</header>";
+}
+
+public static function afficherConnexion(){ 
+    echo "<a href=vues/connexionUtilisateur.php> se connecter </a> ";
+    echo "<a href=vues/formulaireInscription.html> s'inscrire </a> ";
+}
+
+public static function afficherPageAccueil(){
+    $titre = 'DPS3';
+    $styleSpecial = '';
+    include('vues/debut.php');
+    if(isset($_SESSION["utilisateurCourant"])){
+        self::afficherHeader();
+        echo '<main>';
+        echo $_SESSION["utilisateurCourant"]; 
+    }else{ 
+        echo '<main>';
+        self::afficherConnexion();
+        $_SESSION["previous"]="connexion";
+    }
+    echo '</main>';
+    include('vues/footer.html');
+    include('vues/popups/addGroup.html');
+    include('vues/fin.html');
 }
 
 
-public static function afficherNav(){
-    echo "Nav";
-    controleurApplication::afficherListeGroupe();
-    controleurUtilisateur::afficherPetitUtilisateur();
-}
 
-public static function afficherListeGroupe(){
-    echo "listeGroupe";
-    //foreach dans listeGroupe de utilisateur 
-    for($i=0; $i<3; $i++){
-    controleurGroupe::afficherPetitGroupe();}
-    echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherPetitGroupe&id=$i> rejoindre un groupe </a> ";
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// public static function afficherNav(){
+//     echo "Nav";
+//     controleurApplication::afficherListeGroupe();
+//     controleurUtilisateur::afficherPetitUtilisateur();
+// }
+// NE SERT A RIEN MAIS ARCHIVES HASSOUL
+// public static function afficherListeGroupe(){
+//     echo "listeGroupe";
+//     //foreach dans listeGroupe de utilisateur 
+//     for($i=0; $i<3; $i++){
+//     controleurGroupe::afficherPetitGroupe();
+// }
+//     echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherPetitGroupe&id=$i> rejoindre un groupe </a> ";
+// }
 
 /*
 methodes : 

@@ -6,7 +6,7 @@
         private array $listeEtiquettes;
         private array $listeMessages;
         private array $listeReactions;
-
+        //private string $descriptionVote; TODO : adapter les méthodes pour
         public function get($attribute){
             return $this->$attribute;
         }

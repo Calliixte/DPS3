@@ -9,6 +9,13 @@
 <body>
 
 <h1>Inscription à DPS3</h1>
+<?php 
+if (isset($_SESSION['previous'])) {
+    if (  "connexion" != $_SESSION['previous']) {
+         session_destroy();
+    }
+ }
+?> 
 <form action="../controleur/reponseConnexionUtilisateur.php" method="POST" enctype="multipart/form-data">
 
     <label for="u_addr">Email ou Nom d'utilisateur</label>
@@ -23,6 +30,16 @@
         required
         placeholder="***"
     />
+    <?php 
+    if(isset($_GET["erreur"])){
+            $nb = $_GET["erreur"];
+            echo "Tentative numéro : $nb ";
+            echo "<input id=\"erreur\" name=\"erreur\" type=\"hidden\" value=$nb />";
+        } 
+    
+    
+    ?>
+    
 
     <input type="submit" value="S'inscrire">
 </form>
