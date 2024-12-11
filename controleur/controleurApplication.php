@@ -15,6 +15,11 @@ public static function afficherHeader(){
         }
         echo "</nav>";
     }
+    else{
+        $idUser = "";
+        include('vues/header.php');
+    }
+
     include('vues/boutonRejoindre.php');
     echo "</header>";
 }
