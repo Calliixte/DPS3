@@ -24,6 +24,7 @@ public static function afficherHeader(){
         $photoProfil = "img/profilePicture/0.jpg";
         include('vues/header.php');
     }
+   
 
     include('vues/boutonRejoindre.php');
     echo "<a href=vues/connexionUtilisateur.php> se déconnecter </a> ";
@@ -53,7 +54,7 @@ public static function afficherPageAccueil(){
     include('vues/popups/addGroup.html');
     include('vues/fin.html');
 }
-//TODO : methode page d'accueil et du coup renommer au dessus en connexion mais la garder en par défaut
+
 
 
 
