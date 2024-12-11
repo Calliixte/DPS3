@@ -1,7 +1,7 @@
 <?php
     Class Reaction{
-        private int $idAuteur;
-        private string $emoticone;
+        private ?int $idAuteur=null;
+        private ?string $emoticone=null;
 
         public function __construct(int $idAuteur=NULL, string $emoticone=NULL){
             if(!is_null($idAuteur)){

@@ -10,6 +10,7 @@
 
         public static function afficherGrandGroupe(){
             $groupe = ControleurGroupe::getGroupe();
+            $_SESSION['groupeCourant']=$groupe; //attention à ça ça peut causer des problemes
             $nomG = $groupe->get("nomGroupe");
             $titre= $nomG;
             $styleSpecial = '';
@@ -20,12 +21,12 @@
             echo "Récent <br/>";
             $liste=$groupe->get("listeVote");
             for($i = 0;$i<count($liste);$i++){
-                // a decommenter pour avoir l'id pour afficherGrand $idVote = $liste[$i]->get("idVote");
+                $idVote = $liste[$i]->get("idVote");
                 $titreVote = $liste[$i]->get("titreVote");
                 $listeEtiquette = $liste[$i]->get("listeEtiquettes");
                 //$dateCreation = $liste[$i]->get("dateCreation");
                 $description = $liste[$i]->getDescription(); 
-                $idvkw=$i+1   /*$idVote pour afficherGrand qui marcherait*/;
+                $idvkw=$i;
                 $url = "routeur.php?controleur=controleurVote&action=afficherVoteGros&id=$idvkw";
                 include('vues/petitVote.php');
                 

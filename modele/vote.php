@@ -69,9 +69,9 @@
             $this->listeEtiquettes = $resultat->fetchAll();
         }
         public function getDescription(){ // description étant un string de taille conséquente et étant reservé à des cas précis,le conserver dans l'objet n'est pas pertinent
-            $requete = "SELECT descriptionVote AS nbVote FROM ChoixVote WHERE idVote=$this->idVote;";
+            $requete = "SELECT descriptionVote FROM Vote WHERE idVote=$this->idVote;";
             $resultat = Connexion::pdo()->query($requete);
-            return $resultat["descriptionVote"];
+            return $resultat->fetch()["descriptionVote"];
 
         }
         public function fillChoixVote($idUser=NULL){
