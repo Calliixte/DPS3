@@ -7,8 +7,13 @@
     box-shadow: var(--basic-button-shadow);
 
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-columns: 40% 40% 20%;
     grid-template-rows: 50px 50px;
+}
+
+#quick-navbar a {
+    width: fit-content;
+    aspect-ratio: 1 / 1;
 }
 
 #quick-navbar .logo {
