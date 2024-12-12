@@ -1,6 +1,6 @@
 
 main {
-    /* grid-area: 1 / 2 / 2 /-1; */
     flex-grow: 2;
     background-color: green;
+    min-height: calc(100vh - 200px);
 }
