@@ -35,7 +35,6 @@ $controleur="controleurApplication"; //mettre le controleur par défaut (celui d
 $action="afficherPageAccueil"; //mettre l'action que doit faire ce controleur par défaut
 $tableauControleurs = ["controleurApplication","controleurGroupe","controleurMessage","controleurUtilisateur","controleurVote"];
 
-
 if(isset($_GET["controleur"])){
     if(in_array($_GET["controleur"],$tableauControleurs)){
         $controleur=$_GET["controleur"];
