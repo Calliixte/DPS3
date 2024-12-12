@@ -31,7 +31,7 @@
         
         ?>
 
-        <input id="submit" type="submit" value="S'inscrire">
+        <input id="submit" type="submit" value="Se connecter">
     </form>
 </div>
 
