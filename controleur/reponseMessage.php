@@ -15,7 +15,7 @@ foreach ($_POST as $key => $value) {
 }
 $message=$_POST["message"];
 
-$requete = "SELECT max(idUtilisateur)+1 FROM `Utilisateur` WHERE 1; ";
+$requete = "SELECT max(idMessage)+1 FROM `Message` WHERE 1; ";
 $resultat = Connexion::pdo()->query($requete);
 $nvId=$resultat->fetchColumn();
 $requete = "INSERT INTO `Message`(`idMessage`, `texte`, `dateEnvoi`, `idVote`, `idUtilisateur`, `idGroupe`) VALUES (?,?,SYSDATE(),?,?,?)";
