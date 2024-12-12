@@ -6,7 +6,7 @@ class controleurVote{
             $idVoteActuel=$_GET["id"];
             $vote =  $_SESSION['groupeCourant']->get("listeVote")[$idVoteActuel];
             
-            $vote->fillChoixVote();
+            $vote->fillChoixVote($_SESSION["utilisateurCourant"]->get("idUtilisateur")); //met a jour l'objet vote
             $titreVote= $vote->get("titreVote");
             $listeChoixVote = $vote ->get("choixVote");
             //$dateCreation = $vote->get("dateCreation");

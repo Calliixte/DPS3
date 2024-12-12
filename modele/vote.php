@@ -101,7 +101,7 @@
                 }
             }else{ // dans ce cas on ne 
                 while ($row = $resultat->fetch()) {
-                    $this->choixVote[$row['intitule']] = array ('nbVote' => $row['nbVote']);
+                    $this->choixVote[$row['idChoixVote']] = array ('intitule' => $row['intitule'],'nbVote' => $row['nbVote']);
                 }
             }
         }
