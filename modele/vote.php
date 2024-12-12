@@ -7,13 +7,19 @@
         private array $listeMessages;
         private array $listeReactions;
         //private date $dateCreation TODO : modifier les méthodes pour implémenter ce changement
+
+
+        // date de création + 
+
         public function get($attribute){
             return $this->$attribute;
         }
 
+
         public function set($attribute, $val){
             $this->$attribute = $val;
         }
+
 
         public function __construct(int $idVote=NULL, string $titreVote=NULL){
             if(!is_null($idVote)){
@@ -21,6 +27,7 @@
                 $this->titreVote = $titreVote;
             }
         }
+
 
         public static function getVote(int $idVote, int $idUser=NULL){
             $requete = "SELECT idVote, titreVote FROM Vote WHERE idVote = $idVote;";
@@ -33,6 +40,7 @@
             $vote->listeReactions = Reaction::getReactionMessage($idVote);
             return $vote;
         }
+
 
         public static function getVotesGroupe($idGroupe){
             $requete = "SELECT idVote, titreVote FROM Vote WHERE idGroupe = $idGroupe";
@@ -48,6 +56,7 @@
 
             return $listeVote;
         }
+
 
         public static function getJSON(int $idVote, int $idUser=NULL){
             $vote = Vote::getVote($idVote, $idUser);
@@ -68,12 +77,16 @@
             
             $this->listeEtiquettes = $resultat->fetchAll();
         }
+
+
         public function getDescription(){ // description étant un string de taille conséquente et étant reservé à des cas précis,le conserver dans l'objet n'est pas pertinent
             $requete = "SELECT descriptionVote FROM Vote WHERE idVote=$this->idVote;";
             $resultat = Connexion::pdo()->query($requete);
             return $resultat->fetch()["descriptionVote"];
 
         }
+
+
         public function fillChoixVote($idUser=NULL){
             $requete = "SELECT idChoixVote, intitule, CountVoteChoix(idChoixVote) AS nbVote FROM ChoixVote WHERE idVote=$this->idVote;";
             $resultat = Connexion::pdo()->query($requete);
@@ -82,16 +95,19 @@
                 while ($row = $resultat->fetch()) {
                     $aVote = $this->aChoisi($idUser, $row['idChoixVote']);
                     
-                    $this->choixVote[$row['intitule']] = array ('nbVote' => $row['nbVote'],
-                                                                'aVote' => $aVote);
+                    $this->choixVote[$row['idChoixVote']] = array ('intitule' => $row['intitule'],
+                                                                    'nbVote' => $row['nbVote'],
+                                                                    'aVote' => $aVote);
                 }
-            }else{
+            }else{ // dans ce cas on ne 
                 while ($row = $resultat->fetch()) {
                     $this->choixVote[$row['intitule']] = array ('nbVote' => $row['nbVote']);
                 }
             }
         }
+        
 
+        // à mettre dans la calsse Utilisateur en static et sans $idUser en paramètre
         public function aChoisi(int $idUser, int $idChoixVote){
             $requete = "SELECT COUNT(*) AS 'nbVote' FROM ChoixMembre 
                         WHERE idChoixVote = $idChoixVote
@@ -102,11 +118,13 @@
             return $resultat->fetch()['nbVote'] > 0;
         }
 
+
         public function __toString(){
             return "<h3>Vote</h3>
                     <p>id : $this->idVote<br>
                        titre : $this->titreVote</p>";
         }
+
 
         public function display(){
             echo $this;
