@@ -37,9 +37,9 @@
           echo "</fieldset>";
           $idVotant = $_SESSION["utilisateurCourant"]->get("idUtilisateur");
           $idGroupeVotant = $_SESSION["groupeCourant"]->get("idGroupe");
+          $idVoteTraite= $vote->get('idVote');
           echo "<input id=\"idUtilisateur\" name=\"idUtilisateur\" type=\"hidden\" value=$idVotant />";
           echo "<input id=\"idGroupe\" name=\"idGroupe\" type=\"hidden\" value=$idGroupeVotant />";
-          $idVoteTraite= $vote->get('idVote');
           echo "<input id=\"idVote\" name=\"idVote\" type=\"hidden\" value=$idVoteTraite />";
 ?>
        <div>

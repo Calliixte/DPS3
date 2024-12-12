@@ -15,7 +15,7 @@ foreach ($_POST as $key => $value) {
     if($key == "idVote"){
         $idVote = $value;
     }
-    if($key != "idUtilisateur" && $key !="idGroupe"){
+    if($key != "idUtilisateur" && $key !="idGroupe" && $key !="idVote"){
         array_push($listeIdChoisis,$value);
     }
 }
@@ -52,8 +52,8 @@ foreach($listeIdChoisis as $id){
     $stmt->execute();
 }
 
-// $urlBack = "../routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=$idGroupe";
-// echo "Votre vote a bien été pris en compte !";
-// echo "<meta http-equiv=\"refresh\" content=\"1; url=$urlBack\"> ";
+$urlBack = "../routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=$idGroupe";
+echo "Votre vote a bien été pris en compte !";
+echo "<meta http-equiv=\"refresh\" content=\"1; url=$urlBack\"> ";
 
 ?>
