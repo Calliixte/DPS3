@@ -1,5 +1,4 @@
 <?php
-require_once("controleurHeader.php");
 //methode afficher accueil
 // <!-- on mettra les methodes de connexion /inscription dedans  -->
 class controleurApplication{
