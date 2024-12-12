@@ -51,19 +51,25 @@ public static function afficherConnexion(){
 }
 
 public static function afficherPageAccueil(){
+
+    $connected = isset($_SESSION["utilisateurCourant"]);
     $titre = 'DPS3';
     $styleSpecial = '';
     include('vues/debut.php');
-    if(isset($_SESSION["utilisateurCourant"])){
+    if($connected){
         self::afficherHeader();
-        echo '<main>';
+
+    }
+    
+    echo "<main><div>"; // Div par défaut dans lequel on affiche la page actuelle
+
+    if($connected){
         echo $_SESSION["utilisateurCourant"]; 
     }else{ 
-        echo '<main>';
         self::afficherConnexion();
         $_SESSION["previous"]="connexion";
     }
-    echo '</main>';
+    echo "</main><div>";
     include('vues/footer.html');
     include('vues/popups/addGroup.html');
     include('vues/fin.html');

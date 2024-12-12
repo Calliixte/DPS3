@@ -3,7 +3,7 @@
             <img alt="logo" src="media/logo.svg" />
         </a>
         <a class="profilepic" href="test.html" >
-            <img alt="profile picture" src=<?=?> />
+            <img alt="profile picture" src=<?=$photoProfil?> />
         </a>
         <a class="mypolls" href="test.html" >
             <img class="icon" alt="my polls" src="media/filled-poll-100.png" />

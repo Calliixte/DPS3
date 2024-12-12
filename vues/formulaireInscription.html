@@ -1,59 +1,65 @@
-<h1>Inscription à DPS3</h1>
-<form action="controleur/reponseInscription.php" method="POST" enctype="multipart/form-data">
-    <label for="imageUpload">Envoyez votre photo de profil :</label><br>
-    <input type="file" id="imageUpload" name="u_photo" accept="image/*" required>	
-						
-    <label for="u_name">
-        Nom
-    </label>
-    <input id="u_name"
-        name="nom_utilisateur"
-        type="text"
-        placeholder="nom"
-    />
+<div>
+    <h1>Inscription à DPS3</h1>
+    <form action="controleur/reponseInscription.php" method="POST" enctype="multipart/form-data">
+        <label for="imageUpload">Envoyez votre photo de profil :</label>
+        <input type="file" id="imageUpload" name="u_photo" accept="image/*" required>	
 
-    <label for="u_firstname">
-        Prenom
-    </label>
-    <input id="u_firstname"
-        name="prenom_utilisateur"
-        type="text"
-        placeholder="prénom"
-    />
-    
-    <label for="u_nickname">
-        Pseudo
-    </label>
-    <input id="u_nickname"
-        name="pseudo_utilisateur"
-        type="text"
-        pattern="[^@#$%^&*]+" 
-        title="Les caractères @, #, $, %, ^, &, * ne sont pas autorisés." 
-        required
-        placeholder="pseudo"
-    />
-    
-    <label for="u_password">
-        Mot de passe
-    </label>
-    <input id="u_password"
-        name="password_utilisateur"
-        type="password"
-        required
-        placeholder="***"
-    />
+        <label for="u_name">
+            Nom
+        </label>
+        <input id="u_name"
+            name="nom_utilisateur"
+            type="text"
+            placeholder="nom"
+        />
 
-    <label for="u_birthdate">Date de Naissance</label>
-    <input type="date" id="u_birthdate" name="u_ddn"/>
+        <label for="u_firstname">
+            Prenom
+        </label>
+        <input id="u_firstname"
+            name="prenom_utilisateur"
+            type="text"
+            placeholder="prénom"
+        />
+        
 
-    <label for="u_addr">Adresse</label>
-    <input type="text" id="u_addr" name="adresse_utilisateur" placeholder="xx rue des xx 00000 ville">
+        <label for="u_nickname">
+            Pseudo
+        </label>
+        <input id="u_nickname"
+            name="pseudo_utilisateur"
+            type="text"
+            pattern="[^@#$%^&*]+" 
+            title="Les caractères @, #, $, %, ^, &, * ne sont pas autorisés." 
+            required
+            placeholder="pseudo"
+        />
+        
 
-    <label for="u_email">Email</label>
-    <input type="email" id="u_email" name="email_utilisateur" placeholder="exemple@domaine.com" required>
+        <label for="u_password">
+            Mot de passe
+        </label>
+        <input id="u_password"
+            name="password_utilisateur"
+            type="password"
+            required
+            placeholder="***"
+        />
+        
 
-    
+        <label for="u_birthdate">Date de Naissance</label>
+        <input type="date" id="u_birthdate" name="u_ddn"/>
+        
+
+        <label for="u_addr">Adresse</label>
+        <input type="text" id="u_addr" name="adresse_utilisateur" placeholder="xx rue des xx 00000 ville">
+        
+
+        <label for="u_email">Email</label>
+        <input type="email" id="u_email" name="email_utilisateur" placeholder="exemple@domaine.com" required>
+        
 
 
-    <input type="submit" value="S'inscrire">
-</form>
+        <input type="submit" value="S'inscrire">
+    </form>
+</div>

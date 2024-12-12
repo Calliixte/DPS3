@@ -1,6 +1,23 @@
 
 main {
     flex-grow: 2;
-    background-color: green;
+    background-color: white;
     min-height: calc(100vh - 200px);
+    padding: 2rem;
+}
+
+main > div{
+    background-color: red;
+    border-radius: 1rem;
+    display: inline-block;
+}
+
+form {
+    background-color: white;
+    border: solid black;
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 1rem;
+    max-width: 40rem;
 }
