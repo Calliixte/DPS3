@@ -11,6 +11,7 @@
 :root {
     --light-blue: #5eafff;
     --dark-blue: #0c4782;
+    --light-grey: #D9D9D9;
     --basic-button-shadow: 0 2px 10px -1px rgba(0,0,0, 50%);
 }
 

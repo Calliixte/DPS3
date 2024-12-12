@@ -61,7 +61,7 @@ public static function afficherPageAccueil(){
 
     }
     
-    echo "<main><div>"; // Div par défaut dans lequel on affiche la page actuelle
+    echo "<main>"; // Div par défaut dans lequel on affiche la page actuelle
 
     if($connected){
         echo $_SESSION["utilisateurCourant"]; 
@@ -69,7 +69,7 @@ public static function afficherPageAccueil(){
         self::afficherConnexion();
         $_SESSION["previous"]="connexion";
     }
-    echo "</main><div>";
+    echo "</main>";
     include('vues/footer.html');
     include('vues/popups/addGroup.html');
     include('vues/fin.html');

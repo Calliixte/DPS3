@@ -1,4 +1,4 @@
-<div>
+<div id="default">
     <h1>Connexion à DPS3</h1>
     <?php 
     if (isset($_SESSION['previous'])) {
@@ -31,7 +31,7 @@
         
         ?>
 
-        <input type="submit" value="S'inscrire">
+        <input id="submit" type="submit" value="S'inscrire">
     </form>
 </div>
 
