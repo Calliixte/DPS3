@@ -12,15 +12,20 @@
                   $nomID = "choix$cpt";
                   echo "<br/>";
                   $nom= $choix["intitule"];
-                  echo "  <div>
-                    <input type=\"checkbox\" id=$idCv name=$nom value=$idCv />
-                    <label for=$idCv>$nom</label>";
-                  $nbVote = $choix["nbVote"];
+                  echo "<div>";
+                  echo"<input type=\"checkbox\" id=$idCv name=$nom value=$idCv ";
                   if($choix["aVote"]){
-                    echo "vous avez voté pour cette option <br/>";
+                   echo" checked";
+                  }
+                  echo "/>";
+                  echo"<label for=$idCv>$nom</label>";
+                  $nbVote = $choix["nbVote"];
+                  echo " : $nbVote votes";
+                  if($choix["aVote"]){
+                    echo "           |Votre vote est enregistré sur cette option <br/>";
                   }
                   //recup $avote plus tard pour prechck les chkbox
-                  echo " : $nbVote votes</div>";
+                  echo "</div>";
                   $cpt++;
               echo " ";
               // echo "id " . $idCv . " ";
