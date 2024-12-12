@@ -32,18 +32,21 @@ public static function afficherHeader(){
 
 public static function afficherConnexion(){ 
     $action = 'Connexion';
+
     if(isset($_GET['actionConnexion'])){
         $action =$_GET['actionConnexion'];
     }
 
-    echo $action;
-    // echo "<a href=vues/connexionUtilisateur.php> se connecter </a> ";
-    if($action = 'Connexion'){ 
+    if($action == 'Connexion'){ 
         include("vues/formulaireConnexion.php");
-        echo "<a href=routeur.php?actionConnexion=Inscription>s'inscrire</a> ";
-    }elseif($action = 'Inscription'){
+        echo "<p>pas de compte ? 
+                <a href=routeur.php?actionConnexion=Inscription>s'inscrire</a>
+              </p>";
+    }else{
         include("vues/formulaireInscription.html");
-        echo "<a href=routeur.php?actionConnexion=Connexion>connexion</a> ";
+        echo "<p>Déjà un compte ? 
+                <a href=routeur.php?actionConnexion=Connexion>connexion</a>
+              </p>";
     }
 }
 
