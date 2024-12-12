@@ -3,18 +3,19 @@
 </style>
 
 
-<form action="../controleur/reponseInscription.php" method="POST" enctype="multipart/form-data">
+<form action="controleur/reponseVote.php" method="POST" enctype="multipart/form-data">
 
 <?php
             echo "<fieldset>";
             $cpt=0;
-            foreach(array_keys($listeChoixVote) as $choix){
+            foreach($listeChoixVote as $choix){
                   $nomID = "choix$cpt";
                   echo "<br/>";
                   echo "  <div>
-                    <input type=\"checkbox\" id=$nomID name=$nomID value=\"choixPossible\" />
-                    <label for=$nomID>$choix</label>
-                  </div>";
+                    <input type=\"checkbox\" id=$choix name=$nomID value=$choix />
+                    <label for=$choix>$choix</label>";
+                  $nbVote = [$choix]["nomProposition"]["nbVote"];
+                  echo " : $nbVote votes</div>";
                   $cpt++;
               echo " ";
 
