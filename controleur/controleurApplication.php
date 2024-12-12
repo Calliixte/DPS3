@@ -26,11 +26,12 @@ public static function afficherHeader(){
    
 
     include('vues/boutonRejoindre.php');
-    echo "<a href=vues/connexionUtilisateur.php> se déconnecter </a> ";
+    echo "<a href=routeur.php?actionConnexion=Connexion> se déconnecter </a> ";
     echo "</header>";
 }
 
 public static function afficherConnexion(){ 
+    $_SESSION["utilisateurCourant"] = NULL; // flush l'utilisateur courant (déconnexion)
     $action = 'Connexion';
 
     if(isset($_GET['actionConnexion'])){
@@ -52,9 +53,13 @@ public static function afficherConnexion(){
 
 public static function afficherPageAccueil(){
 
-    $connected = isset($_SESSION["utilisateurCourant"]);
+
+
+    $connected = isset($_SESSION["utilisateurCourant"]) && !isset($_GET['actionConnexion']);
     $titre = 'DPS3';
     $styleSpecial = '';
+    
+    
     include('vues/debut.php');
     if($connected){
         self::afficherHeader();
