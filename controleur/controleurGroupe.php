@@ -21,6 +21,7 @@
             echo "Récent <br/>";
             $liste=$groupe->get("listeVote");
             for($i = 0;$i<count($liste);$i++){
+                $liste[$i]->fillEtiquettes();
                 $idVote = $liste[$i]->get("idVote");
                 $titreVote = $liste[$i]->get("titreVote");
                 $listeEtiquette = $liste[$i]->get("listeEtiquettes");

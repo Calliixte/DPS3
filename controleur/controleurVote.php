@@ -5,6 +5,8 @@ class controleurVote{
         public static function afficherVoteGros(){
             $idVoteActuel=$_GET["id"];
             $vote =  $_SESSION['groupeCourant']->get("listeVote")[$idVoteActuel];
+            
+            $vote->fillChoixVote();
             $titreVote= $vote->get("titreVote");
             $listeChoixVote = $vote ->get("choixVote");
             //$dateCreation = $vote->get("dateCreation");
