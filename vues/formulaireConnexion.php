@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h1>Inscription à DPS3</h1>
+<h1>Connexion à DPS3</h1>
 <?php 
 if (isset($_SESSION['previous'])) {
     if (  "connexion" != $_SESSION['previous']) {
@@ -16,7 +16,7 @@ if (isset($_SESSION['previous'])) {
     }
  }
 ?> 
-<form action="../controleur/reponseConnexionUtilisateur.php" method="POST" enctype="multipart/form-data">
+<form action="controleur/reponseConnexionUtilisateur.php" method="POST" enctype="multipart/form-data">
 
     <label for="u_addr">Email ou Nom d'utilisateur</label>
     <input type="text" id="u_addr" name="login_utilisateur" placeholder="Email ou Login">			
