@@ -1,5 +1,4 @@
 <?php
-require_once("controleurHeader.php");
 //methode afficher accueil
 // <!-- on mettra les methodes de connexion /inscription dedans  -->
 class controleurApplication{
@@ -32,8 +31,20 @@ public static function afficherHeader(){
 }
 
 public static function afficherConnexion(){ 
-    echo "<a href=vues/connexionUtilisateur.php> se connecter </a> ";
-    echo "<a href=vues/formulaireInscription.html> s'inscrire </a> ";
+    $action = 'Connexion';
+    if(isset($_GET['actionConnexion'])){
+        $action =$_GET['actionConnexion'];
+    }
+
+    echo $action;
+    // echo "<a href=vues/connexionUtilisateur.php> se connecter </a> ";
+    if($action = 'Connexion'){ 
+        include("vues/formulaireConnexion.php");
+        echo "<a href=routeur.php?actionConnexion=Inscription>s'inscrire</a> ";
+    }elseif($action = 'Inscription'){
+        include("vues/formulaireInscription.html");
+        echo "<a href=routeur.php?actionConnexion=Connexion>connexion</a> ";
+    }
 }
 
 public static function afficherPageAccueil(){

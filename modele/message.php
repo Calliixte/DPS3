@@ -1,7 +1,7 @@
 <?php
     Class Message{
         private int $idMessage;
-        private Utilisateur $auteur;
+        private int $idAuteur;
         private string $texte;
         private string $dateEnvoi;
         private array $listeReactions;
@@ -15,7 +15,7 @@
         }
 
         public static function getMessages(int $idVote){
-            $requete = "SELECT idMessage, texte, dateEnvoi FROM Message WHERE idVote = $idVote;";
+            $requete = "SELECT idMessage, idUtilisateur AS idAuteur, texte, dateEnvoi FROM Message WHERE idVote = $idVote;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Message");
             

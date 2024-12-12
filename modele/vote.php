@@ -37,7 +37,7 @@
             $vote->fillChoixVote($idUser);
             $vote->fillEtiquettes();
             $vote->listeMessages = Message::getMessages($idVote);
-            $vote->listeReactions = Reaction::getReactionMessage($idVote);
+            $vote->listeReactions = Reaction::getReactionVote($idVote);
             return $vote;
         }
 
@@ -49,8 +49,6 @@
             $listeVote = $resultat->fetchAll();
 
             foreach($listeVote as $vote){
-                // $vote->fillChoixVote();
-                // $vote->fillEtiquettes();
                 $vote->set('listeMessages', Message::getMessages($vote->idVote));
             }
 

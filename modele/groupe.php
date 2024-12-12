@@ -2,9 +2,10 @@
     Class Groupe{
         private int $idGroupe;
         private string $nomGroupe;
-        private string $regles;
-        private int $nbMembres;
+        private bool $voteBlancCompte;
         private ?string $lienPhotoIcone;    // ? ⇒ nullable
+        private ?string $lienPhotoBanniere;    // ? ⇒ nullable
+        private int $nbMembres;
         private array $listeVote;
 
         public const DEFAULT_LIEN_PHOTO_ICONE = 'media/filled-default-group-icon-1600.png';
@@ -26,7 +27,7 @@
         }
 
         public static function getGroupe(int $idGroupe){
-            $requete = "SELECT idGroupe, nomGroupe, COUNT(*) AS nbMembres, lienPhotoIcone 
+            $requete = "SELECT idGroupe, nomGroupe, voteBlancCompte, lienPhotoIcone, lienPhotoBanniere, COUNT(*) AS nbMembres
                         FROM Groupe 
                         NATURAL JOIN Membre 
                         WHERE idGroupe = $idGroupe;";
@@ -42,7 +43,7 @@
         }
 
         public static function getGroupesUtilisateur(int $idUtilisateur){
-            $requete = "SELECT G.idGroupe, nomGroupe, COUNT(*) AS nbMembres, lienPhotoIcone
+            $requete = "SELECT idGroupe, nomGroupe, voteBlancCompte, lienPhotoIcone, lienPhotoBanniere, COUNT(*) AS nbMembres
                         FROM Groupe G
                         INNER JOIN Membre M1 ON G.idGroupe=M1.idGroupe 
                         INNER JOIN Membre M2 ON G.idGroupe=M2.idGroupe
@@ -73,6 +74,31 @@
 
             return json_encode($data, JSON_UNESCAPED_UNICODE);
         }
+
+        
+        // la description du groupe n'est pas attribut de la classe car string de taille conséquente et on l'affiche rarement
+        public function getDescription(){
+            $requete = "SELECT descriptionGroupe
+                        FROM Groupe
+                        WHERE idGroupe = $this->idGroupe;";
+            $resultat = Connexion::pdo()->query($requete);
+            $description = $resultat->fetch(PDO::FETCH_ASSOC);
+            
+            return $description;
+        }
+
+
+        // les regles du groupe ne sont pas attribut de la classe car string de taille conséquente et on les affiche rarement
+        public function getRegles(){
+            $requete = "SELECT reglesGroupe
+                        FROM Groupe
+                        WHERE idGroupe = $this->idGroupe;";
+            $resultat = Connexion::pdo()->query($requete);
+            $description = $resultat->fetch(PDO::FETCH_ASSOC);
+            
+            return $description;
+        }
+
 
         public function __toString(){
             return "<h3> Groupe </h3>
