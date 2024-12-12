@@ -53,7 +53,7 @@ h2 {
     font-size: 1.4rem;
 }
 
-p, span, label {
+p, span, label, input {
     font-family: 'Istok Web', 'Impact';
     font-weight: normal;
     font-size: 1rem;
