@@ -28,7 +28,7 @@
 
         public static function getGroupe(int $idGroupe){
             $requete = "SELECT idGroupe, nomGroupe, voteBlancCompte, lienPhotoIcone, lienPhotoBanniere, COUNT(*) AS nbMembres
-                        FROM Groupe 
+                        FROM Groupe
                         NATURAL JOIN Membre 
                         WHERE idGroupe = $idGroupe;";
             $resultat = Connexion::pdo()->query($requete);
@@ -43,7 +43,7 @@
         }
 
         public static function getGroupesUtilisateur(int $idUtilisateur){
-            $requete = "SELECT idGroupe, nomGroupe, voteBlancCompte, lienPhotoIcone, lienPhotoBanniere, COUNT(*) AS nbMembres
+            $requete = "SELECT G.idGroupe, nomGroupe, voteBlancCompte, lienPhotoIcone, lienPhotoBanniere, COUNT(*) AS nbMembres
                         FROM Groupe G
                         INNER JOIN Membre M1 ON G.idGroupe=M1.idGroupe 
                         INNER JOIN Membre M2 ON G.idGroupe=M2.idGroupe
