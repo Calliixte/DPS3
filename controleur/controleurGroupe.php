@@ -18,18 +18,25 @@
             ControleurApplication::afficherHeader();
             echo '<main>';
             echo "<h1> $nomG </h1>";
-            echo "Récent <br/>";
+            echo "<div id=\"my-groups-bottom-grad\"></div>";
+            $popup = "#popup-regles";
+            $reglesGroupe = $groupe ->getRegles();
+            echo "<a href=$popup>Règles de la communauté </a>";
+            echo "Récent <br/>"; // ATTENTION POUR LE CSS YA UN BR ICI ------------------------------------------------------------------------------------------------------------------
             $liste=$groupe->get("listeVote");
             for($i = 0;$i<count($liste);$i++){
-                $liste[$i]->fillEtiquettes();
-                $idVote = $liste[$i]->get("idVote");
-                $titreVote = $liste[$i]->get("titreVote");
-                $listeEtiquette = $liste[$i]->get("listeEtiquettes");
-                //$dateCreation = $liste[$i]->get("dateCreation");
-                $description = $liste[$i]->getDescription(); 
-                $idvkw=$i;
-                $url = "routeur.php?controleur=controleurVote&action=afficherVoteGros&id=$idvkw";
-                include('vues/petitVote.php');
+                //   /!\    $liste[$i] est un objet Vote
+                // if($liste[$i]->get('accepte')){
+                    $liste[$i]->fillEtiquettes();
+                    $idVote = $liste[$i]->get("idVote");
+                    $titreVote = $liste[$i]->get("titreVote");
+                    $listeEtiquette = $liste[$i]->get("listeEtiquettes");
+                    //$dateCreation = $liste[$i]->get("dateCreation");
+                    $description = $liste[$i]->getDescription(); 
+                    $idvkw=$i;
+                    $url = "routeur.php?controleur=controleurVote&action=afficherVoteGros&id=$idvkw";
+                    include('vues/petitVote.php');
+                // }
                 
             }
             $groupe->display();
@@ -37,7 +44,7 @@
 
             echo '</main>';
             include('vues/footer.html');
-            include('vues/popups/addGroup.html');
+            include('vues/popups/addGroup.php');
             include('vues/fin.html');
 
             // include("vue/groupe.php");
