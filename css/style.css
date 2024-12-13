@@ -15,6 +15,24 @@
     --basic-button-shadow: 0 2px 10px -1px rgba(0,0,0, 50%);
 }
 
+.vote{
+    background-color: var(--light-grey);
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    padding: 1rem;
+    max-width: 40rem;
+}
+.vote form{
+
+}
+
+.boiteChoixVote{
+
+}
+
+
 .icon {
     /*
     filtre à appliquer pour obtenir la couleur voulue

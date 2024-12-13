@@ -1,7 +1,3 @@
-<style>
-  .vote {border:solid black;}
-</style>
-
 
 <form action="controleur/reponseVote.php" method="POST" enctype="multipart/form-data">
 
@@ -10,11 +6,10 @@
             $cpt=0;
             foreach($listeChoixVote as $idCv =>$choix){
                   $nomID = "choix$cpt";
-                  echo "<br/>";
                   $nom= $choix["intitule"];
-                  echo "<div>";
-                  echo"<input type=\"checkbox\" id=$idCv name=$nom value=$idCv ";
-                  if($choix["aVote"]){
+                  echo "<div class=\"boiteChoixVote\">";
+                  echo"<input type=\"checkbox\" id=$idCv name=$nomID value=$idCv ";
+                  if($choix["aVote"]){   //potentiellement faire des radioButton au lieu de faire des checkBox
                    echo" checked";
                   }
                   echo "/>";
@@ -22,17 +17,11 @@
                   $nbVote = $choix["nbVote"];
                   echo " : $nbVote votes";
                   if($choix["aVote"]){
-                    echo "           |Votre vote est enregistré sur cette option <br/>";
+                    echo "           |Votre vote est enregistré sur cette option";
                   }
-                  //recup $avote plus tard pour prechck les chkbox
                   echo "</div>";
                   $cpt++;
               echo " ";
-              // echo "id " . $idCv . " ";
-              // foreach($choix as $p){
-              //   echo " ".$p;
-              // }
-
           }
           echo "</fieldset>";
           $idVotant = $_SESSION["utilisateurCourant"]->get("idUtilisateur");
@@ -45,4 +34,4 @@
        <div>
        <button type="submit">Envoyer le vote</button>
        </div>
-       </form>
+</form>
