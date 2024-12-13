@@ -82,9 +82,8 @@
                         FROM Groupe
                         WHERE idGroupe = $this->idGroupe;";
             $resultat = Connexion::pdo()->query($requete);
-            $description = $resultat->fetch(PDO::FETCH_ASSOC);
             
-            return $description;
+            return $resultat->fetch()["descriptionGroupe"];
         }
 
 
@@ -94,9 +93,8 @@
                         FROM Groupe
                         WHERE idGroupe = $this->idGroupe;";
             $resultat = Connexion::pdo()->query($requete);
-            $regles = $resultat->fetch(PDO::FETCH_ASSOC);
-            
-            return $regles;
+
+            return $resultat->fetch()["reglesGroupe"];;
         }
 
 
