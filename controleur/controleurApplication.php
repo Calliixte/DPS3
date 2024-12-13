@@ -76,7 +76,7 @@ public static function afficherPageAccueil(){
     }
     echo "</main>";
     include('vues/footer.html');
-    include('vues/popups/addGroup.html');
+    include('vues/popups/addGroup.php');
     include('vues/fin.html');
 }
 
