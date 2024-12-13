@@ -40,19 +40,19 @@ $stmt->execute();
 
 
 foreach($listeIdChoisis as $id){
-    // try{
+    try{
     $requete = "INSERT INTO `ChoixMembre`(`idUtilisateur`, `idGroupe`, `idChoixVote`) VALUES (?,?,?)";
     $stmt = Connexion::pdo()->prepare($requete);
     $stmt->bindParam(1, $idUtilisateur, PDO::PARAM_INT);
     $stmt->bindParam(2, $idGroupe, PDO::PARAM_INT);           
     $stmt->bindParam(3, $id, PDO::PARAM_INT);
     $stmt->execute();
-    // }
-    // catch(PDOException $e){
-    //     echo "Vous avez essayé de voter pour plusieurs choix dans un vote à choix unique, seul votre premier vote a été conservé !"; //ne restera pas tout le temps pareil
-    //     echo "<meta http-equiv=\"refresh\" content=\"1; url=$urlBack\"> ";
-    //     exit();
-    // }
+    }
+    catch(PDOException $e){
+        echo "Vous avez essayé de voter pour plusieurs choix dans un vote à choix unique, seul votre premier vote a été conservé !"; //ne restera pas tout le temps pareil
+        echo "<meta http-equiv=\"refresh\" content=\"1; url=$urlBack\"> ";
+        exit();
+    }
 }
 
 
