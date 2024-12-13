@@ -2,14 +2,23 @@
     Class Vote{
         private int $idVote;
         private string $titreVote;
+        private string $lienPhoto;
+        
+        private ?DateInterval $delaiDiscussion;
+        private ?DateInterval $delaiVote;
+        private DateTime $dateCreationVote;
+        
+        private string $codeSuffrage;
+        private bool $autoriserVoteBlanc;
+        private bool $autoriserPlusieursChoix;
+        private ?float $evalBudget;
+        private ?bool $propositionAcceptee;
+
         private array $choixVote;
         private array $listeEtiquettes;
         private array $listeMessages;
         private array $listeReactions;
-        //private date $dateCreation TODO : modifier les méthodes pour implémenter ce changement
 
-
-        // date de création + 
 
         public function get($attribute){
             return $this->$attribute;
@@ -30,10 +39,15 @@
 
 
         public static function getVote(int $idVote, int $idUser=NULL){
-            $requete = "SELECT idVote, titreVote FROM Vote WHERE idVote = $idVote;";
+            $requete = "SELECT  idVote, titreVote, lienPhoto, 
+                                delaiDiscussion, delaiVote, dateCreationVote,
+                                codeSuffrage, autoriserVoteBlanc, autoriserPlusieursChoix,
+                                propositionAcceptee, evalBudget
+                        FROM Vote WHERE idVote = $idVote;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
             $vote = $resultat->fetch();
+            
             $vote->fillChoixVote($idUser);
             $vote->fillEtiquettes();
             $vote->listeMessages = Message::getMessages($idVote);
@@ -43,12 +57,17 @@
 
 
         public static function getVotesGroupe($idGroupe){
-            $requete = "SELECT idVote, titreVote FROM Vote WHERE idGroupe = $idGroupe";
+            $requete = "SELECT  idVote, titreVote, lienPhoto, 
+                                delaiDiscussion, delaiVote, dateCreationVote,
+                                codeSuffrage, autoriserVoteBlanc, autoriserPlusieursChoix
+                                propositionAcceptee, evalBudget
+                        FROM Vote WHERE idGroupe = $idGroupe";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Vote");
             $listeVote = $resultat->fetchAll();
-
+            
             foreach($listeVote as $vote){
+                // pour des raisons d'efficacité, pas de fillEtiquettes() ni de fillChoixVote(), on les appelera quand ce sera nécessaire
                 $vote->set('listeMessages', Message::getMessages($vote->idVote));
             }
 
