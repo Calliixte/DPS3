@@ -13,7 +13,7 @@
                   echo "<br/>";
                   $nom= $choix["intitule"];
                   echo "<div>";
-                  echo"<input type=\"checkbox\" id=$idCv name=$nom value=$idCv ";
+                  echo"<input type=\"checkbox\" id=$idCv name=$nomID value=$idCv ";
                   if($choix["aVote"]){
                    echo" checked";
                   }
@@ -24,15 +24,9 @@
                   if($choix["aVote"]){
                     echo "           |Votre vote est enregistré sur cette option <br/>";
                   }
-                  //recup $avote plus tard pour prechck les chkbox
                   echo "</div>";
                   $cpt++;
               echo " ";
-              // echo "id " . $idCv . " ";
-              // foreach($choix as $p){
-              //   echo " ".$p;
-              // }
-
           }
           echo "</fieldset>";
           $idVotant = $_SESSION["utilisateurCourant"]->get("idUtilisateur");
