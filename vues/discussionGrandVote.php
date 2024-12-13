@@ -1,4 +1,4 @@
-
+<div class="discussionVote">
 <h2>Discussion</h2>
 
 <h3> Contribuez ! </h3>
@@ -23,12 +23,12 @@ foreach($listeMessage as $message){
             $idMsg = $message->get("idMessage");
             $listeReaction = Reaction::getReactionMessage($idMsg);          //  pour l'instant réaction & messages sont un peu bordel donc ça restera comme ça tant que reac est pas fini
             $ndate = substr($datePub,0,16);
-            echo "<div> $ndate <br/> $contenu <br/>";
+            echo "<div class=\"messageVote\"> $ndate  $contenu ";
             foreach ($listeReaction as $reaction){
             //     //implementer un truc pour compter les reactions et les stacker quand y'a les memes (optionnel je pense)
                  echo $reaction->get('emoticone');
             }
-            echo "<div>";
+            echo "<div class=\"listeReaction\">";
             echo " Réagir : ";
             echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">😂</a>"; 
 
@@ -39,7 +39,6 @@ foreach($listeMessage as $message){
             echo"</div>";
           }
             echo "<a href=routeur.php> Voter </a>";
-            echo"<br/>";
     echo"</div>";
 
 
