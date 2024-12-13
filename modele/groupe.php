@@ -94,9 +94,9 @@
                         FROM Groupe
                         WHERE idGroupe = $this->idGroupe;";
             $resultat = Connexion::pdo()->query($requete);
-            $description = $resultat->fetch(PDO::FETCH_ASSOC);
+            $regles = $resultat->fetch(PDO::FETCH_ASSOC);
             
-            return $description;
+            return $regles;
         }
 
 
