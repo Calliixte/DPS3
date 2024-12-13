@@ -9,7 +9,7 @@
 
         <link type='text/css' rel='stylesheet' href='css/style.css'>
         <?php
-            if(isset($styleSpecial) ||  $styleSpecial!='')
+            if(isset($styleSpecial) &&  $styleSpecial!='')
                 echo "<link type='text/css' rel='stylesheet' href='css/$styleSpecial.css'>";
         ?>
     </head>

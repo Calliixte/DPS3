@@ -36,24 +36,6 @@ class controleurVote{
             
             echo "<a href=routeur.php> retour </a> ";
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

@@ -16,7 +16,7 @@ div#default{
     grid-row: 2/3;
     width: fit-content;
     height: fit-content;
-    padding-top: 0.5rem;
+    padding: 0.5rem;
     box-shadow: var(--basic-button-shadow);
 }
 
@@ -26,7 +26,7 @@ div#default h1{
 }
 
 form {
-    background-color: var(--light-grey);
+    background-color: white;
     border-radius: 1rem;
     display: grid;
     grid-template-columns: auto auto;
@@ -40,10 +40,21 @@ p {
     align-self: start;
 }
 
-input{
+label{
+    background-color: var(--light-grey);
     border-radius: 20px;
-    border: none;
+    align-self: center;
+    padding: 0.4em 2em 0.4em 1em;
+}
+
+input:not(#imageUpload):not(#submit){
+    border-radius: 20px;
+    border: solid var(--light-grey) 1.5px;
     padding-left: 0.8em;
+    height: 2em;
+    position: relative;
+    left: -2.5em;
+    padding-right: 0.5em;
 }
 
 input#submit {
