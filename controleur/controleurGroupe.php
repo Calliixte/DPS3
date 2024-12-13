@@ -33,6 +33,8 @@
                 
             }
             $groupe->display();
+            echo "<a href=vues/formulaireVote.php>nouvelle proposition</a>";
+
             echo '</main>';
             include('vues/footer.html');
             include('vues/popups/addGroup.html');
