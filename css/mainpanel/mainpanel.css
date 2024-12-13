@@ -2,14 +2,22 @@
 main {
     flex-grow: 2;
     background-color: white;
-    min-height: calc(100vh - 200px);
-    padding: 2rem;
+    min-height: calc(100vh);
+    display: grid;
+    grid-template-rows: auto auto auto;
+    justify-content: center;
+    align-content: center;
 }
 
 div#default{
     background-image: linear-gradient(-55deg,var(--light-blue), var(--dark-blue));
     border-radius: 1rem;
-    display: inline-block;
+    display: block;
+    grid-row: 2/3;
+    width: fit-content;
+    height: fit-content;
+    padding-top: 0.5rem;
+    box-shadow: var(--basic-button-shadow);
 }
 
 div#default h1{
@@ -27,11 +35,23 @@ form {
     max-width: 40rem;
 }
 
+p {
+    grid-row: 3/4;
+    align-self: start;
+}
+
+input{
+    border-radius: 20px;
+    border: none;
+    padding-left: 0.8em;
+}
+
 input#submit {
     grid-column: 1/3;
     justify-self: center;
     width: 30%;
     height: 3rem;
     border : none;
-    border-radius: 0.5rem;
+    border-radius: 15px;
+    box-shadow: var(--basic-button-shadow);
 } 
