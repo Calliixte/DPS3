@@ -2,7 +2,7 @@
     Class Vote{
         private int $idVote;
         private string $titreVote;
-        private string $lienPhoto;
+        private ?string $lienPhoto;
         
         private ?DateInterval $delaiDiscussion;
         private ?DateInterval $delaiVote;
