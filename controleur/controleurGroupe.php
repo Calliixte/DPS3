@@ -38,7 +38,7 @@
             $liste=$groupe->get("listeVote");
             for($i = 0;$i<count($liste);$i++){
                 //   /!\    $liste[$i] est un objet Vote
-                // if($liste[$i]->get('accepte')){
+                if($liste[$i]->get('propositionAcceptee')){
                     $liste[$i]->fillEtiquettes();
                     $idVote = $liste[$i]->get("idVote");
                     $titreVote = $liste[$i]->get("titreVote");
@@ -53,12 +53,12 @@
                     $txtSuppr = "Voter";
                     }
                     include('vues/petitVote.php');
-                // }
+                }
                 
             }
             $groupe->display();
             echo "<a href=vues/formulaireVote.php>nouvelle proposition</a>";
-            echo "<a href=routeur.php?controleur=controleurVote&action=afficherNonAcceptes>Voir les propositions en cours de traitement</a>";
+            echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherNonAcceptes>Voir les propositions en cours de traitement</a>";
 
             echo '</main>';
             include('vues/footer.html');
@@ -70,22 +70,35 @@
 
 
         public static function afficherNonAcceptes(){
+            $nomG = $_SESSION['groupeCourant']->get("nomGroupe");
+            $titre= $nomG;
+            $styleSpecial = '';
+            include('vues/debut.php');
+            ControleurApplication::afficherHeader();
+            echo '<main>';
             $liste=$_SESSION['groupeCourant']->get("listeVote");
             for($i = 0;$i<count($liste);$i++){
                 //   /!\    $liste[$i] est un objet Vote
-                // if(!$liste[$i]->get('accepte')){ //par rapport à l'autre y'a un not devant le boolean
+                if(!$liste[$i]->get('propositionAcceptee')){ //par rapport à l'autre y'a un not devant le boolean
                     $liste[$i]->fillEtiquettes();
                     $idVote = $liste[$i]->get("idVote");
                     $titreVote = $liste[$i]->get("titreVote");
                     $listeEtiquette = $liste[$i]->get("listeEtiquettes");
                     //$dateCreation = $liste[$i]->get("dateCreation");
                     $description = $liste[$i]->getDescription(); 
-                    $url = "vues/accepterVote.php?id=$idVote&titre=$titreVote";
+                    $titreSend = urlencode($titreVote);
+                    $url = "vues/accepterVote.php?id=$idVote&titre=$titreSend";
                     $txt = "Accepter la proposition";
                     include('vues/petitVote.php');
-                // }
+                }
                 
             }
+            echo "<a href=routeur.php>Quitter ce menu</a>";
+
+            echo '</main>';
+            include('vues/footer.html');
+            include('vues/popups/addGroup.php');
+            include('vues/fin.html');
         }
 
         public static function afficherVotes(){

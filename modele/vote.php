@@ -191,7 +191,7 @@ Class Vote{
     }
 
         public static function AccepterVote($idVote,$idRole){
-            if ($idRole =! 2 ){
+            if ($idRole != 2 ){
                 return -1;
             }
             $requete=" UPDATE Vote set propositionAcceptee = 1 where idVote = $idVote";
