@@ -34,7 +34,7 @@ class controleurVote{
             include('vues/fin.html');
             
         }
-}
+
         public static function supprimerVote(){
             $idVoteActuel=$_GET["id"];
             $vote =  $_SESSION['groupeCourant']->get("listeVote")[$idVoteActuel];
@@ -42,6 +42,6 @@ class controleurVote{
             SupprimerVote($idV);
             echo "<meta http-equiv=\"refresh\" content=\"0; url=routeur.php\"> "; //rediriger vers la page d'accueil c'est très meh 
         }
-
+    }
 
 ?>

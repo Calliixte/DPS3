@@ -19,7 +19,7 @@
 
         public function get($attribute){
             return $this->$attribute;
-        
+        }
 
         public function set($attribute, $val){
             $this->$attribute = $val;
