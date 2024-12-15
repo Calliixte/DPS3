@@ -115,8 +115,6 @@
             return $hashMdp==$resultat;
         }
 
-        
-
         public static function getUtilisateur($idUtilisateur){
             $requete = "SELECT idUtilisateur, pseudo, nom, prenom, estVerifie, lienPhotoProfil FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
             $resultat = Connexion::pdo()->query($requete);
@@ -124,7 +122,6 @@
             
             $User = $resultat->fetch();
             $User->listeGroupes = Groupe::getGroupesUtilisateur($idUtilisateur);
-
             return $User;
         }
 
@@ -151,8 +148,8 @@
                        pseudo : $this->pseudo<br>
                        nom : $this->nom<br>
                        prenom : $this->prenom<br>
-                       photo de Profil : $this->lienPhotoProfil<p>
-                       numéro de role : $this->role";
+                       photo de Profil : $this->lienPhotoProfil<br>
+                       numéro de role : $this->role</p>";
         }
 
         public function display(){
