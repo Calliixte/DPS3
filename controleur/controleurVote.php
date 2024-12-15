@@ -25,7 +25,7 @@ class controleurVote{
 
             //puis
             include ("vues/discussionGrandVote.php");
-
+            echo "<a href=routeur.php> retour </a> ";
             echo '</main>';
             include('vues/footer.html');
             include('vues/popups/addGroup.html');
@@ -34,7 +34,6 @@ class controleurVote{
             //passer l'idVote
             //todo faire une methode avec select * qui prendra les données et affichera tout l'objet comme prévu, avec un include comme avant tout ça
             
-            echo "<a href=routeur.php> retour </a> ";
         }
 }
 
