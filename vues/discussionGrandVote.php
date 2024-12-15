@@ -28,6 +28,9 @@ foreach($listeMessage as $message){
             //     //implementer un truc pour compter les reactions et les stacker quand y'a les memes (optionnel je pense)
                  echo $reaction->get('emoticone');
             }
+            if ($_SESSION['utilisateurCourant']->get('role')==2){ //est administrateur 
+            echo "<a href=\"routeur.php?controleur=controleurMessage&action=supprimerMessage&id=$idvkw\">Supprimer ce message</a>"; 
+            }
             echo "<div class=\"listeReaction\">";
             echo " Réagir : ";
             echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">😂</a>"; 

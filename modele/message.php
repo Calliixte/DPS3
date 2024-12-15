@@ -27,5 +27,13 @@
 
             return $listeMessages;
         }
+
+        public static function supprimerMessages($idMessage){
+            $requetePreparee = Connexion::pdo()->prepare("DELETE FROM Message where idMessage= :log");
+            $requetePreparee -> bindParam(':log',$idMessage);
+            try{
+              $requetePreparee->execute();
+            }catch(PDOException $e){echo $e->getMessage();}
+        }
     }
 ?>

@@ -15,7 +15,10 @@
             echo"<br/>";
             echo mb_strimwidth($description, 0, 150, "...");
             echo"<br/>";
-            echo "<a href=$url> Voter </a>";
+            echo "<a href=$url> $txt </a>";
+            if(isset($urlSuppr) && isset($txtSuppr)){
+              echo "<a href=$urlSuppr> $txtSuppr </a>";
+            }
             echo"<br/>";
     echo"</div>";
 ?>

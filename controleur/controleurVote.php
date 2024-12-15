@@ -30,13 +30,17 @@ class controleurVote{
             include('vues/footer.html');
             include('vues/popups/addGroup.html');
             include('vues/fin.html');
-
-            //passer l'idVote
-            //todo faire une methode avec select * qui prendra les données et affichera tout l'objet comme prévu, avec un include comme avant tout ça
             
             echo "<a href=routeur.php> retour </a> ";
         }
 }
+        public static function supprimerVote(){
+            $idVoteActuel=$_GET["id"];
+            $vote =  $_SESSION['groupeCourant']->get("listeVote")[$idVoteActuel];
+            $idV= $vote->get("idVote");
+            SupprimerVote($idV);
+            echo "<meta http-equiv=\"refresh\" content=\"0; url=routeur.php\"> "; //rediriger vers la page d'accueil c'est très meh 
+        }
 
 
 ?>

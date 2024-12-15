@@ -41,7 +41,7 @@
 
             return $groupe;
         }
-
+        
         public static function getGroupesUtilisateur(int $idUtilisateur){
             $requete = "SELECT G.idGroupe, nomGroupe, voteBlancCompte, lienPhotoIcone, lienPhotoBanniere, COUNT(*) AS nbMembres
                         FROM Groupe G
@@ -96,7 +96,9 @@
 
             return $resultat->fetch()["reglesGroupe"];;
         }
-
+        public function getUrlRejoindre(){
+            return "https://projets.iut-orsay.fr/saes3-vjacqu3/classePHP/rejoindreGroupe?idG=$idGroupe";
+        }
 
         public function __toString(){
             return "<h3> Groupe </h3>
