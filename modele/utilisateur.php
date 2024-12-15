@@ -10,9 +10,12 @@
         private string $nom;
         private string $prenom;
         private ?string $lienPhotoProfil; 
-        private bool $estVerifie;
+        
         private int $role = MEMBRE;
+        private bool $estVerifie;
+
         private array $listeGroupes;
+
 
         public function get($attribute){
             return $this->$attribute;
@@ -26,7 +29,9 @@
                                     string $pseudo=NULL, 
                                     string $nom=NULL,
                                     string $prenom=NULL,
-                                    string $lienPhotoProfil=NULL) {
+                                    string $lienPhotoProfil=NULL,
+                                    bool $estVerifie=NULL,
+                                    int $role=NULL) {
                 
             if(!is_null($idUtilisateur)){
                 $this->idUtilisateur = $idUtilisateur;
@@ -34,10 +39,12 @@
                 $this->nom = $nom;
                 $this->prenom = $prenom;
                 $this->lienPhotoProfil = $lienPhotoProfil;
+                $this->estVerifie = $estVerifie;
+                $this->role=$role;
             }
         }
         
-        public static function insererUtilisateur($nomUtilisateur,$prenomUtilisateur,$pseudo,$mdp,$ddn,$email,$adresse,$lienPdp){
+        public static function insererUtilisateur($nomUtilisateur, $prenomUtilisateur, $pseudo, $mdp, $ddn,$email,$adresse,$lienPdp){
             $requete = "SELECT max(idUtilisateur)+1 FROM `Utilisateur` WHERE 1; ";
             $resultat = Connexion::pdo()->query($requete);
             $idMax=$resultat->fetchColumn();
@@ -79,6 +86,8 @@
             return false; 
             
         }
+
+
         public static function verifLogin($log /*log est soit un email soit un pseudo*/){
                       //pour distinguer pseudo ou email -> on vérifie si il y a un @ dans le string, les @ sont interdits dans les pseudos mais tjrs présents dans les emails
             $estEmail = false;
@@ -109,7 +118,7 @@
         
 
         public static function getUtilisateur($idUtilisateur){
-            $requete = "SELECT idUtilisateur, pseudo, nom, prenom, estVerifie FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
+            $requete = "SELECT idUtilisateur, pseudo, nom, prenom, estVerifie, lienPhotoProfil FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchmode(PDO::FETCH_CLASS,"Utilisateur");
             
