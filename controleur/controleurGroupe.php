@@ -21,8 +21,8 @@
         public static function afficherGrandGroupe(){
             $groupe = ControleurGroupe::getGroupe();
             $_SESSION['groupeCourant']=$groupe; //attention à ça ça peut causer des problemes
-            $_SESSION['utilisateurCourant']->set('role',getRoleMembre($_SESSION['utilisateurCourant']->get('idUtilisateur'),$groupe->get('idGroupe')) ?? 0);
-                                            //on met le role                  a la valeur du groupe pour l'idUser et l'id Groupe            si la fonction renvoie null on met membre
+            $_SESSION['utilisateurCourant']->set('role',$groupe->getRoleMembre($_SESSION['utilisateurCourant']->get('idUtilisateur')) ?? 0);
+            //                                  on met le role                  a la valeur du groupe pour l'idUser et l'id Groupe            si la fonction renvoie null on met membre
             $nomG = $groupe->get("nomGroupe");
             $titre= $nomG;
             $styleSpecial = '';

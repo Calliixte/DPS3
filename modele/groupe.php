@@ -97,9 +97,18 @@
             return $resultat->fetch()["reglesGroupe"];;
         }
         public function getUrlRejoindre(){
-            return "https://projets.iut-orsay.fr/saes3-vjacqu3/classePHP/rejoindreGroupe?idG=$idGroupe";
+            $id= $this->idGroupe;
+            return "https://projets.iut-orsay.fr/saes3-vjacqu3/classePHP/rejoindreGroupe?idG=$id";
         }
 
+        public function getRoleMembre($idU){
+                $id= $this->idGroupe;
+                $requetePreparee = Connexion::pdo()->prepare( "SELECT idRole FROM `Membre` WHERE idUtilisateur=:idU and idGroupe=$id");
+                $requetePreparee -> bindParam(':idU',$idU);
+                $requetePreparee->execute();
+    
+                return $requetePreparee->fetchColumn();
+        }
         public function __toString(){
             return "<h3> Groupe </h3>
                     <p>
