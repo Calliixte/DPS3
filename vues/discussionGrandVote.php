@@ -35,10 +35,19 @@ foreach($listeMessage as $message){
             }
             echo "<div class=\"listeReaction\">";
             echo " Réagir : ";
-            echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">😂</a>"; 
-            echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">👍</a>";
-            echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">👎</a>";
-            echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">👏</a>";
+            $idReacteur = $idVotant;
+            $emoji1 = urlencode("😂");
+            $emoji2 = urlencode("👍");
+            $emoji3 = urlencode("👎");
+            $emoji4 = urlencode("👏");
+            $url1="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji1&idM=$idMsg";
+            $url2="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji2&idM=$idMsg";
+            $url3="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji3&idM=$idMsg";
+            $url4="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji4&idM=$idMsg";
+            echo "<a href=$url1>😂</a>"; 
+            echo "<a href=$url2>👍</a>";
+            echo "<a href=$url3>👎</a>";
+            echo "<a href=$url4>👏</a>";
             echo "</div>";
             echo"</div>";
           }

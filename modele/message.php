@@ -35,5 +35,26 @@
               $requetePreparee->execute();
             }catch(PDOException $e){echo $e->getMessage();}
         }
+        
+
+        public static function ajouterReaction($idAuteur,$idGroupe,$idMessage,$emoji){
+            try{
+            $sql = "INSERT INTO ReactionMessage (idUtilisateur, idGroupe, idMessage, unicodeEmoticone) 
+            VALUES (:idAuteur, :idGroupe, :idMessage, :emoji)";
+    
+            $stmt = Connexion::pdo()->prepare($sql);
+            $stmt->bindParam(':idAuteur', $idAuteur, PDO::PARAM_INT);
+            $stmt->bindParam(':idGroupe', $idGroupe, PDO::PARAM_INT);
+            $stmt->bindParam(':idMessage', $idMessage, PDO::PARAM_INT);
+            $stmt->bindParam(':emoji', $emoji, PDO::PARAM_STR);
+
+            // Exécution de la requête
+            $stmt->execute();
+            return "Réaction ajoutée avec succès.";
+            } catch (PDOException $e) {
+                // Gérer les erreurs de connexion ou d'exécution
+                return "Erreur : " . $e->getMessage();
+            }   
+        }
     }
 ?>
