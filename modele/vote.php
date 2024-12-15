@@ -1,7 +1,7 @@
 <?php
 /*  
     QUICK FIX : les fonctions suivantes pouront être déplacées dans un autre fichier plus tard
-    (la classe Vote est un peu plsu bas)
+    (la classe Vote est un peu plus bas)
 */
 
 // NOTA: quand on SELECT une collone de type TIME sur mariaDb cela retourne une string au fomat 'nbHeures:nbMinutes:nbSecondes'
@@ -144,7 +144,7 @@ Class Vote{
     public static function getVotesGroupe($idGroupe){
         $requete = "SELECT  idVote, titreVote, lienPhoto, 
                             delaiDiscussion, delaiVote, dateCreationVote,
-                            codeSuffrage, autoriserVoteBlanc, autoriserPlusieursChoix
+                            codeSuffrage, autoriserVoteBlanc, autoriserPlusieursChoix,
                             propositionAcceptee, evalBudget
                     FROM Vote WHERE idGroupe = $idGroupe";
         $resultat = Connexion::pdo()->query($requete);
@@ -217,7 +217,7 @@ Class Vote{
     }
     
 
-    // à mettre dans la calsse Utilisateur en static et sans $idUser en paramètre
+    // à mettre dans la classe Utilisateur en static et sans $idUser en paramètre
     public function aChoisi(int $idUser, int $idChoixVote){
         $requete = "SELECT COUNT(*) AS 'nbVote' FROM ChoixMembre 
                     WHERE idChoixVote = $idChoixVote
