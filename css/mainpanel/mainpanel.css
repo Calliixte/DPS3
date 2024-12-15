@@ -11,7 +11,7 @@ main {
     flex-basis: 0;
 }
 
-main > div{
+div#default{
     background-image: linear-gradient(-55deg,var(--light-blue), var(--dark-blue));
     border-radius: 1rem;
     display: block;
@@ -22,7 +22,7 @@ main > div{
     box-shadow: var(--basic-button-shadow);
 }
 
-main > div h1{
+div#default h1{
     margin-left: 1rem;
     color: white;
 }
