@@ -41,8 +41,6 @@ foreach($listeMessage as $message){
             echo "</div>";
             echo"</div>";
           }
-            echo "<a href=routeur.php> Voter </a>";
-    echo"</div>";
-     
-
+            echo "<a href=routeur.php> Voter </a>";   
 ?>
+</div>
