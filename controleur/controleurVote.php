@@ -39,7 +39,7 @@ class controleurVote{
             $idVoteActuel=$_GET["id"];
             $vote =  $_SESSION['groupeCourant']->get("listeVote")[$idVoteActuel];
             $idV= $vote->get("idVote");
-            SupprimerVote($idV);
+            Vote::SupprimerVote($idV);
             echo "<meta http-equiv=\"refresh\" content=\"0; url=routeur.php\"> "; //rediriger vers la page d'accueil c'est très meh 
         }
     }

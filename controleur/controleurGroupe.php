@@ -50,7 +50,7 @@
                     $txt = "Voter";
                     if ($_SESSION['utilisateurCourant']->get('role')==2){ //est administrateur 
                     $urlSuppr = "routeur.php?controleur=controleurVote&action=supprimerVote&id=$idvkw";
-                    $txtSuppr = "Voter";
+                    $txtSuppr = "Supprimer";
                     }
                     include('vues/petitVote.php');
                 }
@@ -87,8 +87,9 @@
                     //$dateCreation = $liste[$i]->get("dateCreation");
                     $description = $liste[$i]->getDescription(); 
                     $titreSend = urlencode($titreVote);
-                    $url = "vues/accepterVote.php?id=$idVote&titre=$titreSend";
-                    $txt = "Accepter la proposition";
+                    if($_SESSION['utilisateurCourant']->get('role')==2){
+                    $urlAccp = "vues/accepterVote.php?id=$idVote&titre=$titreSend";
+                    $txtAccp = "Accepter la proposition";}
                     include('vues/petitVote.php');
                 }
                 
