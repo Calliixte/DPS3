@@ -59,6 +59,10 @@
             $groupe->display();
             echo "<a href=vues/formulaireVote.php>nouvelle proposition</a>";
             echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherNonAcceptes>Voir les propositions en cours de traitement</a>";
+            $popupI = "#popup-invitation";
+            $lienInvit = $groupe ->getUrlRejoindre();
+            echo "<a href=$popupI>Inviter quelqu'un</a>";
+
 
             echo '</main>';
             include('vues/footer.html');

@@ -98,7 +98,7 @@
         }
         public function getUrlRejoindre(){
             $id= $this->idGroupe;
-            return "https://projets.iut-orsay.fr/saes3-vjacqu3/classePHP/rejoindreGroupe?idG=$id";
+            return "https://projets.iut-orsay.fr/saes3-vjacqu3/classePHP/controleur/rejoindreGroupe.php?idInvit=$id";
         }
 
         public function getRoleMembre($idU){
