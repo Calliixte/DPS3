@@ -19,9 +19,11 @@ class controleurVote{
             $descriptionVote = $vote ->getDescription(); 
             $listeEtiquette = $vote-> get("listeEtiquettes") ;
             $listeMessage = $vote -> get("listeMessages");
+            echo "<div class=\"baseVote\">";
             include ("vues/baseGrandVote.php");
             // if (date + delai > sysdate : afficher votes fermés else : faire ce programme
             include("vues/choixGrandVote.php");
+            echo "</div>";
 
             //puis
             include ("vues/discussionGrandVote.php");

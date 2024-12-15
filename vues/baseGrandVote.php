@@ -1,4 +1,3 @@
-<div class="BaseVote">
 <?php
   foreach($listeEtiquette as $eti){
     echo $eti;
@@ -10,4 +9,3 @@
   echo " [image du vote ]";
   echo $descriptionVote;
 ?>
-</div>

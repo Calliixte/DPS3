@@ -7,9 +7,11 @@ main {
     grid-template-rows: auto auto auto;
     justify-content: center;
     align-content: center;
+    width: calc(100% - 20rem);
+    flex-basis: 0;
 }
 
-div#default{
+main > div{
     background-image: linear-gradient(-55deg,var(--light-blue), var(--dark-blue));
     border-radius: 1rem;
     display: block;
@@ -20,7 +22,7 @@ div#default{
     box-shadow: var(--basic-button-shadow);
 }
 
-div#default h1{
+main > div h1{
     margin-left: 1rem;
     color: white;
 }
