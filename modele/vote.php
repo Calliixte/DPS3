@@ -128,6 +128,7 @@ Class Vote{
         $resultat = Connexion::pdo()->query($requete);
 
         // utilisation du constructeur pour créer l'objet 
+        // il est nécessaire de créer l'objet via le contructeur pour initialiser correctement $this->delaiDiscussion, $this->delaiVote, et $this->dateCreationVote
         // l'ordre des colonne sélectionnées dans la requête ne compte pas, 
         // chaque paramètre du contructeur est mappé aevc une valeur ayant une clé du même nom dans le tableau retourné par fetch()
         $vote = new Vote(... $resultat->fetch(PDO::FETCH_ASSOC));
@@ -150,6 +151,7 @@ Class Vote{
         $resultat = Connexion::pdo()->query($requete);
 
         // utilisation du constructeur pour créer l'objet 
+        // il est nécessaire de créer l'objet via le contructeur pour initialiser correctement $this->delaiDiscussion, $this->delaiVote, et $this->dateCreationVote
         // l'ordre des colonne sélectionnées dans la requête ne compte pas, 
         // chaque paramètre du contructeur est mappé aevc une valeur ayant une clé du même nom dans le tableau retourné par fetch()
         $listeVote = [];
