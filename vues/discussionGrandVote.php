@@ -29,7 +29,7 @@ foreach($listeMessage as $message){
                  echo $reaction->get('emoticone');
             }
             if ($_SESSION['utilisateurCourant']->get('role')==2){ //est administrateur 
-            echo "<a href=\"routeur.php?controleur=controleurMessage&action=supprimerMessage&id=$idvkw\">Supprimer ce message</a>"; 
+            echo "<a href=\"routeur.php?controleur=controleurMessage&action=supprimerMessage&id=$idMsg\">Supprimer ce message</a>"; 
             }
             echo "<div class=\"listeReaction\">";
             echo " Réagir : ";
