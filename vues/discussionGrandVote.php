@@ -17,6 +17,8 @@
 </form>
 <?php
 foreach($listeMessage as $message){
+
+            echo $idVotant . " group:  " . $idGroupeVotant;
             $contenu = $message->get("texte");
             //$auteur = $message ->get("auteur")->get("pseudo"); pour l'instant le message n'a pas d'auteur il faut finir la classe
             $datePub = $message ->get("dateEnvoi");
@@ -34,9 +36,8 @@ foreach($listeMessage as $message){
             echo "<div class=\"listeReaction\">";
             echo " Réagir : ";
             echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">😂</a>"; 
-
-            echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">🤝</a>";
             echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">👍</a>";
+            echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">👎</a>";
             echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">👏</a>";
             echo "</div>";
             echo"</div>";

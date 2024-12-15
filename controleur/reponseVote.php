@@ -14,7 +14,10 @@ foreach ($_POST as $key => $value) {
     if($key == "idVote"){
         $idVote = $value;
     }
-    if($key != "idUtilisateur" && $key !="idGroupe" && $key !="idVote"){
+    if($key == "voteBlanc"){
+        $voteBlanc=true;
+    }
+    if($key != "idUtilisateur" && $key !="idGroupe" && $key !="idVote" && $key!="voteBlanc"){
         array_push($listeIdChoisis,$value);
     }
 }
@@ -38,7 +41,7 @@ $stmt->execute();
     echo "aucun Vote supprimé";
 }
 
-
+if(!isset($voteBlanc)){
 foreach($listeIdChoisis as $id){
     try{
     $requete = "INSERT INTO `ChoixMembre`(`idUtilisateur`, `idGroupe`, `idChoixVote`) VALUES (?,?,?)";
@@ -54,7 +57,23 @@ foreach($listeIdChoisis as $id){
         exit();
     }
 }
-
+}else{
+    try{
+        $id=null;
+        $requete = "INSERT INTO `ChoixMembre`(`idUtilisateur`, `idGroupe`, `idChoixVote`) VALUES (?,?,?)";
+        $stmt = Connexion::pdo()->prepare($requete);
+        $stmt->bindParam(1, $idUtilisateur, PDO::PARAM_INT);
+        $stmt->bindParam(2, $idGroupe, PDO::PARAM_INT);           
+        $stmt->bindParam(3, $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+        // echo "Vous avez essayé de voter pour plusieurs choix dans un vote à choix unique, seul votre premier vote a été conservé !"; //ne restera pas tout le temps pareil
+        echo "<meta http-equiv=\"refresh\" content=\"1; url=$urlBack\"> ";
+        exit();
+    }
+}
 
 echo "Votre vote a bien été pris en compte !";
 echo "<meta http-equiv=\"refresh\" content=\"1; url=$urlBack\"> ";
