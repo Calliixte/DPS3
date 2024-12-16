@@ -166,6 +166,10 @@ Class Vote{
     }
 
 
+    public static function insererVote($idVote, $titre, $delaiDiscussion, $delaiVote, $description, $evalBudget, $voteBlanc, $multiChoix, $idGroupe){
+        $requete = "INSERT INTO VOTE VALUES($idVote, $titre, $delaiDiscussion, $delaiVote, NOW(), 0, $evalBudget, $voteBlanc, $multiChoix, NULL, $idGroupe;"
+    }
+
     /*
         ATTENTION: si json_encode() ou getJSON() ne fonctionne plus, c'est de la faute de Vianney (moi)
         car les DateTime et les DateInterval n'ont pas de méthode __toString() (il faut utiliser leur méthode format())
