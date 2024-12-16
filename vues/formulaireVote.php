@@ -1,5 +1,5 @@
 <div id="default">
-    <h1>Inscription à DPS3</h1>
+    <h1>Proposer un Vote</h1>
     <form action="controleur/reponseInscription.php" method="POST" enctype="multipart/form-data">
         <label for="title">
             Titre
@@ -10,13 +10,22 @@
             placeholder=""
         />
 
+        <div class="scrollableWindow">
+            <?php
+                $cpt = 0;
+                foreach($listeEtiquette as $etiquette){
+                    $nomID = "etiquette$cpt";
+                    echo "<input type=\"checkbox\" id=$nomID name=$nomID value=$etiquette/>";
+                    echo "<label for=$nomID>$etiquette</label>"; 
+                    $cpt++;
+                }
+            ?>
+        </div>
+
         <?php
-            $cpt = 0;
-            foreach($listeEtiquette as $etiquette){
-                $nomID = "etiquette$cpt";
-                echo "<input type=\"checkbox\" id=$nomID name=$nomID value=$etiquette/>";
-                echo "<label for=$nomID>$etiquette</label>"; 
-                $cpt++;
+            for($i = 0; $i < $nbChoix; $i++){
+                $numChoix = $i+1;
+                echo "<input type=\"text\" id=\"choix$numChoix\" name=\"choix$numChoix\" placeholder=\"choix $numChoix\"/>";
             }
         ?>
 
@@ -25,15 +34,11 @@
 
         <!-- TODO liste de mode de scrutin -->
 
-        <label for="imageUpload">ajouter une photo :</label>
+        <label for="imageUpload">ajouter une photo</label>
         <input type="file" id="imageUpload" name="u_photo" accept="image/*" required>
 
-        <input id="u_description"
-            name="description"
-            type="text"
-            placeholder="écrire une description"
-        />
+        <textarea id="description" name="description" maxlength="500" placeholder="écrire une description"></textarea>
 
-        <input id="submit" type="submit" value="S'inscrire">
+        <input id="submit" type="submit" value="envoyer">
     </form>
 </div>

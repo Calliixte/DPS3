@@ -57,7 +57,7 @@
                 
             }
             $groupe->display();
-            echo "<a href=vues/formulaireVote.php>nouvelle proposition</a>";
+            echo "<a href=routeur.php?controleur=controleurGroupe&action=nouvelleProposition>nouvelle proposition</a>";
             echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherNonAcceptes>Voir les propositions en cours de traitement</a>";
             $popupI = "#popup-invitation";
             $lienInvit = $groupe ->getUrlRejoindre();
@@ -71,7 +71,19 @@
         }
 
 
-
+        public static function nouvelleProposition(){
+            $nbChoix = 4; // Nomnbre de choix pour le vote, on pourra gérer ça dynamiquement avec un bouton si on veut
+            $listeEtiquette = $_SESSION['groupeCourant']->get('listeEtiquette');
+            
+            include('vues/debut.php');
+            ControleurApplication::AfficherHeader();
+            echo '<main>';
+            include('vues/formulaireVote.php');
+            echo '</main>';
+            include('vues/footer.html');
+            include('vues/popups/addGroup.php');
+            include('vues/fin.html');
+        }
 
         public static function afficherNonAcceptes(){
             $nomG = $_SESSION['groupeCourant']->get("nomGroupe");
