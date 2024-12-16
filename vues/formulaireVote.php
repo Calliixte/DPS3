@@ -32,6 +32,9 @@
         <label for="date">Délais de discussion</label>
         <input type="date" id="u_birthdate" name="u_ddn"/>
 
+        <label for="voteBlanc">Autoriser le vote blanc</label>
+        <input id="voteBlanc" type="Checkbox" name="voteBlanc" value=0/>
+
         <!-- TODO liste de mode de scrutin -->
 
         <label for="imageUpload">ajouter une photo</label>
