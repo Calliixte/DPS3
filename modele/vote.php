@@ -166,8 +166,13 @@ Class Vote{
     }
 
 
-    public static function insererVote($idVote, $titre, $delaiDiscussion, $delaiVote, $description, $evalBudget, $voteBlanc, $multiChoix, $idGroupe){
-        $requete = "INSERT INTO VOTE VALUES($idVote, $titre, $delaiDiscussion, $delaiVote, NOW(), 0, $evalBudget, $voteBlanc, $multiChoix, NULL, $idGroupe;"
+    public static function insererVote($idVote, $titre, $delaiDiscussion, $delaiVote, 
+                                       $description, $evalBudget, $voteBlanc, $multiChoix, 
+                                       $idGroupe, $listeEtiquettes, $listeChoix){
+        $requete = "INSERT INTO Vote VALUES($idVote, $titre, $delaiDiscussion, $delaiVote, NOW(), 0, $evalBudget, $voteBlanc, $multiChoix, NULL, $idGroupe;";
+        
+        $requete = "INSERT INTO EtiquetteVote"
+    
     }
 
     /*
