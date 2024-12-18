@@ -1,0 +1,9 @@
+main#connexion{
+    place-content: center;
+    padding: none;
+}
+
+p {
+    grid-row: 3/4;
+    align-self: start;
+}

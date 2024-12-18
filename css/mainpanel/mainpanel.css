@@ -1,12 +1,12 @@
-
+@import 'form.css';
+@import 'groupe/groupe.css';
 main {
     flex-grow: 2;
     background-color: white;
     min-height: calc(100vh);
     display: grid;
     grid-template-rows: auto;
-    justify-content: center;
-    align-content: center;
+    place-content: stretch;
     width: calc(100% - 20rem);
     flex-basis: 0;
 }
@@ -14,65 +14,19 @@ main {
 div#default{
     background-image: linear-gradient(-55deg,var(--light-blue), var(--dark-blue));
     border-radius: 1rem;
-    display: block;
-    grid-row: 2/3;
-    width: fit-content;
-    height: fit-content;
+    display: flex;
+    flex-direction: column;
     box-shadow: var(--basic-button-shadow);
+    margin: 2rem;
 }
 
 div#default > div{
     background-color: var(--light-grey);
     border-radius: 1rem;
+    flex-grow: 1;
 }
 
-div#default h1{
+div#default > h1, div#default > p{
     margin-left: 1rem;
     color: white;
 }
-
-form {
-    margin: 0.5rem;
-    background-color: white;
-    border-radius: 1rem;
-    display: grid;
-    grid-template-columns: auto;
-    gap : 10px;
-    padding: 1rem;
-    max-width: 40rem;
-}
-
-p {
-    grid-row: 3/4;
-    align-self: start;
-}
-
-.field{
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 10px;
-    background-color: var(--light-grey);
-    border-radius: 20px;
-}
-
-.field label{
-    margin: 0.5rem;
-    padding-left: 0.5rem;
-}
-
-.field input{
-    width: 13rem;
-    justify-self: right;
-    border-radius: 20px;
-    border: solid var(--light-grey) 1.5px;
-    padding-left: 1rem;
-}
-
-input#submit {
-    justify-self: center;
-    width: 30%;
-    height: 3rem;
-    border : none;
-    border-radius: 15px;
-    box-shadow: var(--basic-button-shadow);
-} 
