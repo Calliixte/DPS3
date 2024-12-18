@@ -4,61 +4,68 @@
         <label for="imageUpload">Envoyez votre photo de profil :</label>
         <input type="file" id="imageUpload" name="u_photo" accept="image/*" required>	
 
-        <label for="u_name">
-            Nom
-        </label>
-        <input id="u_name"
-            name="nom_utilisateur"
-            type="text"
-            placeholder="nom"
-        />
+        <div class="field">
+            <label for="u_name">
+                Nom
+            </label>
+            <input id="u_name"
+                name="nom_utilisateur"
+                type="text"
+                placeholder="nom"
+            />
+        </div>
 
-        <label for="u_firstname">
-            Prenom
-        </label>
-        <input id="u_firstname"
-            name="prenom_utilisateur"
-            type="text"
-            placeholder="prénom"
-        />
-        
+        <div class="field">
+            <label for="u_firstname">
+                Prenom
+            </label>
+            <input id="u_firstname"
+                name="prenom_utilisateur"
+                type="text"
+                placeholder="prénom"
+            />
+        </div>
 
-        <label for="u_nickname">
-            Pseudo
-        </label>
-        <input id="u_nickname"
-            name="pseudo_utilisateur"
-            type="text"
-            pattern="[^@#$%^&*]+" 
-            title="Les caractères @, #, $, %, ^, &, * ne sont pas autorisés." 
-            required
-            placeholder="pseudo"
-        />
-        
+        <div class="field">
+            <label for="u_nickname">
+                Pseudo
+            </label>
+            <input id="u_nickname"
+                name="pseudo_utilisateur"
+                type="text"
+                pattern="[^@#$%^&*]+" 
+                title="Les caractères @, #, $, %, ^, &, * ne sont pas autorisés." 
+                required
+                placeholder="pseudo"
+            />
+        </div>
 
-        <label for="u_password">
-            Mot de passe
-        </label>
-        <input id="u_password"
-            name="password_utilisateur"
-            type="password"
-            required
-            placeholder="***"
-        />
-        
+        <div class="field">
+            <label for="u_password">
+                Mot de passe
+            </label>
+            <input id="u_password"
+                name="password_utilisateur"
+                type="password"
+                required
+                placeholder="***"
+            />
+        </div>
 
-        <label for="u_birthdate">Date de Naissance</label>
-        <input type="date" id="u_birthdate" name="u_ddn"/>
-        
+        <div class="field">
+            <label for="u_birthdate">Date de Naissance</label>
+            <input type="date" id="u_birthdate" name="u_ddn"/>
+        </div>
 
-        <label for="u_addr">Adresse</label>
-        <input type="text" id="u_addr" name="adresse_utilisateur" placeholder="xx rue des xx 00000 ville">
-        
+        <div class="field">
+            <label for="u_addr">Adresse</label>
+            <input type="text" id="u_addr" name="adresse_utilisateur" placeholder="xx rue des xx 00000 ville">
+        </div>
 
-        <label for="u_email">Email</label>
-        <input type="email" id="u_email" name="email_utilisateur" placeholder="exemple@domaine.com" required>
-        
-
+        <div class="field">
+            <label for="u_email">Email</label>
+            <input type="email" id="u_email" name="email_utilisateur" placeholder="exemple@domaine.com" required>
+        </div>
 
         <input id="submit" type="submit" value="S'inscrire">
     </form>
