@@ -29,8 +29,9 @@
             include('vues/debut.php');
             ControleurApplication::afficherHeader();
             echo '<main>';
+            echo '<div id="default">';
             echo "<h1> $nomG </h1>";
-            echo "<div id=\"my-groups-bottom-grad\"></div>";
+            echo '<div id="groupe">';
             $popup = "#popup-regles";
             $reglesGroupe = $groupe ->getRegles();
             echo "<a href=$popup>Règles de la communauté </a>";
@@ -56,14 +57,15 @@
                 }
                 
             }
-            $groupe->display();
+            // $groupe->display();
             echo "<a href=routeur.php?controleur=controleurGroupe&action=nouvelleProposition>nouvelle proposition</a>";
             echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherNonAcceptes>Voir les propositions en cours de traitement</a>";
             $popupI = "#popup-invitation";
             $lienInvit = $groupe ->getUrlRejoindre();
             echo "<a href=$popupI>Inviter quelqu'un</a>";
 
-
+            echo '</div>';
+            echo '</div>';
             echo '</main>';
             include('vues/footer.html');
             include('vues/popups/addGroup.php');
