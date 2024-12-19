@@ -166,13 +166,41 @@ Class Vote{
     }
 
 
-    public static function insererVote($idVote, $titre, $delaiDiscussion, $delaiVote, 
+    public static function insererVote($titre, $delaiDiscussion, $delaiVote, 
                                        $description, $evalBudget, $voteBlanc, $multiChoix, 
                                        $idGroupe, $listeEtiquettes, $listeChoix){
-        $requete = "INSERT INTO Vote VALUES($idVote, $titre, $delaiDiscussion, $delaiVote, NOW(), 0, $evalBudget, $voteBlanc, $multiChoix, NULL, $idGroupe;";
+        $requete = "INSERT INTO Vote VALUES(MAX(idVote)+1, :titre, :delaiDiscussion, :delaiVote, NOW(), 0, :evalBudget, :voteBlanc, :multiChoix, NULL, :idGroupe;";
         
-        $requete = "INSERT INTO EtiquetteVote";
-    
+        $statement = Connexion::pdo()->prepare($requete);
+        $statement->execute([
+            ':titre' => $titre,
+            ':delaiDiscussion' => $delaiDiscussion,
+            ':delaiVote' => $delaiVote, 
+            ':evalBudget' => $evalBudget,
+            ':voteBlanc' => $voteBlanc,
+            ':multiChoix' => $multiChoix,
+            ':idGroupe' => $idGroupe
+        ]);
+
+        $requete = "INSERT INTO EtiquetteVote VALUES(:idVote, :idEtiquette);";
+        $statement = Connexion::pdo()->prepare($requete);
+        foreach($listeEtiquettes as $eti){
+            $statement->execute([
+                ':idVote' => $idVote,
+                ':idEtiquette' => $eti['idEtiquette']
+            ]);
+        }
+
+
+        $requete = "INSERT INTO ChoixVote VALUES(:idChoixVote, :intitule, :idVote);";
+        $statement = Connexion::pdo()->prepare($requete);
+        foreach($listeChoix as $choixVote){
+            $statement->execute([
+                ':idChoixVote' => $listeChoix['idChoixVote'],
+                ':intitule' => $listeChoix['intitule'],
+                ':idVote' => $idVote
+            ]);
+        }
     }
 
     /*
@@ -229,18 +257,13 @@ Class Vote{
     public function fillChoixVote($idUser=NULL){
         $requete = "SELECT idChoixVote, intitule, CountVoteChoix(idChoixVote) AS nbVote FROM ChoixVote WHERE idVote=$this->idVote;";
         $resultat = Connexion::pdo()->query($requete);
-        
+        $resultat->setFetchMode(PDO::FETCH_ASSOC);
+        $this->choixVote = $resultat->fetchAll();
         if(!is_null($idUser)){
-            while ($row = $resultat->fetch()) {
-                $aVote = $this->aChoisi($idUser, $row['idChoixVote']);
+            for($i=0; $i < count($this->choixVote); $i++) {
+                $aVote = $this->aChoisi($idUser, $this->choixVote[$i]['idChoixVote']);
                 
-                $this->choixVote[$row['idChoixVote']] = array ('intitule' => $row['intitule'],
-                                                                'nbVote' => $row['nbVote'],
-                                                                'aVote' => $aVote);
-            }
-        }else{ // dans ce cas on ne 
-            while ($row = $resultat->fetch()) {
-                $this->choixVote[$row['idChoixVote']] = array ('intitule' => $row['intitule'],'nbVote' => $row['nbVote']);
+                $this->choixVote[$i]['aVote'] = $aVote;
             }
         }
     }

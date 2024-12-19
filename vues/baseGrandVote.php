@@ -1,6 +1,6 @@
 <?php
   foreach($listeEtiquette as $eti){
-    echo $eti;
+    echo $eti['labelEtiquette'];
     echo " ";
   }
   
