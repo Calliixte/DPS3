@@ -9,7 +9,7 @@
             echo $titreVote;
             echo "<br/>";
             foreach($listeEtiquette as $eti){
-                echo $eti;
+                echo $eti['labelEtiquette'];
                 echo " ";
             }
             echo"<br/>";

@@ -171,7 +171,7 @@ Class Vote{
                                        $idGroupe, $listeEtiquettes, $listeChoix){
         $requete = "INSERT INTO Vote VALUES($idVote, $titre, $delaiDiscussion, $delaiVote, NOW(), 0, $evalBudget, $voteBlanc, $multiChoix, NULL, $idGroupe;";
         
-        $requete = "INSERT INTO EtiquetteVote"
+        $requete = "INSERT INTO EtiquetteVote";
     
     }
 
@@ -188,13 +188,13 @@ Class Vote{
 
 
     public function fillEtiquettes(){
-        $requete = "SELECT labelEtiquette 
+        $requete = "SELECT E.idEtiquette, labelEtiquette, couleur 
                     FROM EtiquetteVote EV INNER JOIN Etiquette E
                     ON EV.idEtiquette = E.idEtiquette
                     WHERE idVote=$this->idVote;";
 
         $resultat = Connexion::pdo()->query($requete);
-        $resultat->setFetchmode(PDO::FETCH_COLUMN, 0);
+        $resultat->setFetchMode(PDO::FETCH_ASSOC);
         
         $this->listeEtiquettes = $resultat->fetchAll();
     }
