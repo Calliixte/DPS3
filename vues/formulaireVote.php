@@ -1,6 +1,6 @@
 <div id="default">
     <h1>Proposer un Vote</h1>
-    <form action="controleur/reponseInscription.php" method="POST" enctype="multipart/form-data">
+    <form action="controleur/reponseVote.php" method="POST" enctype="multipart/form-data">
         <label for="title">
             Titre
         </label>
@@ -30,7 +30,7 @@
         ?>
 
         <label for="date">Délais de discussion</label>
-        <input type="date" id="u_birthdate" name="u_ddn"/>
+        <input type="date" id="delaiDiscussion" name="delaiDiscussion"/>
 
         <label for="voteBlanc">Autoriser le vote blanc</label>
         <input id="voteBlanc" type="Checkbox" name="voteBlanc" value=0/>
@@ -38,7 +38,7 @@
         <!-- TODO liste de mode de scrutin -->
 
         <label for="imageUpload">ajouter une photo</label>
-        <input type="file" id="imageUpload" name="u_photo" accept="image/*" required>
+        <input type="file" id="imageUpload" name="photo" accept="image/*" required>
 
         <textarea id="description" name="description" maxlength="500" placeholder="écrire une description"></textarea>
 

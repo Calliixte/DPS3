@@ -167,16 +167,15 @@ Class Vote{
 
 
     public static function insererVote($titre, $delaiDiscussion, $delaiVote, 
-                                       $description, $evalBudget, $voteBlanc, $multiChoix, 
+                                       $description, $voteBlanc, $multiChoix, 
                                        $idGroupe, $listeEtiquettes, $listeChoix){
-        $requete = "INSERT INTO Vote VALUES(MAX(idVote)+1, :titre, :delaiDiscussion, :delaiVote, NOW(), 0, :evalBudget, :voteBlanc, :multiChoix, NULL, :idGroupe;";
+        $requete = "INSERT INTO Vote VALUES(MAX(idVote)+1, :titre, :delaiDiscussion, :delaiVote, NOW(), 0, NULL, :voteBlanc, :multiChoix, NULL, :idGroupe;";
         
         $statement = Connexion::pdo()->prepare($requete);
         $statement->execute([
             ':titre' => $titre,
             ':delaiDiscussion' => $delaiDiscussion,
             ':delaiVote' => $delaiVote, 
-            ':evalBudget' => $evalBudget,
             ':voteBlanc' => $voteBlanc,
             ':multiChoix' => $multiChoix,
             ':idGroupe' => $idGroupe
