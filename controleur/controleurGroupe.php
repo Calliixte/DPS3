@@ -29,6 +29,13 @@
             include('vues/debut.php');
             ControleurApplication::afficherHeader();
             echo '<main>';
+
+            $listeEtiquette = $_SESSION['groupeCourant']->get('listeEtiquette');
+
+            echo "<pre>";
+            print_r($listeEtiquette);
+            echo "</pre>";
+
             echo '<div id="default">';
             echo "<h1> $nomG </h1>";
             echo '<div id="groupe">';
@@ -77,6 +84,10 @@
             $nbChoix = 4; // Nomnbre de choix pour le vote, on pourra gérer ça dynamiquement avec un bouton si on veut
             $listeEtiquette = $_SESSION['groupeCourant']->get('listeEtiquette');
             
+            echo "<pre>";
+            print_r($listeEtiquette);
+            echo "</pre>";
+
             include('vues/debut.php');
             ControleurApplication::AfficherHeader();
             echo '<main>';
