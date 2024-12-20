@@ -1,0 +1,10 @@
+div#groupe{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.vote{
+    margin: 1rem;
+    display: grid;
+}

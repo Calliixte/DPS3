@@ -168,6 +168,42 @@ Class Vote{
     }
 
 
+    public static function insererVote($titre, $delaiDiscussion, $delaiVote, 
+                                       $description, $voteBlanc, $multiChoix, 
+                                       $idGroupe, $listeEtiquettes, $listeChoix){
+        $requete = "INSERT INTO Vote VALUES(MAX(idVote)+1, :titre, :delaiDiscussion, :delaiVote, NOW(), 0, NULL, :voteBlanc, :multiChoix, NULL, :idGroupe;";
+        
+        $statement = Connexion::pdo()->prepare($requete);
+        $statement->execute([
+            ':titre' => $titre,
+            ':delaiDiscussion' => $delaiDiscussion,
+            ':delaiVote' => $delaiVote, 
+            ':voteBlanc' => $voteBlanc,
+            ':multiChoix' => $multiChoix,
+            ':idGroupe' => $idGroupe
+        ]);
+
+        $requete = "INSERT INTO EtiquetteVote VALUES(:idVote, :idEtiquette);";
+        $statement = Connexion::pdo()->prepare($requete);
+        foreach($listeEtiquettes as $eti){
+            $statement->execute([
+                ':idVote' => $idVote,
+                ':idEtiquette' => $eti['idEtiquette']
+            ]);
+        }
+
+
+        $requete = "INSERT INTO ChoixVote VALUES(:idChoixVote, :intitule, :idVote);";
+        $statement = Connexion::pdo()->prepare($requete);
+        foreach($listeChoix as $choixVote){
+            $statement->execute([
+                ':idChoixVote' => $listeChoix['idChoixVote'],
+                ':intitule' => $listeChoix['intitule'],
+                ':idVote' => $idVote
+            ]);
+        }
+    }
+
     /*
         ATTENTION: si json_encode() ou getJSON() ne fonctionne plus, c'est de la faute de Vianney (moi)
         car les DateTime et les DateInterval n'ont pas de méthode __toString() (il faut utiliser leur méthode format())
@@ -181,16 +217,34 @@ Class Vote{
 
 
     public function fillEtiquettes(){
-        $requete = "SELECT labelEtiquette 
+        $requete = "SELECT E.idEtiquette, labelEtiquette, couleur 
                     FROM EtiquetteVote EV INNER JOIN Etiquette E
                     ON EV.idEtiquette = E.idEtiquette
                     WHERE idVote=$this->idVote;";
 
         $resultat = Connexion::pdo()->query($requete);
-        $resultat->setFetchmode(PDO::FETCH_COLUMN, 0);
+        $resultat->setFetchMode(PDO::FETCH_ASSOC);
         
         $this->listeEtiquettes = $resultat->fetchAll();
     }
+
+        public static function AccepterVote($idVote,$idRole){
+            if ($idRole != 2 ){
+                return -1;
+            }
+            $requete=" UPDATE Vote set propositionAcceptee = 1 where idVote = $idVote";
+            $resultat = Connexion::pdo()->query($requete);
+            return 1;
+        }
+
+        public static function SupprimerVote($idVote){
+            $requetePreparee = Connexion::pdo()->prepare("DELETE FROM Vote where idVote= :log");
+            $requetePreparee -> bindParam(':log',$idVote);
+            try{
+              $requetePreparee->execute();
+            }catch(PDOException $e){echo $e->getMessage();}
+        }
+
 
 
     public function getDescription(){ // description étant un string de taille conséquente et étant reservé à des cas précis,le conserver dans l'objet n'est pas pertinent
@@ -204,18 +258,13 @@ Class Vote{
     public function fillChoixVote($idUser=NULL){
         $requete = "SELECT idChoixVote, intitule, CountVoteChoix(idChoixVote) AS nbVote FROM ChoixVote WHERE idVote=$this->idVote;";
         $resultat = Connexion::pdo()->query($requete);
-        
+        $resultat->setFetchMode(PDO::FETCH_ASSOC);
+        $this->choixVote = $resultat->fetchAll();
         if(!is_null($idUser)){
-            while ($row = $resultat->fetch()) {
-                $aVote = $this->aChoisi($idUser, $row['idChoixVote']);
+            for($i=0; $i < count($this->choixVote); $i++) {
+                $aVote = $this->aChoisi($idUser, $this->choixVote[$i]['idChoixVote']);
                 
-                $this->choixVote[$row['idChoixVote']] = array ('intitule' => $row['intitule'],
-                                                                'nbVote' => $row['nbVote'],
-                                                                'aVote' => $aVote);
-            }
-        }else{ // dans ce cas on ne 
-            while ($row = $resultat->fetch()) {
-                $this->choixVote[$row['idChoixVote']] = array ('intitule' => $row['intitule'],'nbVote' => $row['nbVote']);
+                $this->choixVote[$i]['aVote'] = $aVote;
             }
         }
     }

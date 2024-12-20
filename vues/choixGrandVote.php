@@ -4,9 +4,10 @@
 <?php
             echo "<fieldset>";
             $cpt=0;
-            foreach($listeChoixVote as $idCv =>$choix){
+            foreach($listeChoixVote as $choix){
                   $nomID = "choix$cpt";
-                  $nom= $choix["intitule"];
+                  $nom = $choix["intitule"];
+                  $idCv = $choix['idChoixVote'];
                   echo "<div class=\"boiteChoixVote\">";
                   echo"<input type=\"checkbox\" id=$idCv name=$nomID value=$idCv ";
                   if($choix["aVote"]){   //potentiellement faire des radioButton au lieu de faire des checkBox
@@ -23,6 +24,10 @@
                   $cpt++;
               echo " ";
           }
+          echo "<div class=\"boiteChoixVote\">";
+          echo"<input type=\"checkbox\" id=voteBlacn name=voteBlanc value=voteBlanc />"; 
+          echo"<label for=voteBlanc>Vote blanc</label>";
+          echo "</div>";
           echo "</fieldset>";
           $idVotant = $_SESSION["utilisateurCourant"]->get("idUtilisateur");
           $idGroupeVotant = $_SESSION["groupeCourant"]->get("idGroupe");

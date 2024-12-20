@@ -17,6 +17,8 @@
 </form>
 <?php
 foreach($listeMessage as $message){
+
+            echo $idVotant . " group:  " . $idGroupeVotant;
             $contenu = $message->get("texte");
             //$auteur = $message ->get("auteur")->get("pseudo"); pour l'instant le message n'a pas d'auteur il faut finir la classe
             $datePub = $message ->get("dateEnvoi");
@@ -28,18 +30,27 @@ foreach($listeMessage as $message){
             //     //implementer un truc pour compter les reactions et les stacker quand y'a les memes (optionnel je pense)
                  echo $reaction->get('emoticone');
             }
+            if ($_SESSION['utilisateurCourant']->get('role')==2){ //est administrateur 
+            echo "<a href=\"routeur.php?controleur=controleurMessage&action=supprimerMessage&id=$idMsg\">Supprimer ce message</a>"; 
+            }
             echo "<div class=\"listeReaction\">";
             echo " Réagir : ";
-            echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">😂</a>"; 
-
-            echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">🤝</a>";
-            echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">👍</a>";
-            echo "<a href=/*lien pour aller a un truc qui insert l'emoji*/\"../routeur.php\">👏</a>";
+            $idReacteur = $idVotant;
+            $emoji1 = urlencode("😂");
+            $emoji2 = urlencode("👍");
+            $emoji3 = urlencode("👎");
+            $emoji4 = urlencode("👏");
+            $url1="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji1&idM=$idMsg";
+            $url2="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji2&idM=$idMsg";
+            $url3="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji3&idM=$idMsg";
+            $url4="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji4&idM=$idMsg";
+            echo "<a href=$url1>😂</a>"; 
+            echo "<a href=$url2>👍</a>";
+            echo "<a href=$url3>👎</a>";
+            echo "<a href=$url4>👏</a>";
             echo "</div>";
             echo"</div>";
           }
-            echo "<a href=routeur.php> Voter </a>";
-    echo"</div>";
-     
-
+            echo "<a href=routeur.php> Voter </a>";   
 ?>
+</div>

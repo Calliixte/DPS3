@@ -7,6 +7,7 @@
         private ?string $lienPhotoBanniere;    // ? ⇒ nullable
         private int $nbMembres;
         private array $listeVote;
+        private array $listeEtiquette;
 
         public const DEFAULT_LIEN_PHOTO_ICONE = 'media/filled-default-group-icon-1600.png';
 
@@ -41,7 +42,7 @@
 
             return $groupe;
         }
-
+        
         public static function getGroupesUtilisateur(int $idUtilisateur){
             $requete = "SELECT G.idGroupe, nomGroupe, voteBlancCompte, lienPhotoIcone, lienPhotoBanniere, COUNT(*) AS nbMembres
                         FROM Groupe G
@@ -58,7 +59,7 @@
             foreach($listeGroupes as $groupe){
                 if(is_null($groupe->lienPhotoIcone))
                     $groupe->lienPhotoIcone = Groupe::DEFAULT_LIEN_PHOTO_ICONE;
-                
+                $groupe->fillEtiquettes();
                 $groupe->listeVote = Vote::getVotesGroupe($groupe->idGroupe);
             }
 
@@ -75,6 +76,16 @@
             return json_encode($data, JSON_UNESCAPED_UNICODE);
         }
 
+        public function fillEtiquettes(){
+            $requete = "SELECT labelEtiquette 
+                        FROM Etiquette
+                        WHERE idGroupe=$this->idGroupe;";
+    
+            $resultat = Connexion::pdo()->query($requete);
+            $resultat->setFetchmode(PDO::FETCH_COLUMN, 0);
+            
+            $this->listeEtiquette = $resultat->fetchAll();
+        }
         
         // la description du groupe n'est pas attribut de la classe car string de taille conséquente et on l'affiche rarement
         public function getDescription(){
@@ -96,8 +107,19 @@
 
             return $resultat->fetch()["reglesGroupe"];;
         }
+        public function getUrlRejoindre(){
+            $id= $this->idGroupe;
+            return "https://projets.iut-orsay.fr/saes3-vjacqu3/classePHP/controleur/rejoindreGroupe.php?idInvit=$id";
+        }
 
-
+        public function getRoleMembre($idU){
+                $id= $this->idGroupe;
+                $requetePreparee = Connexion::pdo()->prepare( "SELECT idRole FROM `Membre` WHERE idUtilisateur=:idU and idGroupe=$id");
+                $requetePreparee -> bindParam(':idU',$idU);
+                $requetePreparee->execute();
+    
+                return $requetePreparee->fetchColumn();
+        }
         public function __toString(){
             return "<h3> Groupe </h3>
                     <p>

@@ -8,19 +8,21 @@
     }
     ?> 
     <form action="controleur/reponseConnexionUtilisateur.php" method="POST" enctype="multipart/form-data">
+        <div class="field">
+            <label for="u_addr">Email ou Nom d'utilisateur</label>
+            <input type="text" id="u_addr" name="login_utilisateur" placeholder="Email ou Login"/>			
+        </div>
 
-        <label for="u_addr">Email ou Nom d'utilisateur</label>
-        <input type="text" id="u_addr" name="login_utilisateur" placeholder="Email ou Login">			
-        
-        <label for="u_password">
-            Mot de passe
-        </label>
-        <input id="u_password"
-            name="password_utilisateur"
-            type="password"
-            required
-            placeholder="***"
-        />
+        <div class="field">
+            <label for="u_password">
+                Mot de passe
+            </label>
+            <input id="u_password"
+                name="password_utilisateur"
+                type="password"
+                required
+                placeholder="***"/>
+        </div>
         <?php 
         if(isset($_GET["erreur"])){
                 $nb = $_GET["erreur"];
@@ -30,7 +32,6 @@
         
         
         ?>
-
         <input id="submit" type="submit" value="Se connecter">
     </form>
 </div>
