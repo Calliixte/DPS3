@@ -1,6 +1,6 @@
 <div id="default">
     <h1>Proposer un Vote</h1>
-    <form action="controleur/reponseVote.php" method="POST" enctype="multipart/form-data">
+    <form action="controleur/reponseProposerVote.php" method="POST" enctype="multipart/form-data">
         <label for="title">
             Titre
         </label>
@@ -15,18 +15,23 @@
                 $cpt = 0;
                 foreach($listeEtiquette as $etiquette){
                     $nomID = "etiquette$cpt";
-                    echo "<input type=\"checkbox\" id=$nomID name=$nomID value=$etiquette/>";
+                    $value = $etiquette['idEtiquette'];
+                    echo "<input type=\"checkbox\" id=$nomID name=$nomID value=$value/>";
                     echo "<label for=$nomID>$etiquette</label>"; 
                     $cpt++;
                 }
+
+                echo "<input type='hidden' id='nbEtiquettes' value=$cpt/>";
             ?>
         </div>
 
         <?php
             for($i = 0; $i < $nbChoix; $i++){
-                $numChoix = $i+1;
-                echo "<input type=\"text\" id=\"choix$numChoix\" name=\"choix$numChoix\" placeholder=\"choix $numChoix\"/>";
+                $nomID = "choix$i";
+                echo "<input type=\"text\" id=$nomID name=\"choix$numChoix\" placeholder=\"choix $numChoix\"/>";
             }
+
+            echo "<input type='hidden' id='nbChoix' value=$nbChoix/>";
         ?>
 
         <label for="date">Délais de discussion</label>
@@ -34,6 +39,9 @@
 
         <label for="voteBlanc">Autoriser le vote blanc</label>
         <input id="voteBlanc" type="Checkbox" name="voteBlanc" value=0/>
+
+        <label for="multiChoix">Vote à choix multiples</label>
+        <input id="multiChoix" type="Checkbox" name="multiChoix" value=0/>
 
         <!-- TODO liste de mode de scrutin -->
 

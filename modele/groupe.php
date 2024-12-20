@@ -77,14 +77,14 @@
         }
 
         public function fillEtiquettes(){
-            $requete = "SELECT labelEtiquette 
+            $requete = "SELECT idEtiquette, labelEtiquette, couleur 
                         FROM Etiquette
-                        WHERE idGroupe=$this->idGroupe;";
+                        WHERE idGroupe = $this->idGroupe";
     
             $resultat = Connexion::pdo()->query($requete);
-            $resultat->setFetchmode(PDO::FETCH_COLUMN, 0);
+            $resultat->setFetchMode(PDO::FETCH_ASSOC);
             
-            $this->listeEtiquette = $resultat->fetchAll();
+            $this->listeEtiquettes = $resultat->fetchAll();
         }
         
         // la description du groupe n'est pas attribut de la classe car string de taille conséquente et on l'affiche rarement

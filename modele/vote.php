@@ -111,13 +111,21 @@ Class Vote{
     public static function insererVote($titre, $delaiDiscussion, $delaiVote, 
                                        $description, $voteBlanc, $multiChoix, 
                                        $idGroupe, $listeEtiquettes, $listeChoix){
-        $requete = "INSERT INTO Vote VALUES(MAX(idVote)+1, :titre, :delaiDiscussion, :delaiVote, NOW(), 0, NULL, :voteBlanc, :multiChoix, NULL, :idGroupe;";
+
+        $requete = "SELECT MAX(idVote)+1 FROM Vote)";
+
+        $resultat = Connexion::pdo()->query($requete);
+        $idVote = $resultat->fetch(PDO::FETCH_COLUMN);
+
+        $requete = "INSERT INTO Vote :idVote, :titre, :delaiDiscussion, :delaiVote, :descriptionVote, NOW(), 0, NULL, :voteBlanc, :multiChoix, NULL, :idGroupe;";
         
         $statement = Connexion::pdo()->prepare($requete);
         $statement->execute([
+            ':idVote' => $idVote,
             ':titre' => $titre,
             ':delaiDiscussion' => Date::toSqlTime($delaiDiscussion),
-            ':delaiVote' => Date::toSqlTime($delaiVote), 
+            ':delaiVote' => Date::toSqlTime($delaiVote),
+            ':descriptionVote' => $escription,
             ':voteBlanc' => $voteBlanc,
             ':multiChoix' => $multiChoix,
             ':idGroupe' => $idGroupe
@@ -128,17 +136,16 @@ Class Vote{
         foreach($listeEtiquettes as $eti){
             $statement->execute([
                 ':idVote' => $idVote,
-                ':idEtiquette' => $eti['idEtiquette']
+                ':idEtiquette' => $eti
             ]);
         }
 
 
-        $requete = "INSERT INTO ChoixVote VALUES(:idChoixVote, :intitule, :idVote);";
+        $requete = "INSERT INTO ChoixVote VALUES(MAX(idChoixVote)+1, :intitule, :idVote);";
         $statement = Connexion::pdo()->prepare($requete);
         foreach($listeChoix as $choixVote){
             $statement->execute([
-                ':idChoixVote' => $listeChoix['idChoixVote'],
-                ':intitule' => $listeChoix['intitule'],
+                ':intitule' => $choixVote,
                 ':idVote' => $idVote
             ]);
         }
