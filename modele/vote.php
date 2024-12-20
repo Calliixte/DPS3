@@ -4,64 +4,66 @@
     (la classe Vote est un peu plus bas)
 */
 
+// accepte une string au fromat de TIME de MariaDB ex : '28 12:59:30', '12:59:30'
 // NOTA: quand on SELECT une collone de type TIME sur mariaDb cela retourne une string au fomat 'nbHeures:nbMinutes:nbSecondes'
 function toDateInterval(string $mariaDbTime) {
-    return new DateInterval('PT' . preg_replace('/(\d+):(\d+):(\d+)/', '$1H$2M$3S', $mariaDbTime));
+	if(!preg_match('/^(?:(\d+)\s)?(\d+):(\d+):(\d+)$/', $mariaDbTime)) {
+		throw new Exception("mauvais format de string TIME de mariaDB (format attendu : 'DD HH:mm:ss' ou 'HH:mm:ss')");
+	}
+	return new DateInterval('P' . preg_replace('/(?:(\d+)\s)?(\d+):(\d+):(\d+)/', '0$1DT0$2H0$3M0$4S', $mariaDbTime));
 }
 
-/*
-    DISCLAIMER, la fnction suivante n'est pas finie, Vianney la terminera
-    TODO: 
-    - contourner $di->days dans lequel on ne peux pas mettre la valeur du nombre de jours total si $di->days==false (simple en bricolant mais ce serait bien de le faire proprement)
-    - implémenter cette fonction dans les méthodes utilisant INSERT
-*/
-// // retourne une string correspondant au format de l'intervalle de temps utilisé dans la base de donnés
-// // ATTENTION, cela modifie aussi l'intervale de temps $di passé en paramètre en le faisant correspondre au format utilisé dans la base de données
-// // les intervalles de temps négatifs ne sont actuellement pas supportés
-// // NOTA: quand on INSERT dans une collone de type TIME sur mariaDb on peut insérer une string au fomat 'nbJours nbHeures:nbMinutes:nbSecondes'
-// function toSqlTime(DateInterval $di) {
-// 	// seuls les intervales <= 30 jours sont acceptés
-// 	$time = '';
+
+
+// retourne une string au fromat de TIME de MariaDB ex : '28 12:59:30', '12:59:30'
+// retourne une string correspondant au format de l'intervalle de temps utilisé dans la base de donnés
+// ATTENTION, cela modifie aussi l'intervale de temps $di passé en paramètre en le faisant correspondre au format utilisé dans la base de données
+// les intervalles de temps négatifs ne sont actuellement pas supportés
+// NOTA: quand on INSERT dans une collone de type TIME sur mariaDb on peut insérer une string au fomat 'nbJours nbHeures:nbMinutes:nbSecondes'
+function toSqlTime(DateInterval $di) {
+	// seuls les intervales <= 30 jours sont acceptés
+	$time = '';
     
-// 	// on ne veux pas de millisecondes
-// 	$di->f = 0;
+	// on ne veux pas de millisecondes
+	$di->f = 0;
     
-// 	// si l'intervalle a été fait avec DateTime::diff(), DateTimeImmutable::diff(), ou DateTimeInterface::diff()
-// 	// alors on a accès au nombre de jours total
-// 	if($di->days) {
-// 		$di->y = 0;
-// 		$di->m = 0;
-// 		$di->d = 0; 
-// 		// $di->days contient déjà le nombre de jours total
-// 	}
-// 	// si l'intervalle a été fait autrement qu'avec DateTime::diff(), DateTimeImmutable::diff(), ou DateTimeInterface::diff()
-// 	// il faut mettre les secondes, minutes, heures et jours au bon format (23h max, 59min max, 59s max)
-// 	else {
-// 		// on en veux pas de nb de mois ou d'années
-// 		if($di->y!=0 || $di->m!=0) {
-// 			 throw new Exception("intervalle de temps supérieur à 30 jours (peut-être une mauvaise saissie ?)");
-// 		}
-// 		$di->s = $di->d*86400 + $di->h*3600 + $di->m*60 + $di->s;
-// 		$di->days = floor($di->s/86400); // on calcule le nombre de jours total et on le stocke dans $di->days
-// 		$di->d = 0; // $di->d est inutile
-// 		$di->s %= 86400;
-// 		$di->h = floor($di->s/3600);
-// 		$di->s %= 3600;
-// 		$di->m = floor($di->s/60);
-// 		$di->s %= 60;
-// 	}
+	// si l'intervalle a été fait avec DateTime::diff(), DateTimeImmutable::diff(), ou DateTimeInterface::diff()
+	// alors on a accès au nombre de jours total
+	if($di->days) {
+		$di->d = $di->days;
+		// $di->days est inutile, mais impossible de le modifier
+		$di->y = 0;
+		$di->m = 0;
+		
+	}
+	// si l'intervalle a été fait autrement qu'avec DateTime::diff(), DateTimeImmutable::diff(), ou DateTimeInterface::diff()
+	// il faut mettre les secondes, minutes, heures et jours au bon format (23h max, 59min max, 59s max)
+	else {
+		// on en veux pas de nb de mois ou d'années
+		if($di->y!=0 || $di->m!=0) {
+			 throw new Exception("intervalle de temps supérieur à 30 jours (peut-être une mauvaise saissie ?)");
+		}
+		$di->s = $di->d*86400 + $di->h*3600 + $di->m*60 + $di->s;
+		$di->d = floor($di->s/86400); // on calcule le nombre de jours total et on le stocke dans $di->days
+		// $di->days est inutile mais il est déjà = false donc on ne peux pas le modifier (modif dynamique de type mixed, interdite depuis une certaine version de php)
+		$di->s %= 86400;
+		$di->h = floor($di->s/3600);
+		$di->s %= 3600;
+		$di->m = floor($di->s/60);
+		$di->s %= 60;
+	}
     
-// 	// On n'accepte que les intervalles >= 30 jours pile-poil
-// 	if($di->d >= 30) {
-// 		if($di->d==30 && !($di->h==0 && $di->i==0 && $di->s==0)) {
-// 			return $di->format('%a %H:%I:%S'); // $di correspond exactement à 30 jours pile-poil
-// 		}
-// 		throw new Exception("intervalle de temps supérieur à 30 jours (peut-être une mauvaise saissie ?)");
-// 	}
+	// On n'accepte que les intervalles >= 30 jours pile-poil
+	if($di->d >= 30) {
+		if($di->d==30 && !($di->h==0 && $di->i==0 && $di->s==0)) {
+			return $di->format('%D	 %H:%I:%S'); // $di correspond exactement à 30 jours pile-poil
+		}
+		throw new Exception("intervalle de temps supérieur à 30 jours (peut-être une mauvaise saissie ?)");
+	}
     
     
-// 	return $di->format('%a %H:%I:%S'); // $di < 30 jours
-// }
+	return $di->format('%D %H:%I:%S'); // $di < 30 jours
+}
 
 Class Vote{
     private int $idVote;
