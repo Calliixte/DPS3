@@ -1,8 +1,6 @@
 <?php
-/*  
-    QUICK FIX : les fonctions suivantes pouront être déplacées dans un autre fichier plus tard
-    (la classe Vote est un peu plus bas)
-*/
+
+
 require_once(__DIR__.'/../config/date.php');
 
 Class Vote{
