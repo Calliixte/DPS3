@@ -1,7 +1,5 @@
 <?php 
 Class Rest{
-
-
     public static function getGroupe(int $idGroupe){
         $requete = "SELECT idGroupe, nomGroupe FROM Groupe WHERE idGroupe = $idGroupe;";
         $resultat = Connexion::pdo()->query($requete);
