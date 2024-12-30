@@ -149,17 +149,6 @@ Class Vote{
         }
     }
 
-    /*
-        ATTENTION: si json_encode() ou getJSON() ne fonctionne plus, c'est de la faute de Vianney (moi)
-        car les DateTime et les DateInterval n'ont pas de méthode __toString() (il faut utiliser leur méthode format())
-    */
-    public static function getJSON(int $idVote, int $idUser=NULL){
-        $vote = Vote::getVote($idVote, $idUser);
-
-        return json_encode((array) $vote,JSON_UNESCAPED_UNICODE);
-        //Vote va garder un json fucked up pour l'instant TODO : creer une fonction to_array pour Vote
-    }
-
 
     public function fillEtiquettes(){
         $requete = "SELECT E.idEtiquette, labelEtiquette, couleur 

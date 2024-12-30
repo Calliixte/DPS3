@@ -1,5 +1,3 @@
-
-
 <?php
 
 require_once("../config/connexion.php");
@@ -19,20 +17,21 @@ if(!isset($_GET["classe"]) || !isset($_GET["id"])){
     exit();
 } }
 $classe = $_GET["classe"];
-require_once("../modele/". $classe . ".php");
+require_once("../modele/". $classe . ".php"); //Potentiellement inutile
 $id = $_GET["id"];
 
 if($classe == "vote"){
     if(!isset($_GET["idVotant"]) || !isset($_GET["idGroupe"])){
-        echo "<b>Erreur : </b> Pour utiliser l'API vous devez à minima indiquer une <b>idVotant</b> et un <b>idGroupe</b> dans l'url, vous pouvez consulter la  $lienDocu pour en savoir plus. ";
+        echo "<b>Erreur : </b> Pour utiliser l'API vous devez à minima indiquer un <b>idVotant</b> et un <b>idGroupe</b> dans l'url, vous pouvez consulter la  $lienDocu pour en savoir plus. ";
         exit();
     }
     $idVotant= $_GET["idVotant"];
     $idGroupe= $_GET["idGroupe"];
-    $JSON = Vote::getJSON($id,$idVotant,$idGroupe);
+    $JSON = Rest::getVote($id,$idVotant,$idGroupe);
 }
 else{
-$JSON = $classe::getJSON($id);
+    $methode = "get$classe";
+    $JSON = Rest::$methode($id);
 }
 
 

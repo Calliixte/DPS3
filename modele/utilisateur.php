@@ -125,13 +125,6 @@
             return $User;
         }
 
-        public static function getJSON($idUtilisateur){
-        $requete = "SELECT * FROM Utilisateur WHERE idUtilisateur = $idUtilisateur;";
-        $resultat = Connexion::pdo()->query($requete);
-
-        return json_encode($resultat->fetch(PDO::FETCH_ASSOC),JSON_UNESCAPED_UNICODE);
-        }
-
 
         public function getGroupe($idGroupe){
             foreach($this->listeGroupes as $groupe){

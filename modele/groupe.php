@@ -66,16 +66,6 @@
             return $listeGroupes;
         }
 
-        public static function getJSON(int $idGroupe){
-            $requete = "SELECT idGroupe, nomGroupe FROM Groupe WHERE idGroupe = $idGroupe;";
-            $resultat = Connexion::pdo()->query($requete);
-            $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
-            
-            $data = $resultat->fetch(PDO::FETCH_ASSOC);
-
-            return json_encode($data, JSON_UNESCAPED_UNICODE);
-        }
-
         public function fillEtiquettes(){
             $requete = "SELECT idEtiquette, labelEtiquette, couleur 
                         FROM Etiquette
