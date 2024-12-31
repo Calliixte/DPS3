@@ -20,11 +20,11 @@
 
         public static function afficherGrandGroupe(){
             $groupe = ControleurGroupe::getGroupe();
-            $_SESSION['groupeCourant']=$groupe; //attention à ça ça peut causer des problemes
+            $_SESSION['groupeCourant']= $groupe; //attention à ça ça peut causer des problemes
             $_SESSION['utilisateurCourant']->set('role',$groupe->getRoleMembre($_SESSION['utilisateurCourant']->get('idUtilisateur')) ?? 0);
             //                                  on met le role                  a la valeur du groupe pour l'idUser et l'id Groupe            si la fonction renvoie null on met membre
-            $nomG = $groupe->get("nomGroupe");
-            $titre= $nomG;
+            $titre = $_SESSION['groupeCourant']->get("nomGroupe");
+
             $styleSpecial = '';
             include('vues/debut.php');
             ControleurApplication::afficherHeader();
@@ -38,10 +38,10 @@
             echo "</pre>";
 
             echo '<div id="default">';
-            echo "<h1> $nomG </h1>";
+            echo "<h1> $titre </h1>";
             echo '<div id="groupe">';
             $popup = "#popup-regles";
-            $reglesGroupe = $groupe ->getRegles();
+            $reglesGroupe = $_SESSION['groupeCourant']->getRegles();
             echo "<a href=$popup>Règles de la communauté </a>";
             echo "Récent <br/>"; // ATTENTION POUR LE CSS YA UN BR ICI ------------------------------------------------------------------------------------------------------------------
             $liste=$groupe->get("listeVote");
@@ -69,7 +69,7 @@
             echo "<a href=routeur.php?controleur=controleurGroupe&action=nouvelleProposition>nouvelle proposition</a>";
             echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherNonAcceptes>Voir les propositions en cours de traitement</a>";
             $popupI = "#popup-invitation";
-            $lienInvit = $groupe ->getUrlRejoindre();
+            $lienInvit = $_SESSION['groupeCourant']->getUrlRejoindre();
             echo "<a href=$popupI>Inviter quelqu'un</a>";
 
             echo '</div>';
