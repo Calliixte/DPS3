@@ -74,7 +74,7 @@
             $resultat = Connexion::pdo()->query($requete);
             $resultat->setFetchMode(PDO::FETCH_ASSOC);
             
-            $this->listeEtiquettes = $resultat->fetchAll();
+            $this->listeEtiquette = $resultat->fetchAll();
         }
         
         // la description du groupe n'est pas attribut de la classe car string de taille conséquente et on l'affiche rarement

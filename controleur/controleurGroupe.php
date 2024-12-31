@@ -30,6 +30,7 @@
             ControleurApplication::afficherHeader();
             echo '<main>';
 
+            $_SESSION['groupeCourant']->fillEtiquettes();
             $listeEtiquette = $_SESSION['groupeCourant']->get('listeEtiquette');
 
             echo "<pre>";

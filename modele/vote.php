@@ -123,7 +123,7 @@ Class Vote{
             ':titre' => $titre,
             ':delaiDiscussion' => Date::toSqlTime($delaiDiscussion),
             ':delaiVote' => Date::toSqlTime($delaiVote),
-            ':descriptionVote' => $escription,
+            ':descriptionVote' => $description,
             ':voteBlanc' => $voteBlanc,
             ':multiChoix' => $multiChoix,
             ':idGroupe' => $idGroupe

@@ -1,6 +1,6 @@
 
 <?php 
-
+require_once("config/date.php");
 require_once("config/connexion.php");
 require_once("modele/message.php");
 require_once("modele/reaction.php");
@@ -16,19 +16,6 @@ require_once("controleur/controleurVote.php");
 require_once("controleur/controleurApplication.php");
 Connexion::connect();
 session_start();
-// if(!isset($_SESSION['utilisateurCourant'])){
-//     controleurApplication::afficherConnexion();
-// }
-
-
-
-// $titre = 'DPS3';
-// $styleSpecial = '';
-
-// include('vues/debut.php');
-// include('vues/header.php');
-
-
 
 
 $controleur="controleurApplication"; //mettre le controleur par défaut (celui de la page d'accueil)
@@ -47,13 +34,5 @@ if(isset($_GET["action"])){
     }
 }
 $controleur::$action();
-
-
-
-
-// include('vues/footer.html');
-// include('vues/popups/addGroup.html');
-// include('vues/fin.html');
-
 
 ?>

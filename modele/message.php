@@ -1,7 +1,4 @@
 <?php
-
-require_once(__DIR__.'/../config/date.php');
-
 Class Message{
     private int $idMessage;
     private int $idAuteur;
@@ -9,7 +6,7 @@ Class Message{
     private DateTime $dateEnvoi;
     private array $listeReactions;
 
-    public function __contruct(int $idMessage = NULL, int $idAuteur= NULL, string $texte= NULL, string $dateEnvoi= NULL) {
+    public function __construct(int $idMessage = NULL, int $idAuteur= NULL, string $texte= NULL, string $dateEnvoi= NULL) {
         if(!is_null($idMessage)){
             $this->idMessage = $idMessage;
             $this->idAuteur = $idAuteur;
