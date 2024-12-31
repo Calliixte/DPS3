@@ -84,10 +84,6 @@
         public static function nouvelleProposition(){
             $nbChoix = 4; // Nomnbre de choix pour le vote, on pourra gérer ça dynamiquement avec un bouton si on veut
             $listeEtiquette = $_SESSION['groupeCourant']->get('listeEtiquette');
-            
-            echo "<pre>";
-            print_r($listeEtiquette);
-            echo "</pre>";
 
             include('vues/debut.php');
             ControleurApplication::AfficherHeader();

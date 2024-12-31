@@ -16,8 +16,9 @@
                 foreach($listeEtiquette as $etiquette){
                     $nomID = "etiquette$cpt";
                     $value = $etiquette['idEtiquette'];
+                    $label = $etiquette['labelEtiquette'];
                     echo "<input type=\"checkbox\" id=$nomID name=$nomID value=$value/>";
-                    echo "<label for=$nomID>$etiquette</label>"; 
+                    echo "<label for=$nomID>$label</label>"; 
                     $cpt++;
                 }
 
@@ -28,7 +29,7 @@
         <?php
             for($i = 0; $i < $nbChoix; $i++){
                 $nomID = "choix$i";
-                echo "<input type=\"text\" id=$nomID name=\"choix$numChoix\" placeholder=\"choix $numChoix\"/>";
+                echo "<input type=\"text\" id=$nomID name=$nomID placeholder=\"choix $i\"/>";
             }
 
             echo "<input type='hidden' id='nbChoix' value=$nbChoix/>";
