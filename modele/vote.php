@@ -115,6 +115,11 @@ Class Vote{
         $resultat = Connexion::pdo()->query($requete);
         $idVote = $resultat->fetch(PDO::FETCH_COLUMN);
 
+        $requete = "SELECT MAX(idChoixVote)+1 FROM ChoixVote;";
+
+        $resultat = Connexion::pdo()->query($requete);
+        $idChoixVote = $resultat->fetch(PDO::FETCH_COLUMN);
+
         $requete = "INSERT INTO Vote VALUES(:idVote, :titre, :delaiDiscussion, :delaiVote, NOW(), :descriptionVote, :propositionAccepte, :evalBudget, :idCreateur, :codeSuffrage, :idGroupe, :voteBlanc, :multiChoix, NULL);";
         
         $statement = Connexion::pdo()->prepare($requete);
@@ -143,13 +148,16 @@ Class Vote{
         }
 
 
-        $requete = "INSERT INTO ChoixVote VALUES(MAX(idChoixVote)+1, :intitule, :idVote);";
+        $requete = "INSERT INTO ChoixVote VALUES(:idChoixVote, :intitule, :idVote);";
         $statement = Connexion::pdo()->prepare($requete);
         foreach($listeChoix as $choixVote){
             $statement->execute([
+                ':idChoixVote' => $idChoixVote,
                 ':intitule' => $choixVote,
                 ':idVote' => $idVote
             ]);
+
+            $idChoixVote++;
         }
     }
 

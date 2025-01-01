@@ -17,7 +17,7 @@
                     $nomID = "etiquette$cpt";
                     $value = $etiquette['idEtiquette'];
                     $label = $etiquette['labelEtiquette'];
-                    echo "<input type=\"checkbox\" id=$nomID name=$nomID value=$value/>";
+                    echo "<input type=\"checkbox\" id=$nomID name=$nomID value=$value>";
                     echo "<label for=$nomID>$label</label>"; 
                     $cpt++;
                 }
