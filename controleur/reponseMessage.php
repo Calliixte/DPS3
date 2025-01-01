@@ -28,6 +28,8 @@ $stmt->bindParam(5, $idGroupe, PDO::PARAM_INT);
 $stmt->execute();
 $urlBack = "../routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=$idGroupe";
 echo "Message envoyé !";
+
+
 echo "<meta http-equiv=\"refresh\" content=\"1; url=$urlBack\"> ";
 
 
