@@ -85,6 +85,8 @@
             $nbChoix = 4; // Nomnbre de choix pour le vote, on pourra gérer ça dynamiquement avec un bouton si on veut
             $listeEtiquette = $_SESSION['groupeCourant']->get('listeEtiquette');
             $idGroupe = $_SESSION['groupeCourant']->get('idGroupe');
+            $idCreateur = $_SESSION['utilisateurCourant']->get('idUtilisateur');
+            
             include('vues/debut.php');
             ControleurApplication::AfficherHeader();
             echo '<main>';

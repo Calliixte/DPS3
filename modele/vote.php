@@ -108,22 +108,26 @@ Class Vote{
 
     public static function insererVote($titre, $delaiDiscussion, $delaiVote, 
                                        $description, $voteBlanc, $multiChoix, 
-                                       $idGroupe, $listeEtiquettes, $listeChoix){
+                                       $idGroupe, $listeEtiquettes, $listeChoix, $idCreateur){
 
         $requete = "SELECT MAX(idVote)+1 FROM Vote;";
 
         $resultat = Connexion::pdo()->query($requete);
         $idVote = $resultat->fetch(PDO::FETCH_COLUMN);
 
-        $requete = "INSERT INTO Vote :idVote, :titre, :delaiDiscussion, :delaiVote, :descriptionVote, NOW(), 0, NULL, :voteBlanc, :multiChoix, NULL, :idGroupe;";
+        $requete = "INSERT INTO Vote VALUES(:idVote, :titre, :delaiDiscussion, :delaiVote, NOW(), :descriptionVote, :propositionAccepte, :evalBudget, :idCreateur, :codeSuffrage, :idGroupe, :voteBlanc, :multiChoix, NULL);";
         
         $statement = Connexion::pdo()->prepare($requete);
         $statement->execute([
             ':idVote' => $idVote,
             ':titre' => $titre,
-            ':delaiDiscussion' => Date::toSqlTime(DateInterval::createFromDateString($delaiDiscussion)),
-            ':delaiVote' => Date::toSqlTime(DateInterval::createFromDateString($delaiVote)),
+            ':delaiDiscussion' => Date::toSqlTime(new DateInterval("P$delaiDiscussion"."D")),
+            ':delaiVote' => Date::toSqlTime(new DateInterval("P$delaiVote"."D")),
             ':descriptionVote' => $description,
+            ':propositionAccepte' => 0,
+            ':evalBudget' => NULL,
+            ':idCreateur' => $idCreateur,
+            ':codeSuffrage' => 'UNIMAJ1',
             ':voteBlanc' => $voteBlanc,
             ':multiChoix' => $multiChoix,
             ':idGroupe' => $idGroupe
