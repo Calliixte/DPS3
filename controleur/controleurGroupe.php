@@ -34,10 +34,6 @@
             $_SESSION['groupeCourant']->fillEtiquettes();
             $listeEtiquette = $_SESSION['groupeCourant']->get('listeEtiquette');
 
-            echo "<pre>";
-            print_r($listeEtiquette);
-            echo "</pre>";
-
             echo '<div id="default">';
             echo "<h1> $nomG </h1>";
             echo '<div id="groupe">';
