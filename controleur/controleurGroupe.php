@@ -23,8 +23,9 @@
             $_SESSION['groupeCourant'] = $groupe; //attention à ça ça peut causer des problemes
             $_SESSION['utilisateurCourant']->set('role',$groupe->getRoleMembre($_SESSION['utilisateurCourant']->get('idUtilisateur')) ?? 0);
             //                                  on met le role                  a la valeur du groupe pour l'idUser et l'id Groupe            si la fonction renvoie null on met membre
-            $titre = $_SESSION['groupeCourant']->get("nomGroupe");
-
+            $nomG = $_SESSION['groupeCourant']->get("nomGroupe");
+            
+            $titre = $nomG; //On défini le titre de la page
             $styleSpecial = '';
             include('vues/debut.php');
             ControleurApplication::afficherHeader();
@@ -38,7 +39,7 @@
             echo "</pre>";
 
             echo '<div id="default">';
-            echo "<h1> $titre </h1>";
+            echo "<h1> $nomG </h1>";
             echo '<div id="groupe">';
             $popup = "#popup-regles";
             $reglesGroupe = $_SESSION['groupeCourant']->getRegles();
