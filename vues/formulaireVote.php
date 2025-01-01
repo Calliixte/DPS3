@@ -21,8 +21,6 @@
                     echo "<label for=$nomID>$label</label>"; 
                     $cpt++;
                 }
-
-                echo "<input type='hidden' id='nbEtiquettes' value=$cpt/>";
             ?>
         </div>
 
@@ -32,22 +30,27 @@
                 echo "<input type=\"text\" id=$nomID name=$nomID placeholder=\"choix $i\"/>";
             }
 
-            echo "<input type='hidden' id='nbChoix' value=$nbChoix/>";
+            echo "<input type='hidden' name='nbChoix' value=$nbChoix>";
+
+            echo "<input type='hidden' name='idGroupe' value=$idGroupe>";
         ?>
 
         <label for="date">Délais de discussion</label>
-        <input type="date" id="delaiDiscussion" name="delaiDiscussion"/>
+        <input type="date" id="delaiDiscussion" name="delaiDiscussion">
+
+        <label for="date">Durée du vote</label>
+        <input type="date" id="delaiVote" name="delaiVote">
 
         <label for="voteBlanc">Autoriser le vote blanc</label>
-        <input id="voteBlanc" type="Checkbox" name="voteBlanc" value=0/>
+        <input id="voteBlanc" type="Checkbox" name="voteBlanc" value=1>
 
         <label for="multiChoix">Vote à choix multiples</label>
-        <input id="multiChoix" type="Checkbox" name="multiChoix" value=0/>
+        <input id="multiChoix" type="Checkbox" name="multiChoix" value=1>
 
         <!-- TODO liste de mode de scrutin -->
 
         <label for="imageUpload">ajouter une photo</label>
-        <input type="file" id="imageUpload" name="photo" accept="image/*" required>
+        <input type="file" id="imageUpload" name="photo" accept="image/*">
 
         <textarea id="description" name="description" maxlength="500" placeholder="écrire une description"></textarea>
 

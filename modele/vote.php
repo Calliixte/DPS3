@@ -110,7 +110,7 @@ Class Vote{
                                        $description, $voteBlanc, $multiChoix, 
                                        $idGroupe, $listeEtiquettes, $listeChoix){
 
-        $requete = "SELECT MAX(idVote)+1 FROM Vote)";
+        $requete = "SELECT MAX(idVote)+1 FROM Vote;";
 
         $resultat = Connexion::pdo()->query($requete);
         $idVote = $resultat->fetch(PDO::FETCH_COLUMN);
@@ -121,8 +121,8 @@ Class Vote{
         $statement->execute([
             ':idVote' => $idVote,
             ':titre' => $titre,
-            ':delaiDiscussion' => Date::toSqlTime($delaiDiscussion),
-            ':delaiVote' => Date::toSqlTime($delaiVote),
+            ':delaiDiscussion' => Date::toSqlTime(DateInterval::createFromDateString($delaiDiscussion)),
+            ':delaiVote' => Date::toSqlTime(DateInterval::createFromDateString($delaiVote)),
             ':descriptionVote' => $description,
             ':voteBlanc' => $voteBlanc,
             ':multiChoix' => $multiChoix,

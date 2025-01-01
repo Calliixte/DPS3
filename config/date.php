@@ -26,7 +26,7 @@ class Date {
 
     // prend en param un DateTime (supposé avec des jours, mois, heures, etc... "naturels" (ex : max 59 minutes))
     // exemple de $mariaDate : '2024-12-28 10:15:03'
-    public static function toSqlDateTime(DateTime $dt, bool $withMs=false) {
+    public static function toSqlDateTime(DateTime $d1, bool $withMs=false) {
         if($withMs)
             return $d1->format('Y-m-d H:i:s.u');
         else

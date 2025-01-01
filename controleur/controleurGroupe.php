@@ -20,7 +20,7 @@
 
         public static function afficherGrandGroupe(){
             $groupe = ControleurGroupe::getGroupe();
-            $_SESSION['groupeCourant']= $groupe; //attention à ça ça peut causer des problemes
+            $_SESSION['groupeCourant'] = $groupe; //attention à ça ça peut causer des problemes
             $_SESSION['utilisateurCourant']->set('role',$groupe->getRoleMembre($_SESSION['utilisateurCourant']->get('idUtilisateur')) ?? 0);
             //                                  on met le role                  a la valeur du groupe pour l'idUser et l'id Groupe            si la fonction renvoie null on met membre
             $titre = $_SESSION['groupeCourant']->get("nomGroupe");
@@ -84,7 +84,7 @@
         public static function nouvelleProposition(){
             $nbChoix = 4; // Nomnbre de choix pour le vote, on pourra gérer ça dynamiquement avec un bouton si on veut
             $listeEtiquette = $_SESSION['groupeCourant']->get('listeEtiquette');
-
+            $idGroupe = $_SESSION['groupeCourant']->get('idGroupe');
             include('vues/debut.php');
             ControleurApplication::AfficherHeader();
             echo '<main>';

@@ -21,9 +21,10 @@ if(isset($_POST['nbEtiquettes'])){
 
 $listeEtiquette = array();
 
-for($i=0; $i < $cpt; $i++){
-    $nomID = "etiquette$i";
-    $listeEtiquette[$i] = $_POST[$nomID];
+$i = 0;
+while(isset($_POST["etiquette$i"])){
+    $listeEtiquette[$i] = $_POST["etiquette$i"];
+    $i++;
 }
 
 if(isset($_POST['nbChoix'])){
@@ -35,15 +36,23 @@ if(isset($_POST['nbChoix'])){
 $listeChoix = array();
 
 for($i=0; $i < $nbChoix; $i++){
-    $nomID = "etiquette$i";
+    $nomID = "choix$i";
     $listeChoix[$i] = $_POST[$nomID];
 }
 
-$idGroupe = $_SESSION['groupeCourant']->get('idGroupe');
+$voteBlanc = 0;
 
-Connexion::connect();
+if(isset($_POST["voteBlanc"])){
+    $voteBlanc = 1;
+}
 
-Vote::insererVote($_POST["titre"],$_POST["delaiDiscussion"],$_POST["delaiVote"],$_POST["description"],$_POST["voteBlanc"],$_POST["multiChoix"],$idGroupe, $listeEtiquette, $listeChoix);
+$multiChoix = 0;
+
+if(isset($_POST["multiChoix"])){
+    $multiChoix = 1;
+}
+
+Vote::insererVote($_POST["titre"],$_POST["delaiDiscussion"],$_POST["delaiVote"],$_POST["description"],$voteBlanc,$multiChoix,$_POST["idGroupe"], $listeEtiquette, $listeChoix);
 $url = "../routeur.php";
 echo "Vous avez bien été inscrit(e) ! ";
 echo " <meta http-equiv=\"refresh\" content=\"1; url=$url\"> " //redirige vers l'url donnée au bout de 0 secondes, modifier le 0 ou commenter la ligne si on veut voir la page de debug
