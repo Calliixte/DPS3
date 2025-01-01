@@ -21,11 +21,10 @@ foreach($listeMessage as $message){
             echo $idVotant . " group:  " . $idGroupeVotant;
             $contenu = $message->get("texte");
             //$auteur = $message ->get("auteur")->get("pseudo"); pour l'instant le message n'a pas d'auteur il faut finir la classe
-            $datePub = $message ->get("dateEnvoi");
+            $datePub = $message->getDateEnvoi();
             $idMsg = $message->get("idMessage");
             $listeReaction = Reaction::getReactionMessage($idMsg);          //  pour l'instant réaction & messages sont un peu bordel donc ça restera comme ça tant que reac est pas fini
-            $ndate = substr($datePub,0,16);
-            echo "<div class=\"messageVote\"> $ndate  $contenu ";
+            echo "<div class=\"messageVote\"> $datePub  $contenu ";
             foreach ($listeReaction as $reaction){
             //     //implementer un truc pour compter les reactions et les stacker quand y'a les memes (optionnel je pense)
                  echo $reaction->get('emoticone');

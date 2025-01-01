@@ -57,7 +57,7 @@ $idCreateur = $_POST["idCreateur"];
 
 Vote::insererVote($_POST["titre"],$_POST["delaiDiscussion"],$_POST["delaiVote"],$_POST["description"],$voteBlanc,$multiChoix,$_POST["idGroupe"], $listeEtiquette, $listeChoix, $idCreateur);
 $url = "../routeur.php";
-echo "Vous avez bien été inscrit(e) ! ";
+echo "Proposition enregistrée !";
 echo " <meta http-equiv=\"refresh\" content=\"1; url=$url\"> " //redirige vers l'url donnée au bout de 0 secondes, modifier le 0 ou commenter la ligne si on veut voir la page de debug
 ?>
 </pre>

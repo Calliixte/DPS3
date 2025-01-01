@@ -23,6 +23,10 @@ Class Message{
         $this->$attribute = $val;
     }
 
+    public function getDateEnvoi(){
+        return $this->dateEnvoi->format("d/m/Y");
+    }
+
     public static function getMessages(int $idVote){
         $requete = "SELECT idMessage, idUtilisateur AS idAuteur, texte, dateEnvoi FROM Message WHERE idVote = $idVote;";
         $resultat = Connexion::pdo()->query($requete);
