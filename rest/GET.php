@@ -1,7 +1,7 @@
 <?php
 
 require_once("../config/connexion.php");
-
+require_once("../config/rest.php");
 foreach(glob("../modele/*php") as $fichier){
     require_once($fichier);
 }
