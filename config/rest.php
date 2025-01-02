@@ -18,6 +18,9 @@ Class Rest{
         return json_encode($resultat->fetch(PDO::FETCH_ASSOC),JSON_UNESCAPED_UNICODE);
     }
 
+
+
+
     /*
         ATTENTION: si json_encode() ou getJSON() ne fonctionne plus, c'est de la faute de Vianney (moi)
         car les DateTime et les DateInterval n'ont pas de méthode __toString() (il faut utiliser leur méthode format())
@@ -61,6 +64,38 @@ Class Rest{
             echo "Erreur lors de l'exécution de la requête : " . $e->getMessage();
         }
 
+    }
+    public static function post(string $table,array $valeurs,array $clefs=NULL){
+        $requete = "";
+        $baseRequete = "INSERT INTO $table ";
+        if($clefs!=NULL){
+            $cpt = 0;
+            $baseRequete = $baseRequete . "( ";
+            foreach($clefs as $clefAInsert){
+                if ($cpt==0){ $baseRequete=$baseRequete . "`$clefAInsert`";}
+                else{$baseRequete=$baseRequete . ", `$clefAInsert`";}
+                $cpt++;
+            }
+            $baseRequete=$baseRequete . ") ";
+        }
+        $baseRequete = $baseRequete . "VALUES ";
+        $valeurRequete="";
+        $valeurRequete = $valeurRequete . "( ";
+        $cpt=0;
+        foreach($valeurs as $valAInsert){
+            if ($cpt==0){ $valeurRequete=$valeurRequete . "\"$valAInsert\"";}
+            else{$valeurRequete=$valeurRequete . ", \"$valAInsert\"";}
+            $cpt++;
+        }
+        $valeurRequete=$valeurRequete . ") ";
+        $requete = $baseRequete . $valeurRequete;
+        echo $requete;
+        try {
+            $rowsAffected = Connexion::pdo()->exec($requete);
+            echo "Mise à jour réussie. Nombre de lignes affectées : $rowsAffected";
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'exécution de la requête : " . $e->getMessage();
+        }
     }
 }
 

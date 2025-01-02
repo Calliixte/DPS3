@@ -53,12 +53,13 @@
 </head>
 <body>
     <h1>Documentation API JSON</h1>
+    
+    <h2>GET.php</h2>
     <div class="classes-dispo">
-        <p><strong>Classes disponibles :</strong> 
+        <p><strong>Classes disponibles pour <code>GET</code> :</strong> 
             <code>groupe</code>, <code>message</code>, <code>reaction</code>, <code>utilisateur</code>, <code>vote</code>
         </p>
     </div>
-    <h2>GET.php</h2>
     <p>Options communes à toutes les requêtes :</p>
     <ul>
         <li><code>classe</code> = nom de classe (en minuscules)</li>
@@ -78,5 +79,51 @@
     <div class="example">
         <span class="url">https://(nomHote)/rest/GET.php?classe=vote&idGroupe=2&idVotant=2&id=2</span>
     </div>
+    <h2>POST.php</h2>
+    <div class="classes-dispo">
+        <p>
+            <strong><code>POST</code> est utilisables avec toutes les tables</strong>
+        </p>
+    </div>
+    <p>Cette méthode permet d'ajouter une nouvelle entrée dans une table spécifiée de la base de données. Elle accepte deux options principales :</p>
+    <ul>
+        <li><code>table</code> = nom de la table cible</li>
+        <li><code>VALUES</code> = indique si l'insertion est basée uniquement sur des valeurs (optionnel, si absent, utilise des paires clé/valeur)</li>
+    </ul>
+    <p>Lorsque <code>VALUES</code> est utilisé, vous devez fournir les valeurs dans le même ordre que les colonnes de la table cible.</p>
+    <p>Exemple d'URL (avec des clés spécifiées) :</p>
+    <div class="example">
+        <span class="url">https://(nomHote)/rest/POST.php?table=Utilisateur&nom=Dupont&prenom=Jean&pseudo=JeanDupont&dateNaissance=1999-12-09&mail=jean@dupont.ex</span>
+    </div>
+    <p>Exemple d'URL (avec <code>VALUES</code>) :</p>
+    <div class="example">
+        <span class="url">https://(nomHote)/rest/POST.php?table=Utilisateur&VALUES=1&42&password&exemple&Ex&emple&2005-12-12&exem@pl.e&ex 6 rue emple&1&https://guthib.com</span>
+    </div>
+    <p>Note : L'ordre des colonnes doit être respecté et toutes les colonnes doivent être remplies (par des valeurs ou des NULL) si vous utilisez <code>VALUES=1</code>.</p>
+
+    <h2>PUT.php</h2>
+    <div class="classes-dispo">
+        <p>
+            <strong><code>PUT</code> est utilisables avec toutes les tables</strong>
+        </p>
+    </div>
+    <p>Cette méthode permet de mettre à jour une ou plusieurs entrées dans une table spécifiée. Elle accepte les options suivantes :</p>
+    <ul>
+        <li><code>table</code> = nom de la table cible</li>
+        <li>Les paires clé/valeur où la deuxième paire est utilisée comme condition de mise à jour (<code>WHERE</code>)</li>
+    </ul>
+    <p>Exemple d'URL :</p>
+    <div class="example">
+        <span class="url">https://(nomHote)/rest/PUT.php?table=Utilisateur&idUtilisateur=2&nom=Martin&prenom=Jacques</span>
+    </div>
+    <p>Dans cet exemple, le système mettra à jour l'utilisateur avec l'<code>idUtilisateur=2</code> et remplacera son nom et prénom par les nouvelles valeurs.</p>
+
+    <h2>Erreurs et solutions</h2>
+    <p>Si une requête échoue, l'API renvoie une description de l'erreur. Voici quelques erreurs courantes et leurs résolutions :</p>
+    <ul>
+        <li><strong>Erreur :</strong> "Vous devez indiquer une table" – Vérifiez que l'option <code>table</code> est présente dans votre URL.</li>
+        <li><strong>Erreur :</strong> "Aucune donnée à insérer" – Assurez-vous d'avoir spécifié au moins une paire clé/valeur pour <code>POST</code> ou <code>PUT</code>.</li>
+        <li><strong>Erreur :</strong> "Problème d'exécution de la requête" – Vérifiez vos paramètres et la structure de votre base de données.</li>
+    </ul>
 </body>
 </html>
