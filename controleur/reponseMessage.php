@@ -27,10 +27,16 @@ $stmt->bindParam(4, $idUtilisateur, PDO::PARAM_INT);
 $stmt->bindParam(5, $idGroupe, PDO::PARAM_INT);
 $stmt->execute();
 $urlBack = "../routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=$idGroupe";
+
+$listeVote = $_SESSION["groupeCourant"]->get('listeVote'); //Je sais pas utiliser la variable session
+
+foreach($listeVote as $vote){
+    if($vote->get('idVote') == $idVote){
+        $message = new Message($nvId, $idUtilisateur, $message, date("Y-m-d H:i:s"));
+        $vote->addMessage($message);
+    }
+}
+
 echo "Message envoyé !";
-
-
 echo "<meta http-equiv=\"refresh\" content=\"1; url=$urlBack\"> ";
-
-
 ?>

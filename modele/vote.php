@@ -161,7 +161,9 @@ Class Vote{
         }
     }
 
-
+    public function addMessage($message){
+        $this->listeMessages[] = $message;
+    }
     public function fillEtiquettes(){
         $requete = "SELECT E.idEtiquette, labelEtiquette, couleur 
                     FROM EtiquetteVote EV INNER JOIN Etiquette E
