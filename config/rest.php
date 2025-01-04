@@ -27,8 +27,8 @@ Class Rest{
     */
     public static function getVote(int $idVote, int $idUser=NULL){
         $vote = Vote::getVote($idVote, $idUser);
-
-        return json_encode((array) $vote,JSON_UNESCAPED_UNICODE);
+        echo json_encode((array) $vote);
+        // return json_encode((array) $vote,JSON_UNESCAPED_UNICODE);
         //Vote va garder un json fucked up pour l'instant TODO : creer une fonction to_array pour Vote
     }
     public static function put(string $table,array $clefs , array $valeurs){
