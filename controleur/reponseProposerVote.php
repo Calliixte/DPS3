@@ -55,14 +55,32 @@ if(isset($_POST["multiChoix"])){
 
 $idCreateur = $_POST["idCreateur"];
 
-Vote::insererVote($_POST["titre"],$_POST["delaiDiscussion"],$_POST["delaiVote"],$_POST["description"],$voteBlanc,$multiChoix,$_POST["idGroupe"], $listeEtiquette, $listeChoix, $idCreateur);
+$idVote = Vote::insererVote($_POST["titre"],$_POST["delaiDiscussion"],$_POST["delaiVote"],$_POST["description"],$voteBlanc,$multiChoix,$_POST["idGroupe"], $listeEtiquette, $listeChoix, $idCreateur);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    
+    $target_dir = "../img/groupPicture/";
+    $target_file = $target_dir . basename($_FILES["photo"]["name"]);
+    $rename=$target_dir . (string) $idVote; 
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $rename=$target_dir . (string) $idVote .'.'.$imageFileType; 
+
+    print_r($_FILES);
+    
+    if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
+        echo "The file " . htmlspecialchars(basename($_FILES["photo"]["name"])) . " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+    rename($target_file,$rename);
+}
+
 $url = "../routeur.php";
 echo "Proposition enregistrée !";
 echo " <meta http-equiv=\"refresh\" content=\"1; url=$url\"> " //redirige vers l'url donnée au bout de 0 secondes, modifier le 0 ou commenter la ligne si on veut voir la page de debug
 ?>
 </pre>
-
-<img src="<?=$rename?>"/>
-
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 require_once("../config/connexion.php");
 Connexion::connect();
-
+session_start();
 foreach ($_POST as $key => $value) {
     if($key == "idUtilisateur"){
         $idUtilisateur = $value;

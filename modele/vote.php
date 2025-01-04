@@ -105,7 +105,7 @@ Class Vote{
         return $listeVote;
     }
 
-
+    //Insère une ligne dans la table vote de la base de données, et retourne l'idVote de la nouvelle ligne
     public static function insererVote($titre, $delaiDiscussion, $delaiVote, 
                                        $description, $voteBlanc, $multiChoix, 
                                        $idGroupe, $listeEtiquettes, $listeChoix, $idCreateur){
@@ -159,6 +159,8 @@ Class Vote{
 
             $idChoixVote++;
         }
+
+        return $idVote;
     }
 
     public function addMessage($message){
