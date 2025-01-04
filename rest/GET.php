@@ -17,7 +17,7 @@ if(!isset($_GET["classe"]) || !isset($_GET["id"])){
     exit();
 } }
 $classe = $_GET["classe"];
-require_once("../modele/". $classe . ".php"); //Potentiellement inutile
+require_once("../modele/". $classe . ".php"); //Potentiellement inutile (l'est actuellement)
 $id = $_GET["id"];
 
 if($classe == "vote"){
