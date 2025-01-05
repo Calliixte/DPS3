@@ -4,6 +4,9 @@
 require_once(__DIR__.'/../config/date.php');
 
 Class Vote{
+    private static array $listeCodeSuffrage = ["UNIMAJ1","UNIMAJ2","PETITION1","UNIDIPRO1","UNIDI2"]; //Les types de suffrages
+
+
     private int $idVote;
     private string $titreVote;
     private ?string $lienPhoto;
@@ -24,11 +27,13 @@ Class Vote{
     private array $listeMessages;
     private array $listeReactions;
 
+    public static function getListeCodeSuffrage(){
+        return self::$listeCodeSuffrage;
+    }
 
     public function get($attribute){
         return $this->$attribute;
     }
-
 
     public function set($attribute, $val){
         $this->$attribute = $val;
@@ -49,7 +54,12 @@ Class Vote{
             $this->delaiVote = Date::toDateInterval($delaiVote);
             $this->dateCreationVote = Date::toDateTime($dateCreationVote);
 
-            $this->codeSuffrage = $codeSuffrage;
+            if(in_array($codeSuffrage,Vote::$listeCodeSuffrage)){
+                $this->codeSuffrage = $codeSuffrage;
+            } else {
+                $this->codeSuffrage = Vote::$listeCodeSuffrage[0]; //Si le code suffrage est invalide on prend celui par défaut (ici UNIMAJ1)
+            }
+
             $this->autoriserVoteBlanc = $autoriserVoteBlanc;
             $this->autoriserPlusieursChoix = $autoriserPlusieursChoix;
 
@@ -130,7 +140,7 @@ Class Vote{
     //Insère une ligne dans la table vote de la base de données, et retourne l'idVote de la nouvelle ligne
     public static function insererVote($titre, $delaiDiscussion, $delaiVote, 
                                        $description, $voteBlanc, $multiChoix, 
-                                       $idGroupe, $listeEtiquettes, $listeChoix, $idCreateur){
+                                       $idGroupe, $listeEtiquettes, $listeChoix, $idCreateur, $codeSuffrage){
 
         $requete = "SELECT MAX(idVote)+1 FROM Vote;";
 
@@ -154,7 +164,7 @@ Class Vote{
             ':propositionAccepte' => 0,
             ':evalBudget' => NULL,
             ':idCreateur' => $idCreateur,
-            ':codeSuffrage' => 'UNIMAJ1',
+            ':codeSuffrage' => $codeSuffrage,
             ':voteBlanc' => $voteBlanc,
             ':multiChoix' => $multiChoix,
             ':idGroupe' => $idGroupe,

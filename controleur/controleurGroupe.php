@@ -84,6 +84,7 @@
             $listeEtiquette = $_SESSION['groupeCourant']->get('listeEtiquette');
             $idGroupe = $_SESSION['groupeCourant']->get('idGroupe');
             $idCreateur = $_SESSION['utilisateurCourant']->get('idUtilisateur');
+            $listeCodeSuffrage = Vote::getListeCodeSuffrage();
             
             include('vues/debut.php');
             ControleurApplication::AfficherHeader();

@@ -46,6 +46,14 @@
         <input id="multiChoix" type="Checkbox" name="multiChoix" value=1>
 
         <!-- TODO liste de mode de scrutin -->
+        <div class="scrollableWindow">
+            <?php
+                foreach($listeCodeSuffrage as $codeSuffrage){
+                    echo "<input type=\"radio\" id=$codeSuffrage name=\"codeSuffrage\" value=$codeSuffrage required>";
+                    echo "<label for=$codeSuffrage>$codeSuffrage</label>"; 
+                }
+            ?>
+        </div>
 
         <label for="imageUpload">ajouter une photo</label>
         <input type="file" id="imageUpload" name="photo" accept="image/*">

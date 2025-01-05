@@ -60,10 +60,6 @@ if(isset($_POST["multiChoix"])){ //On vérifie si elle est cochée
     $multiChoix = 0; //Sinon on met à false 
 }
 
-$idCreateur = $_POST["idCreateur"]; //On récupère l'id du créateur du vote
-
-$lienPhoto = NULL; //On défini le nom de photo par défaut à null
-
 if(count($listeChoix) < 2){ //Si il y a moins de deux choix, on refuse le vote et on redirige vers le formulaire
     $url = "../routeur.php?controleur=controleurGroupe&action=nouvelleProposition";
 
@@ -72,33 +68,28 @@ if(count($listeChoix) < 2){ //Si il y a moins de deux choix, on refuse le vote e
 } else {
 
     //On insère le vote
-    $idVote = Vote::insererVote($_POST["titre"],$_POST["delaiDiscussion"],$_POST["delaiVote"],$_POST["description"],$voteBlanc,$multiChoix,$_POST["idGroupe"], $listeEtiquette, $listeChoix, $idCreateur);
+    $idVote = Vote::insererVote($_POST["titre"],$_POST["delaiDiscussion"],$_POST["delaiVote"],$_POST["description"],$voteBlanc,$multiChoix,$_POST["idGroupe"], $listeEtiquette, $listeChoix, $_POST["idCreateur"], $_POST["codeSuffrage"]);
 
-    if(isset($_FILES["photo"]["name"])){ //On vérifie qu'une image a été donnée
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            //On défini le nom que l'on va donner au fichier
-            $target_dir = "../img/groupPicture/";
-            $target_file = $target_dir . basename($_FILES["photo"]["name"]);
-            $newName=$target_dir . (string) $idVote; 
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-            $newName=$target_dir . (string) $idVote .'.'.$imageFileType; 
+    //On défini le nom que l'on va donner au fichier
+    $target_dir = "../img/groupPicture/";
+    $target_file = $target_dir . basename($_FILES["photo"]["name"]);
+    $newName=$target_dir . (string) $idVote; 
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $newName=$target_dir . (string) $idVote .'.'.$imageFileType; 
 
-            print_r($_FILES);
-            
-            //On upload l'image sur le serveur 
-            if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) //On met le fichier dans le bon répertoire et on vérifie que ça a fonctionné
-            {
-                echo "The file " . htmlspecialchars(basename($_FILES["photo"]["name"])) . " has been uploaded.";
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-            rename($target_file,$newName); //On renomme le fichier de la manière standard "idVote.jpg"
-
-            Vote::setLienPhoto($idVote, $newName);
-        }
+    print_r($_FILES);
+    
+    //On upload l'image sur le serveur 
+    if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) //On met le fichier dans le bon répertoire et on vérifie que ça a fonctionné
+    {
+        echo "The file " . htmlspecialchars(basename($_FILES["photo"]["name"])) . " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
     }
+    rename($target_file,$newName); //On renomme le fichier de la manière standard "idVote.jpg"
 
+    Vote::setLienPhoto($idVote, $newName);
 
     $url = "../routeur.php";
     echo "Proposition enregistrée !";
