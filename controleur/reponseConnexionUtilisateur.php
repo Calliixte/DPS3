@@ -22,8 +22,7 @@ require_once("../modele/groupe.php");
 require_once("../modele/vote.php");
 require_once("../config/connexion.php");
 Connexion::connect();
-$idUtilisateur = null;
-$cptErr = $_POST["erreur"] ?? 0;
+$idUtilisateur;
 $_SESSION["previous"] = "autre";
 
 
@@ -36,8 +35,7 @@ if($idUtilisateur){
     echo "<meta http-equiv=\"refresh\" content=\"1; url=$urlRouteur\"> ";
 }
 else{ 
-    $cptErr = $cptErr +1;
-    $urlErreur = "../vues/connexionUtilisateur.php?erreur=$cptErr";
+    $urlErreur = "../routeur.php?actionConnexion=Connexion";
     echo "Mot de passe incorrect, vous allez pouvoir ressayer";
     echo " <meta http-equiv=\"refresh\" content=\"2; url=$urlErreur\"> ";
 
