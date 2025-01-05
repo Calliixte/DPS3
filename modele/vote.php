@@ -75,7 +75,8 @@ Class Vote{
             // Ajouter la clé et sa valeur au tableau résultat
             $resultat[$nomAttribut] = $attribut->getValue($this);
         }
-    
+        //convertit l'objet en array mais les messages et reactions qui sont des objets a l'interieur ne sont pas convertis pour la recursion
+        //considerer changer un peu l'array de messages en un array de string pour avoir le contenu ou alors juste on s'en blk car on les utilisera pas dans l'api
         return $resultat;
     }
     
