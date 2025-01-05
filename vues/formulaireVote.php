@@ -4,11 +4,7 @@
         <label for="title">
             Titre
         </label>
-        <input id="title"
-            name="titre"
-            type="text"
-            placeholder=""
-        />
+        <input id="title" name="titre" type="text" placeholder="" required>
 
         <div class="scrollableWindow">
             <?php

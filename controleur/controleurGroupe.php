@@ -79,8 +79,8 @@
 
 
         public static function nouvelleProposition(){
-            $titre = "Proposer un vote"
-            $nbChoix = 4; // Nomnbre de choix pour le vote, on pourra gérer ça dynamiquement avec un bouton si on veut
+            $titre = "Proposer un vote";
+            $nbChoix = 4; // Nombre de choix pour le vote, on pourra gérer ça dynamiquement avec un bouton si on veut
             $listeEtiquette = $_SESSION['groupeCourant']->get('listeEtiquette');
             $idGroupe = $_SESSION['groupeCourant']->get('idGroupe');
             $idCreateur = $_SESSION['utilisateurCourant']->get('idUtilisateur');
