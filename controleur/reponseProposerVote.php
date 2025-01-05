@@ -11,6 +11,7 @@
             <?php
                 require_once("../config/connexion.php");
                 require_once("../modele/vote.php");
+                require_once("../config/server.php");
 
                 Connexion::connect(); //Fichier appelé en dehors du routeur, on doit donc relancer une connexion
 
@@ -45,7 +46,7 @@
 
 
 
-                // Vote blanc étant une checkbox dans le formulaire, il ne sera transmis que si elle est cochée
+                //Vote blanc étant une checkbox dans le formulaire, il ne sera transmis que si elle est cochée
                 if(isset($_POST["voteBlanc"])){ //On vérifie si elle est cochée
                     $voteBlanc = 1; //Si oui on met à true 
                 }else{
@@ -70,26 +71,10 @@
                     //On insère le vote
                     $idVote = Vote::insererVote($_POST["titre"],$_POST["delaiDiscussion"],$_POST["delaiVote"],$_POST["description"],$voteBlanc,$multiChoix,$_POST["idGroupe"], $listeEtiquette, $listeChoix, $_POST["idCreateur"], $_POST["codeSuffrage"]);
 
-                    //On défini le nom que l'on va donner au fichier
-                    $target_dir = "../img/votePicture/";
-                    $target_file = $target_dir . basename($_FILES["photo"]["name"]);
-                    $newName=$target_dir . (string) $idVote; 
-                    $uploadOk = 1;
-                    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                    $newName=$target_dir . (string) $idVote .'.'.$imageFileType; 
 
-                    print_r($_FILES);
+                    $link = Server::uploadImage($_FILES["photo"]["tmp_name"], "../img/votePicture/", basename($_FILES["photo"]["name"]), (string)$idVote);
                     
-                    //On upload l'image sur le serveur 
-                    if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) //On met le fichier dans le bon répertoire et on vérifie que ça a fonctionné
-                    {
-                        echo "The file " . htmlspecialchars(basename($_FILES["photo"]["name"])) . " has been uploaded.";
-                    } else {
-                        echo "Sorry, there was an error uploading your file.";
-                    }
-                    rename($target_file,$newName); //On renomme le fichier de la manière standard "idVote.jpg"
-
-                    Vote::setLienPhoto($idVote, $newName);
+                    Vote::setLienPhoto($idVote, $link);
 
                     $url = "../routeur.php";
                     echo "Proposition enregistrée !";
