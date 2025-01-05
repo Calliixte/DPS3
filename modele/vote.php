@@ -58,6 +58,27 @@ Class Vote{
         }
     }
 
+    public function toArray() {
+        $resultat = [];
+        
+        // Obtenir l'objet de réflexion pour la classe Vote
+        $reflexion = new ReflectionClass($this);
+        
+        // Parcourir tous les attributs de la classe
+        foreach ($reflexion->getProperties() as $attribut) {
+            // Rendre l'attribut accessible même s'il est privé
+            $attribut->setAccessible(true);
+            
+            // Obtenir le nom de l'attribut sans le préfixe "Vote" et sans la visibilité
+            $nomAttribut = $attribut->getName();
+            
+            // Ajouter la clé et sa valeur au tableau résultat
+            $resultat[$nomAttribut] = $attribut->getValue($this);
+        }
+    
+        return $resultat;
+    }
+    
 
     public static function getVote(int $idVote, int $idUser=NULL){
         $requete = "SELECT  idVote, titreVote, lienPhoto, 
