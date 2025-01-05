@@ -187,7 +187,7 @@ Class Vote{
     }
 
     public static function setLienPhoto($idVote, $lien) {
-        $requete = "CALL modifierPhotoGroupe(:idVote,:lienPhoto)"; //Procédure stocké PL/SQL
+        $requete = "CALL modifierPhotoVote(:idVote,:lienPhoto)"; //Procédure stocké PL/SQL
         $statement = Connexion::pdo()->prepare($requete);
         $statement->execute(
             [
