@@ -42,7 +42,40 @@
 
             return $groupe;
         }
+
+        public static function insererMembre($idUser, $idGroupe, $idRole){
+            $requete = "INSERT INTO membre VALUES(:idUtilisateur, :idGroupe, :idRole)";
+            $statement = Connexion::pdo()->prepare($requete);
+            $statement->execute([
+                ":idUtilisateur" => $idUser,
+                ":idGroupe" => $idGroupe,
+                ":idRole" => $idRole
+            ]);
+        }
         
+        public static function insererGroupe($nomGroupe, $description, $regles, $voteBlancCompte){
+        
+            //On récupère l'id groupe max et on ajoute un, ce sera l'id du groupe inséré
+            //On le fait de cette manière car on en a besoin à plus endroit, et qu'on la retourne à la fin, il faut donc le stocker
+            $requete = "SELECT MAX(idGroupe)+1 FROM groupe;"; 
+
+            $resultat = Connexion::pdo()->query($requete);
+            $idGroupe = $resultat->fetch(PDO::FETCH_COLUMN);
+
+            //Les images seront inséré après la création du groupe, car elle seront renommées en fonction de celui-ci
+            $requete = "INSERT INTO groupe VALUES(:idGroupe,:nomGroupe,:description, :regles, :voteBlancCompte, NULL, NULL)";
+            $statement = Connexion::pdo()->prepare($requete);
+            $statement->execute([
+                ":idGroupe" => $idGroupe,
+                ":nomGroupe" => $nomGroupe,
+                ":description" => $description,
+                ":regles"=> $regles,
+                ":voteBlancCompte" => $voteBlancCompte
+            ]);
+
+            return $idGroupe;
+        }
+
         public static function getGroupesUtilisateur(int $idUtilisateur){
             $requete = "SELECT G.idGroupe, nomGroupe, voteBlancCompte, lienPhotoIcone, lienPhotoBanniere, COUNT(*) AS nbMembres
                         FROM Groupe G

@@ -25,7 +25,7 @@ public static function afficherHeader(){
     }
    
 
-    include('vues/boutonRejoindre.php');
+    include('vues/boutonOptions.php');
     echo "<a href=routeur.php?actionConnexion=Connexion> se déconnecter </a> ";
     echo "</header>";
 }

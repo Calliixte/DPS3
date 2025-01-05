@@ -7,6 +7,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+@keyframes buttonHover {
+    from {width: 90%;}
+    to {width: 95%;}
+  }
+
 
 :root {
     --light-blue: #5eafff;
@@ -23,13 +28,6 @@
     gap: 10px;
     padding: 1rem;
     max-width: 40rem;
-}
-.vote form{
-
-}
-
-.boiteChoixVote{
-
 }
 
 
@@ -55,8 +53,6 @@ body {
     
     display: flex;
     flex-wrap: wrap;
-    /* grid-template-rows: auto 120px;
-    grid-template-columns: 300px auto; */
 }
 
 h1 {
@@ -92,7 +88,8 @@ p, span, label, input {
 
 
 .group-button {
-    width: 100%;
+    width: 90%;
+    align-self: center;
 
     border-radius: 20px;
     color: unset;
@@ -102,6 +99,12 @@ p, span, label, input {
     display: grid;
     grid-template-columns: 60px min-content auto;
     grid-template-rows: 1fr 1fr;
+}
+
+.group-button:hover {
+    animation-name: buttonHover;
+    animation-duration: 0.5s;
+    width : 95%;
 }
 
 .group-button img:first-child {

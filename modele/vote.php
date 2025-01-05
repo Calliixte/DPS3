@@ -142,18 +142,15 @@ Class Vote{
                                        $description, $voteBlanc, $multiChoix, 
                                        $idGroupe, $listeEtiquettes, $listeChoix, $idCreateur, $codeSuffrage){
 
-        $requete = "SELECT MAX(idVote)+1 FROM Vote;";
+        //On récupère l'id vote max et on ajoute un, ce sera l'id du vote inséré
+        //On le fait de cette manière car on en a besoin à plus endroit, et qu'on la retourne à la fin, il faut donc le stocker
+        $requete = "SELECT MAX(idVote)+1 FROM Vote;"; 
 
         $resultat = Connexion::pdo()->query($requete);
         $idVote = $resultat->fetch(PDO::FETCH_COLUMN);
 
-        $requete = "SELECT MAX(idChoixVote)+1 FROM ChoixVote;";
-
-        $resultat = Connexion::pdo()->query($requete);
-        $idChoixVote = $resultat->fetch(PDO::FETCH_COLUMN);
 
         $requete = "INSERT INTO Vote VALUES(:idVote, :titre, :delaiDiscussion, :delaiVote, NOW(), :descriptionVote, :propositionAccepte, :evalBudget, :idCreateur, :codeSuffrage, :idGroupe, :voteBlanc, :multiChoix, :lienPhoto);";
-        
         $statement = Connexion::pdo()->prepare($requete);
         $statement->execute([
             ':idVote' => $idVote,
@@ -180,17 +177,14 @@ Class Vote{
             ]);
         }
 
-
-        $requete = "INSERT INTO ChoixVote VALUES(:idChoixVote, :intitule, :idVote);";
+        //La base de donnée étant paramétrée avec auto increment, pas besoin de spécifier d'idChoixVote
+        $requete = "INSERT INTO ChoixVote VALUES(NULL, :intitule, :idVote);";
         $statement = Connexion::pdo()->prepare($requete);
         foreach($listeChoix as $choixVote){
             $statement->execute([
-                ':idChoixVote' => $idChoixVote,
                 ':intitule' => $choixVote,
                 ':idVote' => $idVote
             ]);
-
-            $idChoixVote++;
         }
 
         return $idVote;

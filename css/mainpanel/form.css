@@ -6,7 +6,6 @@ form {
     grid-template-columns: auto;
     gap : 10px;
     padding: 1rem;
-    max-width: 40rem;
 }
 
 .field{

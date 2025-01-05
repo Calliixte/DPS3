@@ -9,6 +9,7 @@ main {
     place-content: stretch;
     width: calc(100% - 20rem);
     flex-basis: 0;
+    padding: 2rem;
 }
 
 div#default{
@@ -17,7 +18,7 @@ div#default{
     display: flex;
     flex-direction: column;
     box-shadow: var(--basic-button-shadow);
-    margin: 2rem;
+    /* margin: 2rem; */
 }
 
 div#default > div{

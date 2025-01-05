@@ -96,6 +96,18 @@
             include('vues/fin.html');
         }
 
+        public static function creerGroupe(){
+            $titre = 'Nouveau groupe';
+            include('vues/debut.php');
+            ControleurApplication::AfficherHeader();
+            echo '<main>';
+            include('vues/formulaireGroupe.php');
+            echo '</main>';
+            include('vues/footer.html');
+            include('vues/popups/addGroup.php');
+            include('vues/fin.html');
+        }
+
         public static function afficherNonAcceptes(){
             $nomG = $_SESSION['groupeCourant']->get("nomGroupe");
             $titre= $nomG;
