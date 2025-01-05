@@ -85,17 +85,18 @@ if(count($listeChoix) < 2){ //Si il y a moins de deux choix, on refuse le vote e
 
         print_r($_FILES);
         
-        if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
+        if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) //On met le fichier dans le bon répertoire et on vérifie que ça a fonctionné
+        {
             echo "The file " . htmlspecialchars(basename($_FILES["photo"]["name"])) . " has been uploaded.";
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
-        rename($target_file,$rename);
+        rename($target_file,$rename); //On renomme le fichier de la manière standard "idVote.jpg"
     }
 
     $url = "../routeur.php";
     echo "Proposition enregistrée !";
-    //echo " <meta http-equiv=\"refresh\" content=\"1; url=$url\"> "; //redirige vers l'url donnée au bout de 0 secondes, modifier le 0 ou commenter la ligne si on veut voir la page de debug
+    echo " <meta http-equiv=\"refresh\" content=\"1; url=$url\"> "; //redirige vers l'url donnée au bout de 0 secondes, modifier le 0 ou commenter la ligne si on veut voir la page de debug
 }
 ?>
 </pre>
