@@ -142,7 +142,7 @@ Class Vote{
         $resultat = Connexion::pdo()->query($requete);
         $idChoixVote = $resultat->fetch(PDO::FETCH_COLUMN);
 
-        $requete = "INSERT INTO Vote VALUES(:idVote, :titre, :delaiDiscussion, :delaiVote, NOW(), :descriptionVote, :propositionAccepte, :evalBudget, :idCreateur, :codeSuffrage, :idGroupe, :voteBlanc, :multiChoix, NULL);";
+        $requete = "INSERT INTO Vote VALUES(:idVote, :titre, :delaiDiscussion, :delaiVote, NOW(), :descriptionVote, :propositionAccepte, :evalBudget, :idCreateur, :codeSuffrage, :idGroupe, :voteBlanc, :multiChoix, :lienPhoto);";
         
         $statement = Connexion::pdo()->prepare($requete);
         $statement->execute([
@@ -157,7 +157,8 @@ Class Vote{
             ':codeSuffrage' => 'UNIMAJ1',
             ':voteBlanc' => $voteBlanc,
             ':multiChoix' => $multiChoix,
-            ':idGroupe' => $idGroupe
+            ':idGroupe' => $idGroupe,
+            ':lienPhoto' => NULL //On a besoin du nom du fichier sur le serveur, qui ne sera upload qu'après l'insertion
         ]);
 
         $requete = "INSERT INTO EtiquetteVote VALUES(:idVote, :idEtiquette);";
@@ -183,6 +184,17 @@ Class Vote{
         }
 
         return $idVote;
+    }
+
+    public static function setLienPhoto($idVote, $lien) {
+        $requete = "CALL modifierPhotoGroupe(:idVote,:lienPhoto)"; //Procédure stocké PL/SQL
+        $statement = Connexion::pdo()->prepare($requete);
+        $statement->execute(
+            [
+                ':idVote' => $idVote,
+                'lienPhoto' => $lien
+            ]
+        );
     }
 
     public function addMessage($message){
