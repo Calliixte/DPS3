@@ -10,7 +10,7 @@ class controleurUtilisateur{
     }
     public static function afficherProfilUtilisateur(){
         $titre = 'DPS3';
-        $styleSpecial = '';
+        
         include('vues/debut.php');
         self::afficherHeader();
         echo '<main>';

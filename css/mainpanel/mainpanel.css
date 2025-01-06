@@ -1,6 +1,5 @@
 @import 'form.css';
 @import 'groupe/groupe.css';
-@import 'profil/profil.css';
 
 main {
     flex-grow: 2;

@@ -26,7 +26,7 @@
             $nomG = $_SESSION['groupeCourant']->get("nomGroupe");
             
             $titre = $nomG; //On défini le titre de la page
-            $styleSpecial = '';
+
             include('vues/debut.php');
             ControleurApplication::afficherHeader();
             echo '<main>';
@@ -113,7 +113,7 @@
         public static function afficherNonAcceptes(){
             $nomG = $_SESSION['groupeCourant']->get("nomGroupe");
             $titre= $nomG;
-            $styleSpecial = '';
+            
             include('vues/debut.php');
             ControleurApplication::afficherHeader();
             echo '<main>';

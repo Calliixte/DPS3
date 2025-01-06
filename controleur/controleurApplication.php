@@ -74,7 +74,6 @@ public static function afficherConnexion(){
 
 public static function afficherPageAccueil(){
     $titre = 'DPS3';
-    $styleSpecial = '';
 
     include('vues/debut.php');
 
@@ -93,10 +92,9 @@ public static function afficherPageAccueil(){
 }
 
 public static function afficherProfil(){
-
-    
     $infoUtilisateur=$_SESSION["utilisateurCourant"]->getAllInfoUtilisateur();
     $p=$infoUtilisateur["pseudo"];
+    $styleSpecial = "profil";
     $titre="Profil de $p";
     include('vues/debut.php');
     self::afficherHeader();
