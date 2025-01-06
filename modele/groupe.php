@@ -136,7 +136,7 @@
         }
         public function getUrlRejoindre(){
             $id= $this->idGroupe;
-            return "https://projets.iut-orsay.fr/saes3-vjacqu3/classePHP/controleur/rejoindreGroupe.php?idInvit=$id";
+            return "https://$_SERVER[HTTP_HOST]".dirname($_SERVER['PHP_SELF'])."/controleur/rejoindreGroupe.php?idInvit=$id";
         }
 
         public function accepterVote($idVote){
