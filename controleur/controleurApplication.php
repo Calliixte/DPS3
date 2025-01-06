@@ -31,7 +31,17 @@ public static function afficherHeader(){
     echo "</header>";
 }
 
-public static function afficherConnexion(){ 
+public static function afficherConnexion(){
+    if(isset($_GET["actionConnexion"])){
+        if($_GET["actionConnexion"]=="Inscription"){
+            $titre="Inscription à DPS3";
+        }else{
+            $titre="Connexion à DPS3";
+        }
+    }else{
+        $titre="Connexion à DPS3";
+    }
+
     $_SESSION["utilisateurCourant"] = NULL; // flush l'utilisateur courant (déconnexion)
     $_SESSION["previous"]="connexion";
     $action = 'Connexion';
@@ -82,11 +92,16 @@ public static function afficherPageAccueil(){
 }
 
 public static function afficherProfil(){
+
+    
+    $infoUtilisateur=$_SESSION["utilisateurCourant"]->getAllInfoUtilisateur();
+    $p=$infoUtilisateur["pseudo"];
+    $titre="Profil de $p";
     include('vues/debut.php');
     self::afficherHeader();
     echo '<main>';
-    $infoUtilisateur=$_SESSION["utilisateurCourant"]->getAllInfoUtilisateur();
     include('vues/profil.php');
+
 
     echo '</main>';
     include('vues/footer.html');
