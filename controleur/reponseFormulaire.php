@@ -1,6 +1,7 @@
 <?php
     Class ReponseFormulaire{
         
+        // Faudra penser à globaliser tout ça (sûrement avec un $_GET[formulaire])
         public static function reponseProposerVote(){
             include('vues/debut.php');
             echo '<main>';

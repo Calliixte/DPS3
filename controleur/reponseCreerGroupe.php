@@ -9,9 +9,9 @@
         
         Groupe::insererMembre($idUser, $idGroupe, $idRole);
 
-        $linkBanniere = Server::uploadImage($_FILES["imageBanniere"]["tmp_name"], "../img/GroupPicture/", basename($_FILES["imageBanniere"]["name"]), (string)$idGroupe);
+        $linkBanniere = Server::uploadImage($_FILES["imageBanniere"]["tmp_name"], "img/GroupPicture/", basename($_FILES["imageBanniere"]["name"]), (string)$idGroupe);
         
-        $linkIcone = Server::uploadImage($_FILES["imageIcone"]["tmp_name"], "../img/GroupPicture/", basename($_FILES["imageIcone"]["name"]), (string)$idGroupe."_icon");
+        $linkIcone = Server::uploadImage($_FILES["imageIcone"]["tmp_name"], "img/GroupPicture/", basename($_FILES["imageIcone"]["name"]), (string)$idGroupe."_icon");
 
         $newGroupe = Groupe::getGroupe($idGroupe);
 

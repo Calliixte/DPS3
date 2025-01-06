@@ -58,9 +58,11 @@
             $idVote = Vote::insererVote($_POST["titre"],$_POST["delaiDiscussion"],$_POST["delaiVote"],$_POST["description"],$voteBlanc,$multiChoix,$_POST["idGroupe"], $listeEtiquette, $listeChoix, $_POST["idCreateur"], $_POST["codeSuffrage"]);
 
 
-            $link = Server::uploadImage($_FILES["photo"]["tmp_name"], "../img/votePicture/", basename($_FILES["photo"]["name"]), (string)$idVote);
+            $link = Server::uploadImage($_FILES["photo"]["tmp_name"], "img/votePicture/", basename($_FILES["photo"]["name"]), (string)$idVote);
             
-            Vote::setLienPhoto($idVote, $link);
+            $servUrl = "https://$_SERVER[HTTP_HOST]".dirname($_SERVER['PHP_SELF']);
+
+            Vote::setLienPhoto($idVote, ($servUrl.$link));
 
             $newVote = Vote::getVote($idVote);
 
