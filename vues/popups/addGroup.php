@@ -3,7 +3,12 @@
         <h2>Rejoindre un groupe</h2>
         <a class="close" href="#">&times;</a>
         <div class="content">
-            <p>zone de recherche pour les groupes ici</p>
+            <p>Entrez ci-dessous le lien donné pour rejoindre le groupe</p>
+            <form action="controleur/rejoindreGroupePopUp.php" method="POST">
+            <label for="lien">Lien du groupe</label>
+            <input type="text" id="lien" name="lien">
+            <input type="submit" value="Rejoindre">
+            </form>
         </div>
     </div>
 </div>
