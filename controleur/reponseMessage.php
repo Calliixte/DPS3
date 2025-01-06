@@ -1,8 +1,4 @@
 <?php
-require_once("../config/connexion.php");
-Connexion::connect();
-session_start();
-
 foreach ($_POST as $key => $value) {
     if($key == "idUtilisateur"){
         $idUtilisateur = $value;
@@ -27,13 +23,14 @@ $stmt->bindParam(3, $idVote, PDO::PARAM_INT);
 $stmt->bindParam(4, $idUtilisateur, PDO::PARAM_INT);
 $stmt->bindParam(5, $idGroupe, PDO::PARAM_INT);
 $stmt->execute();
-$urlBack = "../routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=$idGroupe";
+$urlBack = "routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=$idGroupe";
 
 
-foreach($listeVote as $vote){
-    if($vote->get('idVote') == $idVote){
-        $message = new Message($nvId, $idUtilisateur, $message, date("Y-m-d H:i:s"));
-        $vote->addMessage($message);
+//Ajouter le message dans l'objet vote
+foreach($_SESSION["groupeCourant"]->get("listeVote") as $vote){
+    if($vote->get('idVote') == $idVote){ //On trouve le bon Vote
+        $message = new Message($nvId, $idUtilisateur, $message, date("Y-m-d H:i:s")); //On crée l'objet vote
+        $vote->addMessage($message); //On ajoute le message
     }
 }
 
