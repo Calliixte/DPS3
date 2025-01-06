@@ -17,6 +17,7 @@ $requetePreparee -> bindParam(':gr',$idG);
 $requetePreparee -> bindParam(':ro',$test);
 try{
     $requetePreparee->execute();
+    $_SESSION['utilisateurCourant']->addGroupe($idG);
 }catch(PDOException $e){
     echo $e->getMessage();
     echo "Vous n'avez pas pu être ajouté.e au groupe";
