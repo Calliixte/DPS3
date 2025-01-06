@@ -19,12 +19,13 @@ public static function afficherHeader(){
             include('vues/boutonGroupe.php');
         }
         echo "</nav>";
+        
     }
     else{
+        echo "";
         $photoProfil = "img/profilePicture/0.jpg";
         include('vues/header.php');
     }
-   
 
     include("vues/boutonOptions.php");
     echo "<a href=routeur.php?action=afficherConnexion> se déconnecter </a> ";
@@ -76,8 +77,8 @@ public static function afficherPageAccueil(){
     $styleSpecial = '';
 
     include('vues/debut.php');
-    self::afficherHeader();
 
+    self::afficherHeader();
     echo '<main>';
     
     $nomU = $_SESSION["utilisateurCourant"]->get("nom");
