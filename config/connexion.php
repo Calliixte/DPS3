@@ -2,17 +2,17 @@
 class Connexion{
     //---Connexion à projet.iut-orsay.fr---
 
-    // static private $hostname = 'localhost';
-    // static private $database = 'saes3-vjacqu3';
-    // static private $login = 'saes3-vjacqu3';
-    // static private $password = 'stegablix2000';
+    static private $hostname = 'localhost';
+    static private $database = 'saes3-vjacqu3';
+    static private $login = 'saes3-vjacqu3';
+    static private $password = 'stegablix2000';
 
     //---Connexion à xampp (serveur local)---
 
-    static private $hostname = 'localhost';
-    static private $database = 'saes3-vjacqu3';
-    static private $login = 'root';
-    static private $password = null;
+    // static private $hostname = 'localhost';
+    // static private $database = 'saes3-vjacqu3';
+    // static private $login = 'root';
+    // static private $password = null;
 
     // Utilisation de utf8mb4 pour prendre en charge tous les caractères Unicode
     static private $tabUTF8 = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4");

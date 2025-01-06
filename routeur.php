@@ -20,7 +20,6 @@ require_once("controleur/reponseFormulaire.php");
 Connexion::connect();
 session_start();
 
-
 $controleur="controleurApplication"; //mettre le controleur par défaut (celui de la page d'accueil)
 $action="afficherPageAccueil"; //mettre l'action que doit faire ce controleur par défaut
 $tableauControleurs = ["controleurApplication","controleurGroupe","controleurMessage","controleurUtilisateur","controleurVote","reponseFormulaire"];
@@ -36,6 +35,11 @@ if(isset($_GET["action"])){
         $action=$_GET["action"];
     }
 }
-$controleur::$action();
 
+if(!isset($_SESSION["utilisateurCourant"])) //On vérifie si la session a expiré
+{
+    $action = "afficherConnexion";
+}
+
+$controleur::$action();
 ?>
