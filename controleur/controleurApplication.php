@@ -91,37 +91,6 @@ public static function afficherPageAccueil(){
     include('vues/fin.html');
 }
 
-public static function afficherProfil(){
-    $infoUtilisateur=$_SESSION["utilisateurCourant"]->getAllInfoUtilisateur();
-    $p=$infoUtilisateur["pseudo"];
-    $styleSpecial = "profil";
-    $titre="Profil de $p";
-    include('vues/debut.php');
-    self::afficherHeader();
-    echo '<main>';
-    include('vues/profil.php');
-
-
-    echo '</main>';
-    include('vues/footer.html');
-    include('vues/popups/addGroup.php');
-    include('vues/fin.html');
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // public static function afficherNav(){
 //     echo "Nav";

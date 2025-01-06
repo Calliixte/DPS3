@@ -1,28 +1,27 @@
 <!-- pour afficher l'interieur du profil  -->
 
 <?php
-
 class controleurUtilisateur{
     
     public static function afficherPetitUtilisateur(){
         echo "petitUtilisateur";
-        echo "<a href=routeur.php?controleur=controleurUtilisateur&action=afficherProfilUtilisateur> profil </a> ";
+        echo "<a href=routeur.php?controleur=controleurUtilisateur&action=afficherProfil> profil </a> ";
     }
-    public static function afficherProfilUtilisateur(){
-        $titre = 'DPS3';
-        
+    
+    public static function afficherProfil(){
+        $infoUtilisateur=$_SESSION["utilisateurCourant"]->getAllInfoUtilisateur();
+        $p=$infoUtilisateur["pseudo"];
+        $styleSpecial = "profil";
+        $titre="Profil de $p";
         include('vues/debut.php');
-        self::afficherHeader();
+        ControleurApplication::afficherHeader();
         echo '<main>';
-        if(isset($_SESSION["utilisateurCourant"])){
-            echo $_SESSION["utilisateurCourant"]; 
-        }else{ 
-            self::afficherConnexion();
-            $_SESSION["previous"]="connexion";
-        }
+        include('vues/profil.php');
+    
+    
         echo '</main>';
         include('vues/footer.html');
-        include('vues/popups/addGroup.html');
+        include('vues/popups/addGroup.php');
         include('vues/fin.html');
     }
 

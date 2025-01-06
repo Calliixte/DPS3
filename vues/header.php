@@ -2,7 +2,7 @@
         <a class="logo" href="routeur.php" >
             <img alt="logo" src="media/logo.svg" />
         </a>
-        <a class="profilepic" href="routeur.php?controleur=controleurApplication&action=afficherProfil" >
+        <a class="profilepic" href="routeur.php?controleur=controleurUtilisateur&action=afficherProfil" >
             <img alt="profile picture" src=<?=$photoProfil?> />
         </a>
         <a class="mypolls" href="routeur.php" >
