@@ -139,6 +139,14 @@
             return "https://projets.iut-orsay.fr/saes3-vjacqu3/classePHP/controleur/rejoindreGroupe.php?idInvit=$id";
         }
 
+        public function accepterVote($idVote){
+            foreach($this->listeVote as $vote){
+                if($vote->get("idVote") == $idVote){
+                    $vote->set("propositionAcceptee", true);
+                }
+            }
+        }
+
         public function getRoleMembre($idU){
                 $id= $this->idGroupe;
                 $requetePreparee = Connexion::pdo()->prepare( "SELECT idRole FROM `Membre` WHERE idUtilisateur=:idU and idGroupe=$id");

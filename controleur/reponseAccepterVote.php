@@ -13,6 +13,8 @@ if(Vote::accepterVote($_GET["id"],$_SESSION["utilisateurCourant"]->get("role")) 
     exit();
 } 
 else{
+    $_SESSION["groupeCourant"]->accepterVote($_GET["id"]);
+    
     echo "Proposition acceptée, vous allez être redirigé.e sur la page des propositions à accepter";
     echo "<meta http-equiv=\"refresh\" content=\"1; url=../routeur.php?controleur=controleurGroupe&action=afficherNonAcceptes\">";
 }
@@ -20,10 +22,4 @@ else{
 //dans la fonction ça va vérifier avec le role actuel de l'utilisateur donc ça devrait être fine
 //il n'empeche que si l'utilisateur est admin et modifie l'id dans l'url il peut accepter les votes
 //qu'il veut donc c'est moyen
-                                
-
-
-
-
-
 ?>
