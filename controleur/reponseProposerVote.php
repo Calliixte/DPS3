@@ -66,10 +66,6 @@
 
             $_SESSION["groupeCourant"]->addVote($newVote);
 
-            $liste=$_SESSION['groupeCourant']->get("listeVote");
-
-            print_r($liste);
-
             $url = "routeur.php";
             echo "<br>";
             echo "Proposition enregistrée !";
