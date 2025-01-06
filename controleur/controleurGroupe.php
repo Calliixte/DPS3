@@ -54,11 +54,10 @@
                     $listeEtiquette = $liste[$i]->get("listeEtiquettes");
                     //$dateCreation = $liste[$i]->get("dateCreation");
                     $description = $liste[$i]->getDescription(); 
-                    $idvkw=$i;
-                    $url = "routeur.php?controleur=controleurVote&action=afficherVoteGros&id=$idvkw";
+                    $url = "routeur.php?controleur=controleurVote&action=afficherVoteGros&id=$i";
                     $txt = "Voter";
                     if ($_SESSION['utilisateurCourant']->get('role')==2){ //est administrateur 
-                    $urlSuppr = "routeur.php?controleur=controleurVote&action=supprimerVote&id=$idvkw";
+                    $urlSuppr = "routeur.php?controleur=controleurVote&action=supprimerVote&id=$i";
                     $txtSuppr = "Supprimer";
                     }
                     include('vues/petitVote.php');

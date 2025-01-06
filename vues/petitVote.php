@@ -7,14 +7,14 @@
 <?php
     echo"<div class=\"vote\">";
             echo $titreVote;
-            echo "<br/>";
+            echo "<br>";
             foreach($listeEtiquette as $eti){
                 echo $eti['labelEtiquette'];
                 echo " ";
             }
-            echo"<br/>";
+            echo"<br>";
             echo mb_strimwidth($description, 0, 150, "...");
-            echo"<br/>";
+            echo"<br>";
             if(isset($url) && isset($txt)){
             echo "<a href=$url> $txt </a>";
             }

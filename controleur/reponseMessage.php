@@ -9,6 +9,9 @@ foreach ($_POST as $key => $value) {
     if($key == "idVote"){
         $idVote = $value;
     }
+    if($key == "idVoteDansGroupe"){
+        $idVoteDansGroupe = $value; //id du vote dans la liste vote du groupe
+    }
 }
 $message=$_POST["message"];
 
@@ -23,7 +26,7 @@ $stmt->bindParam(3, $idVote, PDO::PARAM_INT);
 $stmt->bindParam(4, $idUtilisateur, PDO::PARAM_INT);
 $stmt->bindParam(5, $idGroupe, PDO::PARAM_INT);
 $stmt->execute();
-$urlBack = "routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=$idGroupe";
+$urlBack = "routeur.php?controleur=controleurVote&action=afficherVoteGros&id=$idVoteDansGroupe";
 
 
 //Ajouter le message dans l'objet vote
@@ -35,5 +38,5 @@ foreach($_SESSION["groupeCourant"]->get("listeVote") as $vote){
 }
 
 echo "Message envoyé !";
-echo "<meta http-equiv=\"refresh\" content=\"1; url=$urlBack\"> ";
+echo "<meta http-equiv=\"refresh\" content=\"0; url=$urlBack\"> ";
 ?>

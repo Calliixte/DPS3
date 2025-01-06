@@ -5,6 +5,8 @@
  <?php    
           echo "<input id=\"idUtilisateur\" name=\"idUtilisateur\" type=\"hidden\" value=$idVotant />";
           echo "<input id=\"idGroupe\" name=\"idGroupe\" type=\"hidden\" value=$idGroupeVotant />";
-          echo "<input id=\"idVote\" name=\"idVote\" type=\"hidden\" value=$idVoteTraite />"; ?>
+          echo "<input id=\"idVote\" name=\"idVote\" type=\"hidden\" value=$idVoteTraite />"; //id du vote dans la base de donnée
+          echo "<input id=\"idVoteDansGroupe\" name=\"idVoteDansGroupe\" type=\"hidden\" value=$idVoteActuel />" //id du vote dans la liste vote du groupe courant
+          ?>
     <button type="submit">Publier</button>
 </form>
