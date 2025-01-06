@@ -27,53 +27,53 @@ public static function afficherHeader(){
    
 
     include("vues/boutonOptions.php");
-    echo "<a href=routeur.php?actionConnexion=Connexion> se déconnecter </a> ";
+    echo "<a href=routeur.php?action=afficherConnexion> se déconnecter </a> ";
     echo "</header>";
 }
 
 public static function afficherConnexion(){ 
     $_SESSION["utilisateurCourant"] = NULL; // flush l'utilisateur courant (déconnexion)
+    $_SESSION["previous"]="connexion";
     $action = 'Connexion';
+    $styleSpecial = 'connexion';
 
     if(isset($_GET['actionConnexion'])){
         $action =$_GET['actionConnexion'];
     }
 
+    include('vues/debut.php');
+    echo '<main id="connexion">';
+
     if($action == 'Connexion'){ 
         include("vues/formulaireConnexion.php");
         echo "<p>pas de compte ? 
-                <a href=routeur.php?actionConnexion=Inscription>s'inscrire</a>
+                <a href=routeur.php?action=afficherConnexion&actionConnexion=Inscription>s'inscrire</a>
               </p>";
     }else{
         include("vues/formulaireInscription.html");
         echo "<p>Déjà un compte ? 
-                <a href=routeur.php?actionConnexion=Connexion>connexion</a>
+                <a href=routeur.php?action=afficherConnexion&actionConnexion=Connexion>connexion</a>
               </p>";
     }
+    echo "</main>";
+    include('vues/footer.html');
+    include('vues/popups/addGroup.php');
+    include('vues/fin.html');
 }
 
 public static function afficherPageAccueil(){
-    $connected = isset($_SESSION["utilisateurCourant"]) && !isset($_GET['actionConnexion']);
     $titre = 'DPS3';
-    
-    if($connected){
-        $styleSpecial = '';
+    $styleSpecial = '';
 
-        include('vues/debut.php');
-        self::afficherHeader();
-        echo '<main>';
-        $nomU = $_SESSION["utilisateurCourant"]->get("nom");
-        $prenomU = $_SESSION["utilisateurCourant"]->get("prenom");
-        $pseudoU = $_SESSION["utilisateurCourant"]->get("pseudo");
-        include("vues/accueil.php");
-    }else{
-        $styleSpecial = 'connexion';
-        $_SESSION["previous"]="connexion";
-        
-        include('vues/debut.php');
-        echo '<main id="connexion">';
-        self::afficherConnexion();
-    }
+    include('vues/debut.php');
+    self::afficherHeader();
+
+    echo '<main>';
+    
+    $nomU = $_SESSION["utilisateurCourant"]->get("nom");
+    $prenomU = $_SESSION["utilisateurCourant"]->get("prenom");
+    $pseudoU = $_SESSION["utilisateurCourant"]->get("pseudo");
+    include("vues/accueil.php");
 
     echo "</main>";
     include('vues/footer.html');
