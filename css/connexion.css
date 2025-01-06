@@ -6,4 +6,5 @@ main#connexion{
 p {
     grid-row: 3/4;
     align-self: start;
+    margin-top: 1rem;
 }
