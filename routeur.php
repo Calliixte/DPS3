@@ -39,6 +39,7 @@ if(isset($_GET["action"])){
 if(!isset($_SESSION["utilisateurCourant"])) //On vérifie si la session a expiré
 {
     $action = "afficherConnexion";
+    $controleur="controleurApplication";
 }
 
 $controleur::$action();

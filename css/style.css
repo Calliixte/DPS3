@@ -23,7 +23,7 @@
     --dark-blue: #0c4782;
     --light-grey: #D9D9D9;
     --dark-grey: #7f7f7f;
-    --basic-button-shadow: 0 2px 10px -1px rgba(0,0,0, 50%);
+    --basic-shadow: 0 2px 10px -1px rgba(0,0,0, 50%);
 }
 
 .vote{

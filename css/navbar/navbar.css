@@ -22,7 +22,7 @@ header .group-button {
     margin-top: 5px;
     margin-bottom: 5px;
 
-    box-shadow: var(--basic-button-shadow);
+    box-shadow: var(--basic-shadow);
 }
 
 header > div:last-child {

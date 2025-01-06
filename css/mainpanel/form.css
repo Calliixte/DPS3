@@ -35,5 +35,5 @@ input#submit {
     height: 3rem;
     border : none;
     border-radius: 15px;
-    box-shadow: var(--basic-button-shadow);
+    box-shadow: var(--basic-shadow);
 } 

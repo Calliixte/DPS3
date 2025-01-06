@@ -11,7 +11,8 @@ class controleurVote{
             $idVoteTraite= $vote->get('idVote');
             
             $titreVote= $vote->get("titreVote");
-            $titre=$titreVote;  
+            $titre=$titreVote; 
+            $styleSpecial="vote"; 
             include('vues/debut.php');
             ControleurApplication::afficherHeader();
             echo '<main>';

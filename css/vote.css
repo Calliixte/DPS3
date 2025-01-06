@@ -1,0 +1,5 @@
+main > div{
+    border-radius: 1rem;
+    box-shadow: var(--basic-shadow);
+    padding: 1rem;
+}

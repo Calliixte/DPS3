@@ -18,7 +18,7 @@ div#default{
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
-    box-shadow: var(--basic-button-shadow);
+    box-shadow: var(--basic-shadow);
     min-width: 30rem;
 }
 
