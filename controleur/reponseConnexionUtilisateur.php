@@ -3,13 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Titre</title>
+        <title>Connexion ...</title>
     </head>
     <body>
 
-        <!-- Ce controleur est définitivement pas parfait, que ce soit le return qui je sais pas trop comment on récup
-        ou les require once de partout, pour l'instant il permet quand meme de tester la structure donc ça va mais
-        a changer la maniere dont c'est organisé cette affaire  -->
 
         <?php
 
@@ -35,9 +32,9 @@
             else{ 
                 $urlErreur = "../routeur.php?actionConnexion=Connexion";
                 echo "Mot de passe incorrect, vous allez pouvoir ressayer";
-                echo " <meta http-equiv=\"refresh\" content=\"2; url=$urlErreur\"> ";
+                echo " <meta http-equiv=\"refresh\" content=\"1; url=$urlErreur\"> ";
 
-            }  //je sais quand meme pas trop comment on va repasser la valeur au programme initial, la méthode devrait être dans le routeur, mais pour un mvc ça serait bizarre, en tout cas on a le code y'a plus qu'a le bouger
+            }  
 
             ?>
     </body>

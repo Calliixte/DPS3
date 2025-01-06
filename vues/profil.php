@@ -25,5 +25,4 @@ echo "<p>Date de naissance : $dateNaissance</p>";
 echo "</div>";
 ?>
 
-
 </body>
