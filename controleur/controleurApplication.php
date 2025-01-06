@@ -8,11 +8,12 @@ public static function afficherHeader(){
     if(isset($_SESSION["utilisateurCourant"])){
         $idUser = $_SESSION["utilisateurCourant"]->get('idUtilisateur');
 
-        $photoProfil = "img/profilePicture/$idUser.jpg";
-        if(!file_exists($photoProfil)){
+        $listePp = glob("img/profilePicture/$idUser.*"); //renvoie une liste de fichiers qui on le nom idUser.extension
+        if (!empty($listePp)) {
+            $photoProfil = $listePp[0]; //Dans le cas ou on a trouvé qqch, on prend le premier car ça sera le seul
+        }else{
             $photoProfil = "img/profilePicture/0.jpg";
         }
-        
         include('vues/header.php');
         foreach($_SESSION['utilisateurCourant']->get('listeGroupes') as $groupe){
             include('vues/boutonGroupe.php');
@@ -25,7 +26,7 @@ public static function afficherHeader(){
     }
    
 
-    include('vues/boutonOptions.php');
+    include("vues/boutonOptions.php");
     echo "<a href=routeur.php?actionConnexion=Connexion> se déconnecter </a> ";
     echo "</header>";
 }
@@ -61,7 +62,10 @@ public static function afficherPageAccueil(){
         include('vues/debut.php');
         self::afficherHeader();
         echo '<main>';
-        echo $_SESSION["utilisateurCourant"]; 
+        $nomU = $_SESSION["utilisateurCourant"]->get("nom");
+        $prenomU = $_SESSION["utilisateurCourant"]->get("prenom");
+        $pseudoU = $_SESSION["utilisateurCourant"]->get("pseudo");
+        include("vues/accueil.php");
     }else{
         $styleSpecial = 'connexion';
         $_SESSION["previous"]="connexion";
@@ -71,6 +75,19 @@ public static function afficherPageAccueil(){
         self::afficherConnexion();
     }
 
+    echo "</main>";
+    include('vues/footer.html');
+    include('vues/popups/addGroup.php');
+    include('vues/fin.html');
+}
+
+public static function afficherProfil(){
+    include('vues/debut.php');
+    self::afficherHeader();
+    echo '<main>';
+    echo"<pre>";
+    print_r($_SESSION["utilisateurCourant"]->getAllInfoUtilisateur());
+    echo"</pre>";
     echo "</main>";
     include('vues/footer.html');
     include('vues/popups/addGroup.php');

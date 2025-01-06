@@ -144,6 +144,13 @@
                        photo de Profil : $this->lienPhotoProfil<br>
                        numéro de role : $this->role</p>";
         }
+        public function getAllInfoUtilisateur(){
+            $requete = "select pseudo,nom,prenom,dateNaissance,mail,adresse,estVerifie from `Utilisateur` WHERE idUtilisateur= :log ";
+            $statement = Connexion::pdo()->prepare($requete);
+            $statement->execute([':log' => $this->idUtilisateur]);
+            $resultat = $statement->fetch(PDO::FETCH_ASSOC);
+            return $resultat;
+        }
 
         public function display(){
             echo $this;
