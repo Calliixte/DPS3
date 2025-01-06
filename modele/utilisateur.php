@@ -135,6 +135,10 @@
             return -1;
         }
 
+        public function addGroupe($groupe){
+            $this->listeGroupes[] = $groupe;
+        }
+
         public function __toString(){
             return "<h3>Utilisateur</h3>
                     <p>id : $this->idUtilisateur<br>

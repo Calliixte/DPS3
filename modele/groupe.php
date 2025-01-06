@@ -99,6 +99,10 @@
             return $listeGroupes;
         }
 
+        public function addVote($vote){
+            $this->listeVote[] = $vote;
+        }
+
         public function fillEtiquettes(){
             $requete = "SELECT idEtiquette, labelEtiquette, couleur 
                         FROM Etiquette
