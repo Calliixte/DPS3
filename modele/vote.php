@@ -96,6 +96,14 @@ Class Vote{
         return $resultat;
     }
     
+    public static function updateDateCreation($idVote, $date) {
+        $requete = "UPDATE Vote SET dateCreationVote=:dateCreationVote WHERE idVote=:idVote;";
+        $statement = Connexion::pdo()->prepare($requete);
+        $statement->execute([
+            ":dateCreationVote" => Date::toSqlDateTime($date),
+            ":idVote" => $idVote
+        ]);
+    }
 
     public static function getVote(int $idVote, int $idUser=NULL){
         $requete = "SELECT  idVote, titreVote, lienPhoto, 

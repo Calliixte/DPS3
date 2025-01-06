@@ -13,8 +13,9 @@ if(Vote::accepterVote($_GET["id"],$_SESSION["utilisateurCourant"]->get("role")) 
     exit();
 } 
 else{
-    $_SESSION["groupeCourant"]->accepterVote($_GET["id"]);
+    $date = $_SESSION["groupeCourant"]->accepterVote($_GET["id"]); //retourne la date de modification
     
+    Vote::updateDateCreation($_GET["id"], $date);
     echo "Proposition acceptée, vous allez être redirigé.e sur la page des propositions à accepter";
     echo "<meta http-equiv=\"refresh\" content=\"1; url=../routeur.php?controleur=controleurGroupe&action=afficherNonAcceptes\">";
 }

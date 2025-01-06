@@ -140,11 +140,18 @@
         }
 
         public function accepterVote($idVote){
+            $currentDate = new Datetime("now");
             foreach($this->listeVote as $vote){
                 if($vote->get("idVote") == $idVote){
                     $vote->set("propositionAcceptee", true);
+                    $vote->set("discussionOuverte", true);
+                    $vote->set("dateCreationVote", $currentDate);
+
+                    return $currentDate;
                 }
             }
+            
+            return -1;
         }
 
         public function getRoleMembre($idU){
