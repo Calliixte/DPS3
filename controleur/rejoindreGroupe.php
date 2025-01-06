@@ -4,7 +4,7 @@ require_once("../config/connexion.php");
 Connexion::connect();
 session_start();
 if (!isset($_SESSION['utilisateurCourant'])){
-    echo "<b>Erreur</b> : vous devez être connecté pour utilser ce lien";
+    echo "<b>Erreur</b> : vous devez être connecté pour utiliser ce lien";
     exit();
 }
 //considerer crypter les liens
@@ -22,6 +22,6 @@ try{
     echo "Vous n'avez pas pu être ajouté.e au groupe";
 }
 
-//echo "<meta http-equiv=\"refresh\" content=\"1; url= ../routeur.php\">";
+echo "<meta http-equiv=\"refresh\" content=\"1; url= ../routeur.php\">";
 
 ?>
