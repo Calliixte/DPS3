@@ -33,9 +33,6 @@ Class Message{
         
         $listeMessages = [];
         while($ligne = $resultat->fetch(PDO::FETCH_ASSOC)) {
-            // echo "<pre>";
-            // print_r($ligne);
-            // echo "</pre>";
             $message = new Message(... $ligne);
             $message->listeReaction = Reaction::getReactionMessage($message->idMessage);
             $listeMessages[] = $message;

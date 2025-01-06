@@ -1,7 +1,7 @@
 <?php
 foreach($listeMessage as $message){
 
-            echo $idVotant . " group:  " . $idGroupeVotant;
+            echo $message->get("idAuteur") . " group:  " . $idGroupeVotant;
             $contenu = $message->get("texte");
             //$auteur = $message ->get("auteur")->get("pseudo"); pour l'instant le message n'a pas d'auteur il faut finir la classe
             $datePub = $message->getDateEnvoi();

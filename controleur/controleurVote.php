@@ -1,10 +1,14 @@
 
 <?php
-
 class controleurVote{
         public static function afficherVoteGros(){
             $idVoteActuel=$_GET["id"];
             $vote =  $_SESSION['groupeCourant']->get("listeVote")[$idVoteActuel];
+            
+            //Variable des messages
+            $idVotant = $_SESSION["utilisateurCourant"]->get("idUtilisateur");
+            $idGroupeVotant = $_SESSION["groupeCourant"]->get("idGroupe");
+            $idVoteTraite= $vote->get('idVote');
             
             $titreVote= $vote->get("titreVote");
             $titre=$titreVote;            
@@ -42,7 +46,7 @@ class controleurVote{
             echo "<a href=routeur.php> retour </a> ";
             echo '</main>';
             include('vues/footer.html');
-            include('vues/popups/addGroup.html');
+            include('vues/popups/addGroup.php');
             include('vues/fin.html');
             
         }
