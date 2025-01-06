@@ -128,7 +128,6 @@ Class Vote{
         return $vote;
     }
 
-
     public static function getVotesGroupe($idGroupe){
         $requete = "SELECT  idVote, titreVote, lienPhoto, 
                             delaiDiscussion, delaiVote, dateCreationVote,
@@ -223,7 +222,7 @@ Class Vote{
 
         $currentDate = new DateTime("now");
 
-        // echo $dateFin->format("Y/m/d")." ".$currentDate->format("Y/m/d");
+        echo $dateFin->format("Y/m/d")." ".$currentDate->format("Y/m/d");
         if($currentDate >= $dateFin){ //Si la date est passé
             $this->discussionOuverte = false; //On ferme la discussion
             $this->voteOuvert = true; //On ouvre le vote

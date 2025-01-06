@@ -36,7 +36,7 @@
         <input type="range" min=0 max=30 step=1 id="delaiDiscussion" name="delaiDiscussion">
 
         <label for="delaiVote">Durée du vote</label>
-        <input type="range" min=1 max=30 step=1 id="delaiVote" name="delaiVote">
+        <input type="range" min=0 max=30 step=1 id="delaiVote" name="delaiVote">
 
         <label for="voteBlanc">Autoriser le vote blanc</label>
         <input id="voteBlanc" type="Checkbox" name="voteBlanc" value=1>
