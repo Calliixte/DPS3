@@ -1,7 +1,7 @@
 <pre>
     <?php
         //Checkbox, on si elle n'est pas coché elle ne sera pas transmise
-        $voteBlancCompte = isset($_POST["voteBlancCompte"]); 
+        $voteBlancCompte = (int) isset($_POST["voteBlancCompte"]); 
 
         $idGroupe = Groupe::insererGroupe($_POST["nomGroupe"],$_POST["description"], $_POST["regles"], $voteBlancCompte);
         $idUser = $_SESSION["utilisateurCourant"]->get("idUtilisateur");
