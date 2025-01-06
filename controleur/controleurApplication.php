@@ -85,10 +85,10 @@ public static function afficherProfil(){
     include('vues/debut.php');
     self::afficherHeader();
     echo '<main>';
-    echo"<pre>";
-    print_r($_SESSION["utilisateurCourant"]->getAllInfoUtilisateur());
-    echo"</pre>";
-    echo "</main>";
+    $infoUtilisateur=$_SESSION["utilisateurCourant"]->getAllInfoUtilisateur();
+    include('vues/profil.php');
+
+    echo '</main>';
     include('vues/footer.html');
     include('vues/popups/addGroup.php');
     include('vues/fin.html');
