@@ -33,7 +33,7 @@
         ?>
 
         <label for="delaiDiscussion">Délais de discussion</label>
-        <input type="range" min=1 max=30 step=1 id="delaiDiscussion" name="delaiDiscussion">
+        <input type="range" min=0 max=30 step=1 id="delaiDiscussion" name="delaiDiscussion">
 
         <label for="delaiVote">Durée du vote</label>
         <input type="range" min=1 max=30 step=1 id="delaiVote" name="delaiVote">

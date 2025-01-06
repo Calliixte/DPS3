@@ -45,7 +45,10 @@
             for($i = 0;$i<count($liste);$i++){
                 //   /!\    $liste[$i] est un objet Vote
                 if($liste[$i]->get('propositionAcceptee')){
+                    $liste[$i]->verifierDelaiDiscussion(); //On vérifie si la discussion est ouverte
+                    $liste[$i]->verifierDelaiVote(); //On vérifie si le vote est ouvert
                     $liste[$i]->fillEtiquettes();
+
                     $idVote = $liste[$i]->get("idVote");
                     $titreVote = $liste[$i]->get("titreVote");
                     $listeEtiquette = $liste[$i]->get("listeEtiquettes");

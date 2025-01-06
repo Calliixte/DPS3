@@ -21,12 +21,24 @@ class controleurVote{
             $listeMessage = $vote -> get("listeMessages");
             echo "<div class=\"baseVote\">";
             include ("vues/baseGrandVote.php");
-            // if (date + delai > sysdate : afficher votes fermés else : faire ce programme
-            include("vues/choixGrandVote.php");
+            
+            if($vote->get("voteOuvert")){
+                include("vues/choixGrandVote.php");
+            }
+            
             echo "</div>";
 
             //puis
+            echo "<div class=\"discussionVote\">";
+            echo "<h2>Discussion</h2>";
+
+            if($vote->get("discussionOuverte")){
+                include ("vues/formulaireMessage.php");
+            }
+
             include ("vues/discussionGrandVote.php");
+            echo "</div>";
+
             echo "<a href=routeur.php> retour </a> ";
             echo '</main>';
             include('vues/footer.html');

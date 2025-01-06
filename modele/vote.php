@@ -22,6 +22,9 @@ Class Vote{
     private ?float $evalBudget;
     private ?bool $propositionAcceptee;
 
+    private bool $voteOuvert;
+    private bool $discussionOuverte;
+
     private array $choixVote;
     private array $listeEtiquettes;
     private array $listeMessages;
@@ -65,6 +68,9 @@ Class Vote{
 
             $this->evalBudget = $evalBudget;
             $this->propositionAcceptee = $propositionAcceptee;
+
+            $this->voteOuvert = false;
+            $this->discussionOuverte = $propositionAcceptee;
         }
     }
 
@@ -110,6 +116,7 @@ Class Vote{
         
         $vote->listeMessages = Message::getMessages($idVote);
         $vote->listeReactions = Reaction::getReactionVote($idVote);
+        $vote->discussionOuverte = $vote->propositionAcceptee;
         return $vote;
     }
 
@@ -199,6 +206,35 @@ Class Vote{
                 'lienPhoto' => $lien
             ]
         );
+    }
+
+    public function verifierDelaiDiscussion(){
+        //La date de fin de discussion = date création vote + délai discussion
+        $dateFin = $this->dateCreationVote;
+        $dateFin->add($this->delaiDiscussion);
+
+        $currentDate = new DateTime("now");
+
+        // echo $dateFin->format("Y/m/d")." ".$currentDate->format("Y/m/d");
+        if($currentDate >= $dateFin){ //Si la date est passé
+            $this->discussionOuverte = false; //On ferme la discussion
+            $this->voteOuvert = true; //On ouvre le vote
+        }
+    }
+
+    public function verifierDelaiVote(){
+        //Le vote est ouvert quand le délai discussion est fini
+        //On a donc dateFin = date création + délai discussion + délai vote
+        $dateFin = $this->dateCreationVote;
+        $dateFin->add($this->delaiDiscussion);
+        $dateFin->add($this->delaiVote);
+
+        $currentDate = new DateTime("now");
+
+        echo $dateFin->format("Y/m/d")." ".$currentDate->format("Y/m/d");
+        if($currentDate >= $dateFin){ //Si la date est passé
+            $this->voteOuvert = false; //On ferme le vote
+        }
     }
 
     public function addMessage($message){

@@ -2,6 +2,7 @@
 require_once("../config/connexion.php");
 Connexion::connect();
 session_start();
+
 foreach ($_POST as $key => $value) {
     if($key == "idUtilisateur"){
         $idUtilisateur = $value;
@@ -28,7 +29,6 @@ $stmt->bindParam(5, $idGroupe, PDO::PARAM_INT);
 $stmt->execute();
 $urlBack = "../routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=$idGroupe";
 
-$listeVote = $_SESSION["groupeCourant"]->get('listeVote'); //Je sais pas utiliser la variable session
 
 foreach($listeVote as $vote){
     if($vote->get('idVote') == $idVote){
