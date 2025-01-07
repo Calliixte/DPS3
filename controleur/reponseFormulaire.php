@@ -6,7 +6,7 @@
             if(isset($_GET["form"])){
                 $formulaire = $_GET["form"];
             } else{
-                echo "a";
+                echo "Erreur : aucun formulaire spécifié";
                 exit();
             }
 
