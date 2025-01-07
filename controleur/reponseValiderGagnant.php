@@ -1,14 +1,13 @@
 <?php
     if(isset($_GET["idChoix"])){
         $idChoix = $_GET["idChoix"];
-
         $idVote = $_SESSION["voteCourant"]->get("idVote");
-
+        
         //Définir le choix gagnant
         Vote::validerChoix($idVote, $idChoix); //insérer le choix dans la base
         $_SESSION["voteCourant"]->set("idChoixGagnant", $idChoix); //Stocker l'id dans le vote
+        echo "gagnant validé !";
 
-        echo "vote validé !";
     }else{
         echo "erreur, aucun choix spécifié";
         exit();

@@ -15,8 +15,6 @@
                   }
                   echo "/>";
                   echo"<label for=$idCv>$nom</label>";
-                  $nbVote = $choix["nbVote"];
-                  echo " : $nbVote votes";
                   if($choix["aVote"]){
                     echo "           |Votre vote est enregistré sur cette option";
                   }
@@ -31,7 +29,7 @@
           echo "</fieldset>";
           $idVotant = $_SESSION["utilisateurCourant"]->get("idUtilisateur");
           $idGroupeVotant = $_SESSION["groupeCourant"]->get("idGroupe");
-          $idVoteTraite= $vote->get('idVote');
+          $idVoteTraite= $_SESSION["voteCourant"]->get('idVote');
           echo "<input id=\"idUtilisateur\" name=\"idUtilisateur\" type=\"hidden\" value=$idVotant />";
           echo "<input id=\"idGroupe\" name=\"idGroupe\" type=\"hidden\" value=$idGroupeVotant />";
           echo "<input id=\"idVote\" name=\"idVote\" type=\"hidden\" value=$idVoteTraite />";

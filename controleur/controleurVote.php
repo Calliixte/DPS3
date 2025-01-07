@@ -52,6 +52,7 @@ class controleurVote{
             echo '</main>';
             include('vues/footer.html');
             include('vues/popups/addGroup.php');
+            include('vues/popups/warningValider.php');
             include('vues/fin.html');
             
         }

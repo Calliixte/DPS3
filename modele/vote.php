@@ -231,6 +231,26 @@ Class Vote{
         );
     }
 
+    public function getChoixVoteById($idChoix){
+        foreach($this->choixVote as $choix){
+            if($choix["idChoixVote"] == $idChoix){
+                return $choix;
+            }
+        }
+
+        return null;
+    }
+
+    public function getIdMaxChoix(){
+        $max = 0;
+        foreach($this->choixVote as $choix){
+            $max = max($max, $choix["nbVote"]);
+            
+        }
+
+        return $max;
+    }
+
     public function verifierDelaiDiscussion(){
         //La date de fin de discussion = date création vote + délai discussion
         $dateFin = $this->dateCreationVote;

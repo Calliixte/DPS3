@@ -3,3 +3,7 @@ main > div{
     box-shadow: var(--basic-shadow);
     padding: 1rem;
 }
+
+.boiteChoixVoteGagnant{
+    border: solid red;
+}
