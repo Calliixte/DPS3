@@ -9,6 +9,7 @@
                 echo "Erreur : aucun formulaire spécifié";
                 exit();
             }
+            $titre = "Chargement";
 
             include('vues/debut.php');
             echo '<main>';

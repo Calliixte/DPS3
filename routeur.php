@@ -36,10 +36,12 @@ if(isset($_GET["action"])){
     }
 }
 
-if(!isset($_SESSION["utilisateurCourant"])) //On vérifie si la session a expiré
-{
-    $action = "afficherConnexion";
-    $controleur="controleurApplication";
+//On vérifie si l'utilisateur et connecté, et qu'il n'est pas en train de s'inscrire ou de se connecter
+if(!isset($_SESSION["utilisateurCourant"])){
+    if(isset($_GET["form"]) && $_GET["form"] != "ConnexionUtilisateur" && $_GET["form"] != "Inscription"){
+        $action = "afficherConnexion";
+        $controleur="controleurApplication";
+    }
 }
 
 $controleur::$action();

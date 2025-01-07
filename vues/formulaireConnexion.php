@@ -7,7 +7,7 @@
         }
     }
     ?> 
-    <form action="controleur/reponseConnexionUtilisateur.php" method="POST" enctype="multipart/form-data">
+    <form action="routeur.php?controleur=reponseFormulaire&action=reponse&form=ConnexionUtilisateur" method="POST" enctype="multipart/form-data">
         <div class="field">
             <label for="u_addr">Email ou Nom d'utilisateur</label>
             <input type="text" id="u_addr" name="login_utilisateur" placeholder="Email ou Login"/>			
