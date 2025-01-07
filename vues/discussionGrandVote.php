@@ -22,10 +22,11 @@ foreach($listeMessage as $message){
             $emoji2 = urlencode("👍");
             $emoji3 = urlencode("👎");
             $emoji4 = urlencode("👏");
-            $url1="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji1&idM=$idMsg";
-            $url2="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji2&idM=$idMsg";
-            $url3="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji3&idM=$idMsg";
-            $url4="controleur/reponseReagirMsg.php?idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji4&idM=$idMsg";
+
+            $url1="routeur.php?controleur=reponseFormulaire&action=reponse&form=ReagirMsg&idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji1&idM=$idMsg&idVote=$idVoteActuel";
+            $url2="routeur.php?controleur=reponseFormulaire&action=reponse&form=ReagirMsg&idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji2&idM=$idMsg&idVote=$idVoteActuel";
+            $url3="routeur.php?controleur=reponseFormulaire&action=reponse&form=ReagirMsg&idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji3&idM=$idMsg&idVote=$idVoteActuel";
+            $url4="routeur.php?controleur=reponseFormulaire&action=reponse&form=ReagirMsg&idU=$idReacteur&idG=$idGroupeVotant&emoji=$emoji4&idM=$idMsg&idVote=$idVoteActuel";
             echo "<a href=$url1>😂</a>"; 
             echo "<a href=$url2>👍</a>";
             echo "<a href=$url3>👎</a>";
