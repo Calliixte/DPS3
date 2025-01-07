@@ -3,7 +3,7 @@
 $couleur = $_POST["couleur"];
 $nom = $_POST["txtEti"];
 $idGroupeActuel = $_SESSION["groupeCourant"]->get("idGroupe");
-$requete = "INSERT INTO `Etiquette`(`idGroupe`, `couleur`,`intitulé`) VALUES (,?,?)"; //j'ai pas mis d'idEtiquette pck normalement c'est en autoincremenet
+$requete = "INSERT INTO `Etiquette`(`idGroupe`, `couleur`,`labelEtiquette`) VALUES (?,?,?)"; //j'ai pas mis d'idEtiquette pck normalement c'est en autoincremenet
 //j'ai pas la composition de la base donc ça s'appelle peut être pas comme ça
 $stmt = Connexion::pdo()->prepare($requete);
 $stmt->bindParam(1, $idGroupeActuel, PDO::PARAM_INT);

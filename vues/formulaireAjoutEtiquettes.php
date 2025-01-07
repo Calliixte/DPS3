@@ -1,6 +1,6 @@
 <div id="default">
     <h1>Profil</h1>
-    <form action="controleur/reponseAjouterEtiquette.php" method="POST" enctype="multipart/form-data">
+    <form action="routeur.php?controleur=reponseFormulaire&action=reponse&form=AjouterEtiquette" method="POST" enctype="multipart/form-data">
         <div class="field">
         <label for="txtEti">
                 Nom de l'etiquette

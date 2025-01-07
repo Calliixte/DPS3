@@ -65,6 +65,7 @@
                 }
                 
             }
+            echo "<a href=routeur.php?controleur=controleurGroupe&action=ajouterEtiquette>nouvelle etiquette</a>";
             echo "<a href=routeur.php?controleur=controleurGroupe&action=nouvelleProposition>nouvelle proposition</a>";
             echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherNonAcceptes>Voir les propositions en cours de traitement</a>";
             $popupI = "#popup-invitation";
@@ -92,6 +93,16 @@
             ControleurApplication::AfficherHeader();
             echo '<main>';
             include('vues/formulaireVote.php');
+            echo '</main>';
+            include('vues/footer.html');
+            include('vues/popups/addGroup.php');
+            include('vues/fin.html');
+        }
+
+        public static function ajouterEtiquette(){
+            include('vues/debut.php');
+            echo '<main>';
+            include('vues/formulaireAjoutEtiquettes.php');
             echo '</main>';
             include('vues/footer.html');
             include('vues/popups/addGroup.php');
