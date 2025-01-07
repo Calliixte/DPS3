@@ -1,6 +1,6 @@
 <div id="default">
     <h1>Profil</h1>
-    <form action="routeur.php?controleur=reponseFormulaire&action=ModifierProfil" method="POST" enctype="multipart/form-data">
+    <form action="routeur.php?controleur=reponseFormulaire&action=reponse&form=ModifierProfil" method="POST" enctype="multipart/form-data">
         <label for="imageUpload">photo de profil :</label>
         
         <div>
