@@ -290,8 +290,6 @@ Class Vote{
         return $resultat->fetch()["descriptionVote"];
 
     }
-
-
     public function fillChoixVote($idUser=NULL){
         $requete = "SELECT idChoixVote, intitule, CountVoteChoix(idChoixVote) AS nbVote FROM ChoixVote WHERE idVote=$this->idVote;";
         $resultat = Connexion::pdo()->query($requete);
@@ -310,9 +308,8 @@ Class Vote{
 
     // à mettre dans la classe Utilisateur en static et sans $idUser en paramètre
     public function aChoisi(int $idUser, int $idChoixVote){
-        $requete = "SELECT COUNT(*) AS 'nbVote' FROM ChoixMembre 
-                    WHERE idChoixVote = $idChoixVote
-                    AND idUtilisateur = $idUser;";
+        $requete = "SELECT CountVoteChoix($idChoixVote) AS 'nbVote' FROM ChoixMembre 
+                    WHERE idUtilisateur = $idUser;";
 
         $resultat = Connexion::pdo()->query($requete);
         

@@ -4,8 +4,8 @@
     echo " ";
   }
   
-  echo "date parution delai auteur (on a pas les variables actuellement a voir dmn cmnt on fait)";
-  echo $titreVote;
-  echo " [image du vote ]";
-  echo $descriptionVote;
+  echo "date parution delai auteur";
+  echo "<h1>$titreVote</h1>";
+  echo "<img src='' alt='image du vote'>";
+  echo "<p>$descriptionVote</p>";
 ?>
