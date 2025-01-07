@@ -3,33 +3,33 @@
 class controleurVote{
         public static function afficherVoteGros(){
             $idVoteActuel=$_GET["id"];
-            $vote =  $_SESSION['groupeCourant']->get("listeVote")[$idVoteActuel];
+            $_SESSION["voteCourant"] =  $_SESSION['groupeCourant']->get("listeVote")[$idVoteActuel];
             
             //Variable des messages
             $idVotant = $_SESSION["utilisateurCourant"]->get("idUtilisateur");
             $idGroupeVotant = $_SESSION["groupeCourant"]->get("idGroupe");
-            $idVoteTraite= $vote->get('idVote');
+            $idVoteTraite= $_SESSION["voteCourant"]->get('idVote');
             
-            $titreVote= $vote->get("titreVote");
+            $titreVote= $_SESSION["voteCourant"]->get("titreVote");
             $titre=$titreVote; 
             $styleSpecial="vote"; 
             include('vues/debut.php');
             ControleurApplication::afficherHeader();
             echo '<main>';
 
-            $vote->fillChoixVote($_SESSION["utilisateurCourant"]->get("idUtilisateur")); //met a jour l'objet vote
-            $listeChoixVote = $vote ->get("choixVote");
+            $_SESSION["voteCourant"]->fillChoixVote($_SESSION["utilisateurCourant"]->get("idUtilisateur")); //met a jour l'objet vote
+            $listeChoixVote = $_SESSION["voteCourant"] ->get("choixVote");
             //$dateCreation = $vote->get("dateCreation");
-            $descriptionVote = $vote ->getDescription(); 
-            $listeEtiquette = $vote-> get("listeEtiquettes") ;
-            $listeMessage = $vote -> get("listeMessages");
+            $descriptionVote = $_SESSION["voteCourant"]->getDescription(); 
+            $listeEtiquette = $_SESSION["voteCourant"]->get("listeEtiquettes") ;
+            $listeMessage = $_SESSION["voteCourant"]->get("listeMessages");
             echo "<div class=\"baseVote\">";
             include ("vues/baseGrandVote.php");
             
-            if($vote->get("voteOuvert")){
+            if($_SESSION["voteCourant"]->get("voteOuvert")){
                 include("vues/choixGrandVote.php");
             }else{
-                if($vote->get("discussionOuverte")){
+                if($_SESSION["voteCourant"]->get("discussionOuverte")){
                     echo "<h2> le vote n'est pas encore ouvert </h2>";
                 }else{
                     include("vues/resultatGrandVote.php");

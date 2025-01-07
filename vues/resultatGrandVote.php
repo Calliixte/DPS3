@@ -2,18 +2,15 @@
 <fieldset>
   <?php
     $userRole = $_SESSION["utilisateurCourant"]->get("role");
-    if($userRole == Utilisateur::ADMIN || $userRole == Utilisateur::ASSESSEUR) {
-      echo "valider résultat<br>";
-      foreach( $listeChoixVote as $choix){
-        $intitule = $choix["intitule"];
-        $nbVote = $choix["nbVote"];
-        echo "<div class='boiteChoixVote'><p>$intitule : $nbVote</p></div>";
-    }
-    } else{
-      foreach( $listeChoixVote as $choix){
-          $intitule = $choix["intitule"];
-          $nbVote = $choix["nbVote"];
-          echo "<div class='boiteChoixVote'><p>$intitule : $nbVote</p></div>";
+
+    foreach( $listeChoixVote as $choix){
+      $idChoix = $choix["idChoixVote"];
+      $intitule = $choix["intitule"];
+      $nbVote = $choix["nbVote"];
+      echo "<div class='boiteChoixVote'><p>$intitule : $nbVote</p></div>";
+
+      if($userRole == Utilisateur::ADMIN || $userRole == Utilisateur::ASSESSEUR) {
+        echo "<a href='routeur.php?controleur=reponseFormulaire&action=reponse&form=ValiderGagnant&idChoix=$idChoix'>Valider Choix Gagnant</a>";
       }
     }
   ?>

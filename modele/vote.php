@@ -10,7 +10,7 @@ Class Vote{
     private int $idVote;
     private string $titreVote;
     private ?string $lienPhoto;
-    
+
     private ?DateInterval $delaiDiscussion;
     private ?DateInterval $delaiVote;
     private DateTime $dateCreationVote;
@@ -18,6 +18,7 @@ Class Vote{
     private string $codeSuffrage;
     private bool $autoriserVoteBlanc;
     private bool $autoriserPlusieursChoix;
+    private ?int $idChoixGagnant;
 
     private ?float $evalBudget;
     private ?bool $propositionAcceptee;
@@ -46,7 +47,7 @@ Class Vote{
     public function __construct(int $idVote=NULL, string $titreVote=NULL, string $lienPhoto=NULL,
                                 string $delaiDiscussion=NULL, string $delaiVote=NULL, string $dateCreationVote=NULL,
                                 string $codeSuffrage=NULL, bool $autoriserVoteBlanc=NULL, bool $autoriserPlusieursChoix=NULL,
-                                float $evalBudget=NULL, bool $propositionAcceptee=NULL){
+                                int $idChoixGagnant=NULL, float $evalBudget=NULL, bool $propositionAcceptee=NULL){
                                     
         if(!is_null($idVote)){
             $this->idVote = $idVote;
@@ -65,7 +66,9 @@ Class Vote{
 
             $this->autoriserVoteBlanc = $autoriserVoteBlanc;
             $this->autoriserPlusieursChoix = $autoriserPlusieursChoix;
-
+            
+            $this->idChoixGagnant = $idChoixGagnant;
+            
             $this->evalBudget = $evalBudget;
             $this->propositionAcceptee = $propositionAcceptee;
 
@@ -109,7 +112,7 @@ Class Vote{
         $requete = "SELECT  idVote, titreVote, lienPhoto, 
                             delaiDiscussion, delaiVote, dateCreationVote,
                             codeSuffrage, autoriserVoteBlanc, autoriserPlusieursChoix,
-                            propositionAcceptee, evalBudget
+                            idChoixGagnant, propositionAcceptee, evalBudget
                     FROM Vote WHERE idVote = $idVote;";
         $resultat = Connexion::pdo()->query($requete);
 
@@ -132,7 +135,7 @@ Class Vote{
         $requete = "SELECT  idVote, titreVote, lienPhoto, 
                             delaiDiscussion, delaiVote, dateCreationVote,
                             codeSuffrage, autoriserVoteBlanc, autoriserPlusieursChoix,
-                            propositionAcceptee, evalBudget
+                            idChoixGagnant, propositionAcceptee, evalBudget
                     FROM Vote WHERE idGroupe = $idGroupe";
         $resultat = Connexion::pdo()->query($requete);
 
@@ -202,6 +205,15 @@ Class Vote{
         }
 
         return $idVote;
+    }
+
+    public static function validerChoix($idVote, $idChoix){
+        $requete = "UPDATE Vote SET idChoixGagnant=:idChoix WHERE idVote=:idVote";
+        $statement = Connexion::pdo()->prepare($requete);
+        $statement->execute([
+            ":idVote"=> $idVote,
+            ":idChoix"=> $idChoix
+        ]);
     }
 
     public static function setLienPhoto($idVote, $lien) {
