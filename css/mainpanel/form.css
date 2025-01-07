@@ -1,3 +1,9 @@
+form img {
+    aspect-ratio: 1/1;
+    width: 7rem;
+    border-radius: 100%;
+}
+
 form {
     margin: 0.5rem;
     background-color: white;

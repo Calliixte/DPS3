@@ -47,6 +47,27 @@
             }
         }
         
+        public static function updateUtilisateur($idUtilisateur, $nom, $prenom, $pseudo, $dateNaissance, $adresse, $mail){
+            $requete = "UPDATE Utilisateur  SET pseudo = :pseudo, 
+                                                nom = :nom, 
+                                                prenom = :prenom, 
+                                                dateNaissance = :dateNaissance, 
+                                                mail = :mail 
+                                            WHERE idUtilisateur = :idUtilisateur";
+
+            $statement = Connexion::pdo()->prepare($requete);
+
+            $statement->execute([
+                ":idUtilisateur"=> $idUtilisateur,
+                ":nom"=> $nom,
+                ":prenom"=> $prenom,
+                ":pseudo"=> $pseudo,
+                ":dateNaissance"=> $dateNaissance,
+                ":adresse"=> $adresse,
+                ":mail"=> $mail
+            ]);
+        }
+
         public static function insererUtilisateur($nomUtilisateur, $prenomUtilisateur, $pseudo, $mdp, $ddn,$email,$adresse,$lienPdp){
             $requete = "SELECT max(idUtilisateur)+1 FROM `Utilisateur` WHERE 1; ";
             $resultat = Connexion::pdo()->query($requete);

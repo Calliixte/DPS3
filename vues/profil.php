@@ -28,6 +28,7 @@
             echo "<p>Date de naissance :</p> <p class=$class>$dateNaissance</p>";
             echo "</div>";
             ?>
+            <a href="routeur.php?controleur=controleurUtilisateur&action=modifierProfil">Modifier</a>
         </div>
     </div>
 </body>
