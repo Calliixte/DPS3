@@ -258,7 +258,6 @@ Class Vote{
 
         $currentDate = new DateTime("now");
 
-        echo $dateFin->format("Y/m/d")." ".$currentDate->format("Y/m/d");
         if($currentDate >= $dateFin){ //Si la date est passé
             $this->discussionOuverte = false; //On ferme la discussion
             $this->voteOuvert = true; //On ouvre le vote
@@ -274,7 +273,6 @@ Class Vote{
 
         $currentDate = new DateTime("now");
 
-        echo $dateFin->format("Y/m/d")." ".$currentDate->format("Y/m/d");
         if($currentDate >= $dateFin){ //Si la date est passé
             $this->voteOuvert = false; //On ferme le vote
         }
