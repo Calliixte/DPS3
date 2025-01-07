@@ -58,14 +58,13 @@
                     $txt = "Voter";
                     $role = $_SESSION['utilisateurCourant']->get('role');
                     if ($role == Utilisateur::ADMIN || $role == Utilisateur::ORGANISATEUR){ //est administrateur ou organisateur de vote
-                    $urlSuppr = "routeur.php?controleur=controleurVote&action=supprimerVote&id=$i";
-                    $txtSuppr = "Supprimer";
+                        $urlSuppr = "routeur.php?controleur=controleurVote&action=supprimerVote&id=$i";
+                        $txtSuppr = "Supprimer";
                     }
                     include('vues/petitVote.php');
                 }
                 
             }
-            // $groupe->display();
             echo "<a href=routeur.php?controleur=controleurGroupe&action=nouvelleProposition>nouvelle proposition</a>";
             echo "<a href=routeur.php?controleur=controleurGroupe&action=afficherNonAcceptes>Voir les propositions en cours de traitement</a>";
             $popupI = "#popup-invitation";

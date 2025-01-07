@@ -10,7 +10,7 @@
       echo "<div class='boiteChoixVote'><p>$intitule : $nbVote</p></div>";
 
       if($userRole == Utilisateur::ADMIN || $userRole == Utilisateur::ASSESSEUR) {
-        echo "<a href='routeur.php?controleur=reponseFormulaire&action=reponse&form=ValiderGagnant&idChoix=$idChoix'>Valider Choix Gagnant</a>";
+        echo "<a href='routeur.php?controleur=reponseFormulaire&action=reponse&form=ValiderGagnant&idChoix=$idChoix&idVoteInList=$idVoteActuel'>Valider Choix Gagnant</a>";
       }
     }
   ?>
