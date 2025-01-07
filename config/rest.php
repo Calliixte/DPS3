@@ -1,12 +1,23 @@
 <?php 
 Class Rest{
     /* Va falloir globaliser le get a un moment la quand meme*/
-    public static function getGroupe(int $idGroupe){
+    public static function getGroupe(int $idGroupe, int $votes=0){
         $requete = "SELECT idGroupe, nomGroupe FROM Groupe WHERE idGroupe = $idGroupe;";
         $resultat = Connexion::pdo()->query($requete);
         $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
-        
         $data = $resultat->fetch(PDO::FETCH_ASSOC);
+        if($votes){
+            $requete = "SELECT idVote FROM Vote where idGroupe=$idGroupe;";
+            $resultat = Connexion::pdo()->query($requete);
+            $votes = array();
+            $a=$resultat->fetch(PDO::FETCH_ASSOC);
+            while($a!=null){
+                array_push($votes,$a["idVote"]);
+                $a=$resultat->fetch(PDO::FETCH_ASSOC);
+
+            }
+            $data["votes"] = $votes;
+        }
 
         return json_encode($data, JSON_UNESCAPED_UNICODE);
     }

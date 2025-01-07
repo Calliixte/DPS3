@@ -19,19 +19,18 @@ if(!isset($_GET["classe"]) || !isset($_GET["id"])){
 $classe = $_GET["classe"];
 require_once("../modele/". $classe . ".php"); //Potentiellement inutile (l'est actuellement)
 $id = $_GET["id"];
-
-if($classe == "vote"){
-    if(!isset($_GET["idVotant"]) || !isset($_GET["idGroupe"])){
-        echo "<b>Erreur : </b> Pour utiliser l'API vous devez à minima indiquer un <b>idVotant</b> et un <b>idGroupe</b> dans l'url, vous pouvez consulter la  $lienDocu pour en savoir plus. ";
-        exit();
-    }
+if(isset($_GET["votes"])){
+    $votes=$_GET["votes"];
+    $JSON = Rest::getGroupe($id,$votes);
+}else{
+    if(isset($_GET["idVotant"])){
     $idVotant= $_GET["idVotant"];
-    $idGroupe= $_GET["idGroupe"];
-    $JSON = Rest::getVote($id,$idVotant,$idGroupe);
-}
-else{
-    $methode = "get$classe";
-    $JSON = Rest::$methode($id);
+    $JSON = Rest::getVote($id,$idVotant);
+
+}   else{
+        $methode = "get$classe";
+        $JSON = Rest::$methode($id);
+    }
 }
 
 
