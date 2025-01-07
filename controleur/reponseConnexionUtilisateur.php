@@ -13,7 +13,7 @@
     }
     else{ 
         $urlErreur = "routeur.php?action=afficherConnexion&actionConnexion=Connexion";
-        echo "Mot de passe incorrect, vous allez pouvoir réessayer";
+        echo "Pseudo ou Mot de passe incorrect, vous allez pouvoir réessayer";
         echo " <meta http-equiv=\"refresh\" content=\"1; url=$urlErreur\"> ";
 
     }  
