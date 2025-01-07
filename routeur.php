@@ -36,14 +36,14 @@ if(isset($_GET["action"])){
     }
 }
 
+$connected = isset($_SESSION["utilisateurCourant"]);
+$connecting = (isset($_GET["form"]) && $_GET["form"] != "ConnexionUtilisateur" && $_GET["form"] != "Inscription");
 
-// On vérifie si l'utilisateur et connecté, et qu'il n'est pas en train de s'inscrire ou de se connecter
-if(!isset($_SESSION["utilisateurCourant"]) || !isset($_SESSION["groupeCourant"])){
-    if(isset($_GET["form"]) && $_GET["form"] != "ConnexionUtilisateur" && $_GET["form"] != "Inscription"){
-        $action = "afficherConnexion";
-        $controleur="controleurApplication";
-    }
-}
+// // On vérifie si l'utilisateur et connecté, et qu'il n'est pas en train de s'inscrire ou de se connecter
+// if((!$connected && !isset($_GET["form"])) || $connecting){   
+//     $action = "afficherConnexion";
+//     $controleur="controleurApplication";
+// }
 
 $controleur::$action();
 ?>

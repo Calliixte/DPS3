@@ -7,18 +7,16 @@ Class Server{
 
         //On défini ou stocker le fichier tout en le renommant
         $path = $destinationfolder . $rename .".". $imageFileType; 
-
-        print_r($_FILES);
         
         //On upload l'image sur le serveur 
         if (move_uploaded_file($sourcefolder, $path)) //On met le fichier dans le bon répertoire et on vérifie que ça a fonctionné
         {
             echo "The file " . htmlspecialchars($filename) . " has been uploaded.";
+            return $path;
         } else {
-            echo "Sorry, there was an error uploading your file.";
+            echo "Sorry, there was an error uploading your file.\n";
+            return null;
         }
-
-        return $path;
     }
 }
 ?>

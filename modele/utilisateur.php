@@ -47,12 +47,14 @@
             }
         }
         
-        public static function updateUtilisateur($idUtilisateur, $nom, $prenom, $pseudo, $dateNaissance, $adresse, $mail){
+        public static function updateUtilisateur($idUtilisateur, $nom, $prenom, $pseudo, $dateNaissance, $adresse, $mail, $lienPhotoProfil){
             $requete = "UPDATE Utilisateur  SET pseudo = :pseudo, 
                                                 nom = :nom, 
                                                 prenom = :prenom, 
                                                 dateNaissance = :dateNaissance, 
-                                                mail = :mail 
+                                                mail = :mail,
+                                                adresse = :adresse,
+                                                lienPhotoProfil = :lienPhotoProfil
                                             WHERE idUtilisateur = :idUtilisateur";
 
             $statement = Connexion::pdo()->prepare($requete);
@@ -64,7 +66,8 @@
                 ":pseudo"=> $pseudo,
                 ":dateNaissance"=> $dateNaissance,
                 ":adresse"=> $adresse,
-                ":mail"=> $mail
+                ":mail"=> $mail,
+                ":lienPhotoProfil" => $lienPhotoProfil
             ]);
         }
 
