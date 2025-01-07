@@ -1,8 +1,8 @@
 <?php 
 Class Rest{
-    /* Va falloir globaliser le get a un moment la quand meme*/
+
     public static function getGroupe(int $idGroupe, int $votes=0){
-        $requete = "SELECT idGroupe, nomGroupe FROM Groupe WHERE idGroupe = $idGroupe;";
+        $requete = "SELECT idGroupe, nomGroupe,budget FROM Groupe WHERE idGroupe = $idGroupe;";
         $resultat = Connexion::pdo()->query($requete);
         $resultat->setFetchmode(PDO::FETCH_CLASS,"Groupe");
         $data = $resultat->fetch(PDO::FETCH_ASSOC);
