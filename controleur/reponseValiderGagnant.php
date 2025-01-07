@@ -19,7 +19,5 @@
         $url = "routeur.php";
     }
 
-    echo $url;
-
     echo "<meta http-equiv=\"refresh\" content=\"1; url=$url\"> ";
 ?>
