@@ -259,24 +259,30 @@ Class Vote{
         $this->listeEtiquettes = $resultat->fetchAll();
     }
 
-        public static function AccepterVote($idVote,$idRole){
-            if ($idRole != 2 ){
-                return -1;
+    public static function AccepterVote($idVote,$idRole){
+        if ($idRole != 2 ){
+            return -1;
+        }
+        $requete=" UPDATE Vote set propositionAcceptee = 1 where idVote = $idVote";
+        $resultat = Connexion::pdo()->query($requete);
+        return 1;
+    }
+
+    public static function SupprimerVote($idVote){
+        $requetePreparee = Connexion::pdo()->prepare("DELETE FROM Vote where idVote= :log");
+        $requetePreparee -> bindParam(':log',$idVote);
+        try{
+            $requetePreparee->execute();
+        }catch(PDOException $e){echo $e->getMessage();}
+    }
+
+    public function voterChoixVote($idChoixVote){
+        foreach($this->choixVote as $choix){
+            if ($choix["idChoixVote"] == $idChoixVote){
+                $choix["aVote"] = true;
             }
-            $requete=" UPDATE Vote set propositionAcceptee = 1 where idVote = $idVote";
-            $resultat = Connexion::pdo()->query($requete);
-            return 1;
         }
-
-        public static function SupprimerVote($idVote){
-            $requetePreparee = Connexion::pdo()->prepare("DELETE FROM Vote where idVote= :log");
-            $requetePreparee -> bindParam(':log',$idVote);
-            try{
-              $requetePreparee->execute();
-            }catch(PDOException $e){echo $e->getMessage();}
-        }
-
-
+    }
 
     public function getDescription(){ // description étant un string de taille conséquente et étant reservé à des cas précis,le conserver dans l'objet n'est pas pertinent
         $requete = "SELECT descriptionVote FROM Vote WHERE idVote=$this->idVote;";
@@ -291,6 +297,7 @@ Class Vote{
         $resultat = Connexion::pdo()->query($requete);
         $resultat->setFetchMode(PDO::FETCH_ASSOC);
         $this->choixVote = $resultat->fetchAll();
+
         if(!is_null($idUser)){
             for($i=0; $i < count($this->choixVote); $i++) {
                 $aVote = $this->aChoisi($idUser, $this->choixVote[$i]['idChoixVote']);

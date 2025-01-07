@@ -1,6 +1,6 @@
 <div id="default">
     <h1>Proposer un Vote</h1>
-    <form action="routeur.php?controleur=reponseFormulaire&action=reponseProposerVote" method="POST" enctype="multipart/form-data">
+    <form action="routeur.php?controleur=reponseFormulaire&action=reponse&form=ProposerVote" method="POST" enctype="multipart/form-data">
         
         <label for="title">Titre</label>
         <input id="title" name="titre" type="text" placeholder="" required>

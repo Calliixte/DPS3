@@ -29,7 +29,7 @@ class controleurVote{
             if($vote->get("voteOuvert")){
                 include("vues/choixGrandVote.php");
             }else{
-                echo "resultat";
+                echo "<br>resultat";
             }
             
             echo "</div>";

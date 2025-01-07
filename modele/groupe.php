@@ -140,6 +140,7 @@
             return $servUrl."/controleur/rejoindreGroupe.php?idInvit=$id";
         }
 
+        //Accepte un vote retourne la date d'acceptation (date actuelle) ou -1 en cas d'erreur
         public function accepterVote($idVote){
             $currentDate = new Datetime("now");
             foreach($this->listeVote as $vote){
@@ -153,6 +154,16 @@
             }
             
             return -1;
+        }
+
+        //Retourne le vote d'idVote, ou null si aucun vote n'a cet id
+        public function getVoteById($idVote){
+            foreach ($this->listeVote as $vote){
+                if($vote->get("idVote") == $idVote){
+                    return $vote;
+                }
+            }
+            return null;
         }
 
         public function getRoleMembre($idU){

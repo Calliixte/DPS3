@@ -1,6 +1,6 @@
 <div id="default">
     <h1>Nouveau groupe</h1>
-    <form action="routeur.php?controleur=reponseFormulaire&action=reponseCreerGroupe" method="POST" enctype="multipart/form-data">
+    <form action="routeur.php?controleur=reponseFormulaire&action=reponse&form=CreerGroupe" method="POST" enctype="multipart/form-data">
         
         <label for="nomGroupe">Nom</label>
         <input id="nomGroupe" name="nomGroupe" type="text" required>

@@ -1,5 +1,5 @@
 
-<form action="controleur/reponseVote.php" method="POST" enctype="multipart/form-data">
+<form action="routeur.php?controleur=reponseFormulaire&action=reponse&form=Vote" method="POST" enctype="multipart/form-data">
 
 <?php
             echo "<fieldset>";

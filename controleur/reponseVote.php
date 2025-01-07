@@ -1,6 +1,4 @@
 <?php
-require_once("../config/connexion.php");
-Connexion::connect();
 
 $listeIdChoisis= array();
 foreach ($_POST as $key => $value) {
@@ -26,7 +24,7 @@ if(!isset($idUtilisateur) || !isset($idGroupe) || !isset($idVote)){
     echo "<b>Erreur : </b> aucun utilisateur ou groupe obtenu.";
     exit();
 }
-$urlBack = "../routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=$idGroupe";
+$urlBack = "routeur.php?controleur=controleurGroupe&action=afficherGrandGroupe&id=$idGroupe";
 // echo "L'utilisateur  $idUtilisateur";
 // echo "Dans le groupe $idGroupe";
 // echo "a voté pour les propositions suivantes : ";
@@ -41,6 +39,8 @@ $stmt->execute();
     echo "aucun Vote supprimé";
 }
 
+$vote = $_SESSION["groupeCourant"]->getVoteById($idVote);
+
 if(!isset($voteBlanc)){
 foreach($listeIdChoisis as $id){
     try{
@@ -50,6 +50,9 @@ foreach($listeIdChoisis as $id){
     $stmt->bindParam(2, $idGroupe, PDO::PARAM_INT);           
     $stmt->bindParam(3, $id, PDO::PARAM_INT);
     $stmt->execute();
+
+    $vote->voterChoixVote($id);
+
     }
     catch(PDOException $e){
         echo "Vous avez essayé de voter pour plusieurs choix dans un vote à choix unique, seul votre premier vote a été conservé !"; //ne restera pas tout le temps pareil
