@@ -29,12 +29,15 @@ class controleurVote{
             if($vote->get("voteOuvert")){
                 include("vues/choixGrandVote.php");
             }else{
-                echo "<br>resultat";
+                if($vote->get("discussionOuverte")){
+                    echo "<h2> le vote n'est pas encore ouvert </h2>";
+                }else{
+                   self::afficherResultat($listeChoixVote);
+                }
             }
             
             echo "</div>";
 
-            //puis
             echo "<div class=\"discussionVote\">";
             echo "<h2>Discussion</h2>";
 
@@ -53,6 +56,16 @@ class controleurVote{
             
         }
 
+        public static function afficherResultat($listeChoix) {
+            echo "<h2> résultat </h2>";
+            foreach( $listeChoix as $choix){
+                $intitule = $choix["intitule"];
+                $nbVote = $choix["nbVote"];
+                echo "<p>$intitule : $nbVote</p>";
+            }
+        }
+
+
         public static function supprimerVote(){
             $idVoteActuel=$_GET["id"];
             $vote =  $_SESSION['groupeCourant']->get("listeVote")[$idVoteActuel];
@@ -61,5 +74,4 @@ class controleurVote{
             echo "<meta http-equiv=\"refresh\" content=\"0; url=routeur.php\"> "; //rediriger vers la page d'accueil c'est très meh 
         }
     }
-
 ?>
