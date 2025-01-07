@@ -56,7 +56,8 @@
                     $description = $liste[$i]->getDescription(); 
                     $url = "routeur.php?controleur=controleurVote&action=afficherVoteGros&id=$i";
                     $txt = "Voter";
-                    if ($_SESSION['utilisateurCourant']->get('role')==2){ //est administrateur 
+                    $role = $_SESSION['utilisateurCourant']->get('role');
+                    if ($role == Utilisateur::ADMIN || $role == Utilisateur::ORGANISATEUR){ //est administrateur ou organisateur de vote
                     $urlSuppr = "routeur.php?controleur=controleurVote&action=supprimerVote&id=$i";
                     $txtSuppr = "Supprimer";
                     }
