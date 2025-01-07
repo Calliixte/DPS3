@@ -6,33 +6,19 @@
         $resultat = Connexion::pdo()->query($requete);
         $idMax=$resultat->fetchColumn();
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $link = Server::uploadImage($_FILES["u_photo"]["tmp_name"], "img/profilePicture/", basename($_FILES["u_photo"]["name"]), (string)$idMax);
+        
+        $servUrl = "https://$_SERVER[HTTP_HOST]".dirname($_SERVER['PHP_SELF']);
+       
+        $path = $servUrl.$link;
 
-            
-            $target_dir = "img/profilePicture/";
-            $target_file = $target_dir . basename($_FILES["u_photo"]["name"]);
-            $rename=$target_dir . (string) $idMax; 
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-            $rename=$target_dir . (string) $idMax .'.'.$imageFileType; 
-
-            print_r($_FILES);
-            
-            if (move_uploaded_file($_FILES["u_photo"]["tmp_name"], $target_file)) {
-                echo "The file " . htmlspecialchars(basename($_FILES["u_photo"]["name"])) . " has been uploaded.";
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-            rename($target_file,$rename);
-        }
-        echo "\n";
         foreach($_POST as $val ){
             echo $val;
             echo "\n";
         }
         echo $_POST["adresse_utilisateur"];
 
-        Utilisateur::insererUtilisateur($_POST["nom_utilisateur"],$_POST["prenom_utilisateur"],$_POST["pseudo_utilisateur"],$_POST["password_utilisateur"],date_format(date_create($_POST["u_ddn"]), 'Y-m-d 0:0:0'),$_POST["email_utilisateur"],$_POST["adresse_utilisateur"],$rename);        
+        Utilisateur::insererUtilisateur($_POST["nom_utilisateur"],$_POST["prenom_utilisateur"],$_POST["pseudo_utilisateur"],$_POST["password_utilisateur"],date_format(date_create($_POST["u_ddn"]), 'Y-m-d 0:0:0'),$_POST["email_utilisateur"],$_POST["adresse_utilisateur"],$path);        
         $url = "routeur.php?action=afficherConnexion&actionConnexion=Connexion";
         echo "Vous avez bien été inscrit(e) ! ";
         echo " <meta http-equiv=\"refresh\" content=\"0; url=$url\"> " //redirige vers l'url donnée au bout de 0 secondes, modifier le 0 ou commenter la ligne si on veut voir la page de debug
