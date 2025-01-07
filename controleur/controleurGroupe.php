@@ -129,7 +129,9 @@
                     //$dateCreation = $liste[$i]->get("dateCreation");
                     $description = $liste[$i]->getDescription(); 
                     $titreSend = urlencode($titreVote);
-                    if($_SESSION['utilisateurCourant']->get('role')==2){
+
+                    $role = $_SESSION['utilisateurCourant']->get('role');
+                    if($role == Utilisateur::ADMIN || $role == Utilisateur::ORGANISATEUR){
                     $urlAccp = "vues/accepterVote.php?id=$idVote&titre=$titreSend";
                     $txtAccp = "Accepter la proposition";}
                     include('vues/petitVote.php');
