@@ -12,8 +12,8 @@ foreach($listeMessage as $message){
             //     //implementer un truc pour compter les reactions et les stacker quand y'a les memes (optionnel je pense)
                  echo $reaction->get('emoticone');
             }
-            if ($_SESSION['utilisateurCourant']->get('role')==2){ //est administrateur 
-            echo "<a href=\"routeur.php?controleur=controleurMessage&action=supprimerMessage&id=$idMsg\">Supprimer ce message</a>"; 
+            if ($_SESSION['utilisateurCourant']->get('role') == Utilisateur::ADMIN){ //est administrateur 
+               echo "<a href=\"routeur.php?controleur=controleurMessage&action=supprimerMessage&id=$idMsg\">Supprimer ce message</a>"; 
             }
             echo "<div class=\"listeReaction\">";
             echo " Réagir : ";

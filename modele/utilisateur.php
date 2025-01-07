@@ -1,17 +1,18 @@
 <?php
-    const MEMBRE = 0;
-    const MODO = 1;
-    const ADMIN = 2;
-    const ASSESS = 3;
-    const ORGA = 4;
     Class Utilisateur{
+        const ADMIN = 2;
+        const MEMBRE = 3;
+        const MODO = 5;
+        const ASSESSEUR = 6;
+        const ORGANISATEUR = 7;
+
         private int $idUtilisateur;
         private string $pseudo;
         private string $nom;
         private string $prenom;
         private ?string $lienPhotoProfil; 
         
-        private int $role = MEMBRE;
+        private int $role = self::MEMBRE;
         private bool $estVerifie;
 
         private array $listeGroupes;

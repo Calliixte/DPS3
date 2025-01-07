@@ -32,7 +32,7 @@ class controleurVote{
                 if($vote->get("discussionOuverte")){
                     echo "<h2> le vote n'est pas encore ouvert </h2>";
                 }else{
-                   self::afficherResultat($listeChoixVote);
+                    include("vues/resultatGrandVote.php");
                 }
             }
             
@@ -55,16 +55,6 @@ class controleurVote{
             include('vues/fin.html');
             
         }
-
-        public static function afficherResultat($listeChoix) {
-            echo "<h2> résultat </h2>";
-            foreach( $listeChoix as $choix){
-                $intitule = $choix["intitule"];
-                $nbVote = $choix["nbVote"];
-                echo "<p>$intitule : $nbVote</p>";
-            }
-        }
-
 
         public static function supprimerVote(){
             $idVoteActuel=$_GET["id"];
