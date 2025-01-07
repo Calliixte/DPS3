@@ -208,12 +208,16 @@ Class Vote{
     }
 
     public static function validerChoix($idVote, $idChoix){
-        $requete = "UPDATE Vote SET idChoixGagnant=:idChoix WHERE idVote=:idVote";
-        $statement = Connexion::pdo()->prepare($requete);
-        $statement->execute([
-            ":idVote"=> $idVote,
-            ":idChoix"=> $idChoix
-        ]);
+        try{
+            $requete = "UPDATE Vote SET idChoixGagnant=:idChoix WHERE idVote=:idVote";
+            $statement = Connexion::pdo()->prepare($requete);
+            $statement->execute([
+                ":idChoix"=> $idChoix,
+                ":idVote"=> $idVote
+            ]);
+        }catch(Exception $e){
+            echo $e;
+        }
     }
 
     public static function setLienPhoto($idVote, $lien) {
@@ -332,7 +336,8 @@ Class Vote{
     public function __toString(){
         return "<h3>Vote</h3>
                 <p>id : $this->idVote<br>
-                    titre : $this->titreVote</p>";
+                    titre : $this->titreVote<br>
+                    id gagnant : $this->idChoixGagnant</p>";
     }
 
 

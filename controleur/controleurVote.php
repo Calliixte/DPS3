@@ -41,7 +41,7 @@ class controleurVote{
             echo "<div class=\"discussionVote\">";
             echo "<h2>Discussion</h2>";
 
-            if($vote->get("discussionOuverte")){
+            if($_SESSION["voteCourant"]->get("discussionOuverte")){
                 include ("vues/formulaireMessage.php");
             }
 
