@@ -2,9 +2,11 @@
     Class Utilisateur{
         const ADMIN = 2;
         const MEMBRE = 3;
+        const DECIDEUR = 4;
         const MODO = 5;
         const ASSESSEUR = 6;
         const ORGANISATEUR = 7;
+        const BANNI = 8;
 
         private int $idUtilisateur;
         private string $pseudo;
