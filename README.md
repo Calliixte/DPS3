@@ -2,6 +2,6 @@
 Le futur de la démocratie participative
 
 ## Team
-- Alain Sandoz
-- Vianney Jacquemot
-- Alistair Baco
+- A. Sandoz
+- V. Jacquemot
+- A. Baco
